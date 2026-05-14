@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /.vercel/
-
-Sitemap: https://lumi-landing-one.vercel.app/sitemap.xml
