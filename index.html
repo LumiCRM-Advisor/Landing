@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi.CRM — от найма до зарплаты вахтовиков в одной системе</title>
+<meta name="description" content="ATS-система для массового найма вахтового персонала. Скрининг 100 резюме за 10 минут, AI-скоринг, интеграции с hh.ru и SuperJob. Воронка, аналитика, реестр зарплат в одном окне. Бесплатный старт 30 дней.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#6f3f81">
+<link rel="canonical" href="https://lumi-landing-one.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lumi-landing-one.vercel.app/">
+<meta property="og:title" content="Lumi.CRM — Массовый подбор без хаоса">
+<meta property="og:description" content="AI-платформа для рекрутинга. Скрининг 100 резюме за 10 минут. Интеграция hh.ru, SuperJob, 1С. Бесплатный старт.">
+<meta property="og:image" content="https://lumi-landing-one.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lumi.CRM — Массовый подбор без хаоса">
+<meta name="twitter:description" content="AI-платформа для рекрутинга. Скрининг 100 резюме за 10 минут.">
+<meta name="twitter:image" content="https://lumi-landing-one.vercel.app/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Lumi.CRM","description":"AI-платформа для рекрутинга и управления персоналом. Массовый подбор без хаоса.","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://lumi-landing-one.vercel.app/","offers":{"@type":"AggregateOffer","priceCurrency":"RUB","lowPrice":"9990","highPrice":"59990","offerCount":"4"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"47"},"featureList":["AI-скоринг резюме","Табель учёта рабочего времени","Реестр зарплат","Интеграция hh.ru","Канбан-воронка"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Lumi.CRM","url":"https://lumi-landing-one.vercel.app/","description":"AI-платформа для массового рекрутинга","contactPoint":{"@type":"ContactPoint","contactType":"sales","availableLanguage":"Russian"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--accent-glow:rgba(111,63,129,0.15);--green:#10b981;--blue:#164194;--amber:#f59e0b;--red:#ef4444;--light-gray:#F4F4F4;--text-gray:#4A4A4A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo,.metric-val,.price-val,.section-title{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* Animated gradient background */
+.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:0}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:float 8s ease-in-out infinite}
+.orb-1{width:400px;height:400px;background:var(--accent);top:-100px;left:-100px;animation-delay:0s}
+.orb-2{width:300px;height:300px;background:var(--blue);top:50%;right:-80px;animation-delay:3s}
+.orb-3{width:250px;height:250px;background:var(--blue);bottom:-50px;left:40%;animation-delay:5s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(0.95)}}
+
+/* Orbit rings — brand signature */
+.orbit-wrap{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:flex-start;justify-content:center;padding-top:60px;perspective:900px;z-index:0;pointer-events:none}
+.orbit-sphere{position:relative;width:500px;height:500px;animation:orbit-float 16s ease-in-out infinite}
+.orbit-ring{position:absolute;border-radius:50%;border:3px solid;top:50%;left:50%}
+.orbit-ring-1{width:420px;height:420px;margin:-210px 0 0 -210px;border-color:rgba(111,63,129,0.45);box-shadow:0 0 18px rgba(111,63,129,0.25),inset 0 0 18px rgba(111,63,129,0.08);animation:orbit-spin-a 12s linear infinite}
+.orbit-ring-2{width:310px;height:310px;margin:-155px 0 0 -155px;border-color:rgba(22,65,148,0.45);box-shadow:0 0 18px rgba(22,65,148,0.25),inset 0 0 18px rgba(22,65,148,0.08);animation:orbit-spin-b 9s linear infinite reverse}
+.orbit-glow{position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(111,63,129,0.55) 0%,rgba(22,65,148,0.2) 50%,transparent 75%);top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(24px);z-index:0}
+.orbit-center{position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(111,63,129,0.18);border:1.5px solid rgba(166,123,190,0.6);top:50%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 0 20px rgba(111,63,129,0.7),0 0 48px rgba(111,63,129,0.35),0 0 80px rgba(111,63,129,0.15);animation:lumi-pulse 3s ease-in-out infinite;z-index:1}
+@keyframes lumi-pulse{0%,100%{box-shadow:0 0 20px rgba(111,63,129,0.7),0 0 48px rgba(111,63,129,0.35),0 0 80px rgba(111,63,129,0.15)}50%{box-shadow:0 0 28px rgba(111,63,129,0.9),0 0 60px rgba(111,63,129,0.5),0 0 100px rgba(111,63,129,0.25)}}
+@keyframes orbit-float{0%{transform:translate(0,-10px)}25%{transform:translate(10px,0)}50%{transform:translate(0,10px)}75%{transform:translate(-10px,0)}100%{transform:translate(0,-10px)}}
+@keyframes orbit-spin-a{from{transform:rotateX(68deg) rotateZ(0deg)}to{transform:rotateX(68deg) rotateZ(360deg)}}
+@keyframes orbit-spin-b{from{transform:rotateX(68deg) rotateY(55deg) rotateZ(0deg)}to{transform:rotateX(68deg) rotateY(55deg) rotateZ(360deg)}}
+
+/* Star field */
+.star-field{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden}
+.sparkle-star{position:absolute;animation:sparkle-twinkle 3s ease-in-out infinite}
+@keyframes sparkle-twinkle{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:.9;transform:scale(1.1)}}
+
+/* Nav */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)}
+
+/* Hero */
+.hero{position:relative;padding:140px 0 100px;text-align:center;overflow:hidden;background:#0c1130}
+.hero-content{position:relative;z-index:2}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid var(--border);border-radius:100px;font-size:12px;color:var(--muted);margin-bottom:28px;letter-spacing:0.3px}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:900;line-height:1.05;margin-bottom:24px;letter-spacing:-0.03em}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--accent2),var(--blue),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:shimmer 4s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:520px;margin:0 auto 36px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 30px var(--accent-glow)}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 0 40px rgba(111,63,129,0.3)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent2)}
+
+/* Metrics bar */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:64px auto 0;max-width:800px;position:relative;z-index:2}
+.metric{background:var(--card);padding:28px 16px;text-align:center}
+.metric-val{font-size:1.6rem;font-weight:800;color:#fff}
+.metric-label{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* Section */
+section{padding:80px 0}
+.section-tag{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);border:1px solid rgba(111,63,129,0.3);padding:4px 12px;border-radius:6px;margin-bottom:16px}
+.section-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;margin-bottom:14px;letter-spacing:-0.02em}
+.section-desc{color:var(--muted);max-width:480px;margin-bottom:48px;font-size:15px}
+
+/* Bento grid */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto;gap:16px}
+.bento-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;transition:all .3s;cursor:pointer}
+.bento-card:hover{border-color:rgba(111,63,129,0.4);transform:translateY(-2px);box-shadow:0 0 0 1px rgba(111,63,129,0.25),0 8px 24px rgba(111,63,129,0.12)}
+.bento-card.glow-purple{box-shadow:0 0 0 2px rgba(111,63,129,0.6),0 0 24px 4px rgba(111,63,129,0.25);border-color:rgba(111,63,129,0.7)}
+.bento-card.glow-blue{box-shadow:0 0 0 2px rgba(22,65,148,0.6),0 0 24px 4px rgba(22,65,148,0.25);border-color:rgba(22,65,148,0.7)}
+.bento-card.glow-green{box-shadow:0 0 0 2px rgba(16,185,129,0.6),0 0 24px 4px rgba(16,185,129,0.25);border-color:rgba(16,185,129,0.7)}
+.bento-card.glow-amber{box-shadow:0 0 0 2px rgba(245,158,11,0.6),0 0 24px 4px rgba(245,158,11,0.25);border-color:rgba(245,158,11,0.7)}
+.bento-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
+.bento-large{grid-column:span 2}
+.bento-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:20px;font-weight:700}
+.bento-icon.purple{background:rgba(111,63,129,0.15);color:var(--accent2)}
+.bento-icon.blue{background:rgba(22,65,148,0.15);color:var(--blue)}
+.bento-icon.green{background:rgba(16,185,129,0.15);color:var(--green)}
+.bento-icon.amber{background:rgba(245,158,11,0.15);color:var(--amber)}
+.bento-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.bento-card p{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* Score animation */
+.score-demo{display:flex;align-items:center;gap:16px;margin-top:20px;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
+.score-ring{width:56px;height:56px;border-radius:50%;border:3px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:800;color:var(--green);position:relative}
+.score-ring::before{content:'';position:absolute;top:-3px;left:-3px;right:-3px;bottom:-3px;border-radius:50%;border:3px solid transparent;border-top-color:var(--green);animation:spin 2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.score-info{flex:1}
+.score-name{font-size:13px;font-weight:600}
+.score-detail{font-size:12px;color:var(--muted)}
+
+/* Integrations */
+.integrations{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.int-badge{padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s}
+.int-badge:hover{border-color:var(--accent);color:var(--text)}
+
+/* Compare */
+.compare{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:32px}
+.compare th,.compare td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--border);font-size:12px}
+.compare th{background:var(--card);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted)}
+.compare th.us-head{background:rgba(111,63,129,0.12);color:var(--accent2);font-size:12px;text-transform:none;letter-spacing:0}
+.compare td:first-child{text-align:left;font-weight:500;color:var(--text);min-width:160px}
+.compare tr:last-child td{border-bottom:none}
+.compare .us{background:rgba(111,63,129,0.05)}
+.yes{color:var(--green);font-weight:600}
+.no{color:var(--red);opacity:0.6}
+.compare-wrap{overflow-x:auto}
+
+/* Pipeline viz — 3 clickable stages */
+.pipeline-tabs{display:flex;gap:8px;margin-top:20px}
+.ptab{flex:1;text-align:center;padding:10px 8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .25s;user-select:none}
+.ptab:hover{border-color:rgba(111,63,129,0.4);color:var(--accent2)}
+.ptab.active{border-color:var(--accent);color:#fff;background:var(--accent);box-shadow:0 0 16px rgba(111,63,129,0.3)}
+.ptab-detail{margin-top:14px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--muted);line-height:1.6;min-height:54px;transition:opacity .2s}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:40px}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:rgba(111,63,129,0.4);box-shadow:0 0 0 1px rgba(111,63,129,0.2),0 6px 20px rgba(111,63,129,0.1)}
+.faq-item summary{padding:20px 24px;font-size:14.5px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+.faq-item summary::after{content:'＋';font-size:18px;font-weight:400;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{padding:0 24px 20px;font-size:13.5px;color:var(--muted);line-height:1.7}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;transition:all .3s}
+.price-card:hover{transform:translateY(-4px);border-color:rgba(111,63,129,0.4);box-shadow:0 0 0 1px rgba(111,63,129,0.25),0 8px 28px rgba(111,63,129,0.14)}
+.price-card.featured{border-color:var(--accent);position:relative;padding-top:48px}
+.price-card.featured::before{content:'Самое популярное';position:absolute;top:0;left:0;right:0;padding:8px 0;text-align:center;background:linear-gradient(90deg,var(--accent),#5a3369);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.5px;border-radius:16px 16px 0 0}
+.price-tag{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.price-val{font-size:2.2rem;font-weight:900;margin-bottom:4px}
+.price-val span{font-size:13px;font-weight:400;color:var(--muted)}
+.price-desc{font-size:13px;color:var(--muted);margin-bottom:8px}
+.price-per-user{font-size:11px;color:var(--accent2);margin-bottom:16px;opacity:0.8}
+.price-list{list-style:none;margin-bottom:24px}
+.price-list li{padding:7px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.price-list li::before{content:'\2713';color:var(--green);font-weight:700;font-size:12px}
+.price-btn{display:block;width:100%;text-align:center;padding:12px;border-radius:10px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:all .2s}
+.price-btn-primary{background:var(--accent);color:#fff}
+.price-btn-primary:hover{background:var(--accent2)}
+.price-btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.price-btn-outline:hover{border-color:var(--accent)}
+
+/* Chaos vs Order */
+.chaos-order{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.chaos-col{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.chaos-col.chaos{border-color:rgba(239,68,68,0.25)}
+.chaos-col.chaos::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),#dc2626)}
+.chaos-col.order{border-color:rgba(16,185,129,0.25)}
+.chaos-col.order::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),#059669)}
+.col-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.chaos-col.chaos .col-label{color:var(--red)}
+.chaos-col.order .col-label{color:var(--green)}
+.col-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.09);font-size:13.5px;color:var(--muted);line-height:1.5}
+.col-item:last-child{border-bottom:none}
+.col-item .icon{flex-shrink:0;font-style:normal;margin-top:1px}
+@media(max-width:768px){.chaos-order{grid-template-columns:1fr}}
+
+/* CTA */
+.final-cta{text-align:center;padding:100px 0;position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;background:var(--accent);border-radius:50%;filter:blur(150px);opacity:0.08;transform:translate(-50%,-50%);pointer-events:none}
+.final-cta h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-bottom:16px;position:relative}
+.final-cta p{color:var(--muted);margin-bottom:36px;position:relative}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+
+/* Demo modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:#0d0d10;border:1px solid var(--border);border-radius:20px;padding:40px;max-width:420px;width:90%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.6)}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:22px;line-height:1;padding:4px}
+.modal-close:hover{color:#fff}
+.modal-box h3{font-size:1.4rem;font-weight:800;margin-bottom:8px;font-family:'Montserrat',sans-serif}
+.modal-box .modal-sub{color:var(--muted);font-size:14px;margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.fg input,.fg select{width:100%;background:#16161e;border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:border-color .2s;font-family:inherit;box-sizing:border-box}
+.fg input:focus,.fg select:focus{border-color:var(--accent)}
+.fg select option{background:#16161e}
+.modal-submit{width:100%;margin-top:8px}
+.modal-success{text-align:center;padding:24px 0;display:none}
+.modal-success .ok-icon{font-size:2.5rem;margin-bottom:12px}
+.modal-success h4{font-size:1.2rem;font-weight:700;margin-bottom:8px;font-family:'Montserrat',sans-serif}
+.modal-success p{color:var(--muted);font-size:14px}
+.nav-demo{background:transparent;border:1px solid var(--border);color:var(--fg)!important;padding:7px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;margin-right:8px;transition:border-color .2s}
+.nav-demo:hover{border-color:var(--accent);color:var(--accent)!important}
+
+/* Counter animation */
+.counter{display:inline-block}
+
+/* Trust bar */
+.trust-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 20px;margin-top:40px;padding:16px 24px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;position:relative;z-index:2}
+.trust-label{font-size:12px;color:var(--muted);font-weight:500}
+.trust-count{font-size:13px;font-weight:700;color:var(--accent2)}
+.trust-sep{color:var(--border);font-size:16px}
+.trust-industry{font-size:12px;color:var(--muted);padding:3px 10px;background:rgba(255,255,255,0.03);border-radius:100px;border:1px solid var(--border)}
+
+/* How it works */
+.steps-row{display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr;align-items:start;gap:0;margin-top:8px}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:all .3s}
+.step-card:hover{border-color:rgba(111,63,129,0.5);transform:translateY(-3px);box-shadow:0 0 0 1px rgba(111,63,129,0.3),0 8px 32px rgba(111,63,129,0.15)}
+.step-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
+.step-num{font-size:3rem;font-weight:900;color:rgba(111,63,129,0.32);line-height:1;margin-bottom:12px;letter-spacing:-0.04em}
+.step-icon{width:48px;height:48px;margin-bottom:16px;color:var(--accent2)}
+.step-icon svg{width:100%;height:100%}
+.step-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.step-card p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.step-arrow{display:flex;align-items:center;justify-content:center;color:rgba(111,63,129,0.55);font-size:28px;padding-top:60px}
+@media(max-width:768px){.steps-row{grid-template-columns:1fr}.step-arrow{display:none}}
+
+/* Testimonials */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .3s;position:relative;overflow:hidden}
+.testi-card:hover{border-color:rgba(111,63,129,0.4);transform:translateY(-2px);box-shadow:0 0 0 1px rgba(111,63,129,0.25),0 8px 24px rgba(111,63,129,0.12)}
+.testi-card::before{content:'\201C';position:absolute;top:16px;right:20px;font-size:4rem;color:rgba(166,123,190,0.28);line-height:1;font-family:Georgia,serif}
+.testi-stars{color:#f59e0b;font-size:13px;letter-spacing:2px;margin-bottom:14px}
+.testi-text{font-size:13.5px;color:var(--text);line-height:1.7;margin-bottom:20px;opacity:0.85}
+.testi-author{display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,0.1);padding-top:16px}
+.testi-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.testi-name{font-size:13px;font-weight:600;color:var(--text)}
+.testi-role{font-size:11.5px;color:var(--muted);margin-top:2px}
+@media(max-width:768px){.testi-grid{grid-template-columns:1fr}}
+
+/* Modules grid */
+.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mod-card{display:block;color:inherit;text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:all .3s}
+.mod-card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(111,63,129,0.35),0 8px 32px rgba(111,63,129,0.18)}
+.mod-stripe{position:absolute;top:0;left:0;right:0;height:3px}
+.mod-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;padding-top:8px}
+.mod-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.mod-badge{padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;white-space:nowrap}
+.badge-live{background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.2)}
+.badge-dev{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2)}
+.badge-soon{background:rgba(6,182,212,0.1);color:#22d3ee;border:1px solid rgba(6,182,212,0.2)}
+.mod-title{font-size:1rem;font-weight:700;margin-bottom:6px}
+.mod-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.55}
+.mod-feats{list-style:none;border-top:1px solid var(--border);padding-top:12px}
+.mod-feats li{padding:4px 0;font-size:12px;color:var(--muted);display:flex;gap:7px;align-items:baseline}
+.mod-feats li::before{content:'·';color:var(--accent2);font-size:16px;line-height:1;flex-shrink:0}
+.mod-plans{display:flex;gap:5px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)}
+.mp{font-size:10px;font-weight:700;letter-spacing:0.3px;padding:3px 9px;border-radius:5px;text-transform:uppercase}
+.mp-on{background:rgba(111,63,129,0.18);color:var(--accent2);border:1px solid rgba(111,63,129,0.28)}
+.mp-off{background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.07)}
+.chain-box{margin-top:48px;padding:28px 32px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow-x:auto}
+.chain-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:16px;font-weight:600}
+.chain-row{display:flex;align-items:center;gap:10px;min-width:max-content}
+.chain-step{padding:9px 16px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap}
+.chain-sep{color:var(--muted);font-size:16px;flex-shrink:0}
+@media(max-width:900px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+.nav-links a:not(.nav-cta){display:none}
+.nav-demo{display:none}
+.metrics{grid-template-columns:repeat(2,1fr)}
+.bento{grid-template-columns:1fr}
+.bento-large{grid-column:span 1}
+.hero-btns{flex-direction:column;align-items:center}
+.btn{width:100%;max-width:280px;text-align:center}
+.pipeline{flex-wrap:wrap}
+.pipe-step::after{display:none}
+.modules-grid{grid-template-columns:1fr}
+}
+.feedback-bar{background:var(--surface);border-top:1px solid var(--border);padding:20px 0}
+.feedback-bar .container{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.feedback-bar span{color:var(--muted);font-size:.95rem}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="https://lumicrm.ru" class="logo">
+  <img src="logo.png" width="40" height="40" alt="Lumi.CRM" style="flex-shrink:0;filter:drop-shadow(0 0 14px rgba(124,58,237,0.6))">
+  <span class="logo-text">Lumi<span style="-webkit-text-fill-color:#a67bbe">.CRM</span></span>
+</a>
+<div class="nav-links">
+<a href="#features">Возможности</a>
+<a href="#modules">Модули</a>
+<a href="#integrations">Интеграции</a>
+<a href="#pricing">Тарифы</a>
+<button class="nav-demo" onclick="openDemoModal('nav')">Получить демо</button><a href="https://app.lumicrm.ru/login?utm_source=landing&utm_medium=nav&utm_campaign=header" class="nav-cta">Войти</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-bg">
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+  <div class="orbit-wrap">
+    <div class="orbit-sphere">
+      <div class="orbit-glow"></div>
+      <div class="orbit-ring orbit-ring-1"></div>
+      <div class="orbit-ring orbit-ring-2"></div>
+      <div class="orbit-center"><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="lg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f5eefa"/><stop offset="100%" stop-color="#a67bbe"/></radialGradient></defs><path d="M12,1 L13.5,10.5 L23,12 L13.5,13.5 L12,23 L10.5,13.5 L1,12 L10.5,10.5 Z" fill="url(#lg)"/><path d="M20,3 L20.8,6.2 L24,7 L20.8,7.8 L20,11 L19.2,7.8 L16,7 L19.2,6.2 Z" fill="#c990e0" opacity="0.8"/></svg></div>
+    </div>
+  </div>
+</div>
+<div class="star-field" id="starField"></div>
+<div class="hero-content container">
+<div class="pill"><span class="dot"></span> AI-powered ATS</div>
+<h1>ATS для массового найма:<br><span class="gradient">10 минут вместо Excel</span></h1>
+<p>AI оценивает кандидатов, парсит резюме и ведёт воронку. Вы собеседуете только лучших.</p>
+<div class="hero-btns">
+<button onclick="openDemoModal('hero')" class="btn btn-primary" style="position:relative;z-index:10">Получить демо →</button>
+<a href="#demo" class="btn btn-ghost">Смотреть демо</a>
+</div>
+<div class="metrics">
+<div class="metric"><div class="metric-val"><span class="counter" data-target="87" data-suffix="%">0%</span></div><div class="metric-label">совпадений с решением рекрутера</div></div>
+<div class="metric"><div class="metric-val">10 мин</div><div class="metric-label">скрининг 100 резюме</div></div>
+<div class="metric"><div class="metric-val">3x</div><div class="metric-label">быстрее закрытие</div></div>
+<div class="metric"><div class="metric-val">14 дней</div><div class="metric-label">бесплатно</div></div>
+</div>
+<div class="trust-bar">
+  <span class="trust-label">Уже используют</span>
+  <span class="trust-count">50+ компаний</span>
+  <span class="trust-sep">·</span>
+  <span class="trust-industry">Строительство</span>
+  <span class="trust-industry">Охрана</span>
+  <span class="trust-industry">Производство</span>
+  <span class="trust-industry">Клининг</span>
+  <span class="trust-industry">Логистика</span>
+</div>
+</div>
+</section>
+
+<section id="how">
+<div class="container">
+  <div style="text-align:center;margin-bottom:48px">
+    <div class="section-tag">Как это работает</div>
+    <h2 class="section-title">Три шага до первого найма</h2>
+    <div class="section-desc" style="margin:0 auto">Запустите систему за один день. Без IT-отдела и долгого внедрения.</div>
+  </div>
+  <div class="steps-row">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
+      <h3>Создайте вакансию</h3>
+      <p>Опишите требования в свободной форме. AI сам формирует критерии оценки и подключает нужные каналы — hh.ru, Avito, Telegram-бот скрининга.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <h3>AI работает за вас</h3>
+      <p>Система разбирает входящие резюме, задаёт уточняющие вопросы в Telegram и выставляет каждому кандидату оценку 0–100 с объяснением.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
+      <h3>Вы видите только лучших</h3>
+      <p>В воронке — только кандидаты прошедшие скрининг. Открывайте карточку, читайте аргументы AI и звоните тем, кто реально подходит.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+<div class="section-tag">Возможности</div>
+<h2 class="section-title">Всё для найма в одном окне</h2>
+<div class="section-desc">От парсинга резюме до оффера. AI делает рутину, вы принимаете решения.</div>
+
+<div class="bento">
+<div class="bento-card bento-large">
+<div class="bento-icon purple">AI</div>
+<h3>AI Match-Score</h3>
+<p>Каждый кандидат получает оценку 0-100 с объяснением. Не "подходит/не подходит", а конкретно: навыки, опыт, пробелы.</p>
+<div class="score-demo">
+<div class="score-ring">92</div>
+<div class="score-info">
+<div class="score-name">Иванов С.П. — Сварщик НАКС</div>
+<div class="score-detail">НАКС РД/РАД &#10003; | Вахта 4г &#10003; | Крайний Север &#10003;</div>
+</div>
+</div>
+</div>
+
+<div class="bento-card">
+<div class="bento-icon blue">PDF</div>
+<h3>AI-парсинг резюме</h3>
+<p>Загрузите PDF или DOCX — ФИО, опыт, навыки, контакты заполнятся за 5 секунд. Batch-загрузка до 100 файлов.</p>
+</div>
+
+<div class="bento-card">
+<div class="bento-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg></div>
+<h3>Безопасность данных</h3>
+<p>Шифрование данных, раздельные базы для каждого клиента, ролевой доступ. Соответствие 152-ФЗ о персональных данных.</p>
+</div>
+
+<div class="bento-card">
+<div class="bento-icon amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></div>
+<h3>Воронка найма</h3>
+<p>Настраиваемые этапы. Drag-and-drop, авто-уведомления, история действий.</p>
+<div class="pipeline-tabs" id="ptabs">
+<div class="ptab active" data-idx="0">Массовый подбор</div>
+<div class="ptab" data-idx="1">Точечный найм</div>
+<div class="ptab" data-idx="2">Стажировки</div>
+</div>
+<div class="ptab-detail" id="ptab-detail">
+  <strong>До 500 позиций одновременно.</strong> AI скрининг, Telegram-бот для первичного отбора, автоматический перевод по этапам — рекрутер видит только финалистов.
+</div>
+</div>
+
+<div class="bento-card">
+<div class="bento-icon purple"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+<h3>Портал кандидата</h3>
+<p>Кандидаты сами ищут вакансии, откликаются, загружают документы. Вы не тратите время на размещение.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="modules">
+<div class="container">
+<div style="text-align:center;margin-bottom:56px">
+<div class="section-tag">Платформа</div>
+<h2 class="section-title">Полный цикл от найма до вахты</h2>
+<div class="section-desc" style="margin:0 auto">Шесть модулей — одна экосистема. Два уже в работе, остальные выходят в Q3 2026. Подключайте по мере роста.</div>
+</div>
+
+<div class="modules-grid">
+
+<a href="/modules/recruiting" class="mod-card" aria-label="Модуль Рекрутинг — подробнее">
+<div class="mod-stripe" style="background:linear-gradient(90deg,#10b981,#059669)"></div>
+<div class="mod-head">
+<div class="mod-icon" style="background:rgba(16,185,129,0.12);color:#34d399">ATS</div>
+<span class="mod-badge badge-live">Доступно</span>
+</div>
+<div class="mod-title">Рекрутинг</div>
+<div class="mod-sub">ATS для массового и точечного найма. AI-скоринг, воронка, парсинг резюме.</div>
+<ul class="mod-feats">
+<li>AI Match-Score 0–100 с объяснением</li>
+<li>Telegram-бот первичного скрининга</li>
+<li>Портал самоотклика кандидата</li>
+<li>hh.ru / SuperJob / Avito интеграция</li>
+</ul>
+<div class="mod-plans"><span class="mp mp-on">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
+</a>
+
+<a href="/modules/operations" class="mod-card" aria-label="Модуль Операционка — подробнее">
+<div class="mod-stripe" style="background:linear-gradient(90deg,#164194,#0d2f6b)"></div>
+<div class="mod-head">
+<div class="mod-icon" style="background:rgba(22,65,148,0.12);color:#7899d4">ОПС</div>
+<span class="mod-badge badge-live">Доступно</span>
+</div>
+<div class="mod-title">Операционка</div>
+<div class="mod-sub">Табель учёта времени, смены, выплаты. Реестр сотрудников на объектах.</div>
+<ul class="mod-feats">
+<li>Табель с ежедневными часами</li>
+<li>Excel-импорт и экспорт реестра</li>
+<li>Группировка по объектам</li>
+<li>История выплат и движения кадров</li>
+</ul>
+<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
+</a>
+
+<a href="/modules/requests" class="mod-card" aria-label="Модуль Заявки на подбор — подробнее">
+<div class="mod-stripe" style="background:linear-gradient(90deg,#6f3f81,#5a3369)"></div>
+<div class="mod-head">
+<div class="mod-icon" style="background:rgba(111,63,129,0.12);color:var(--accent2)">WF</div>
+<span class="mod-badge badge-dev">В разработке</span>
+</div>
+<div class="mod-title">Заявки на подбор</div>
+<div class="mod-sub">Связующее звено системы. Любое действие — от подбора до выплаты — инициируется заявкой.</div>
+<ul class="mod-feats">
+<li>Конструктор маршрутов согласования</li>
+<li>SLA и автоконтроль сроков</li>
+<li>Статусная машина с историей</li>
+<li>Уведомления исполнителям</li>
+</ul>
+<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
+</a>
+
+<a href="/modules/hrm" class="mod-card" aria-label="Модуль Кадры (HRM) — подробнее">
+<div class="mod-stripe" style="background:linear-gradient(90deg,#f59e0b,#d97706)"></div>
+<div class="mod-head">
+<div class="mod-icon" style="background:rgba(245,158,11,0.12);color:#fbbf24">HRM</div>
+<span class="mod-badge badge-dev">В разработке</span>
+</div>
+<div class="mod-title">Кадры</div>
+<div class="mod-sub">Юридическая чистота персонала. Документы, кадровая история, контроль сроков.</div>
+<ul class="mod-feats">
+<li>Реестр документов с контролем сроков</li>
+<li>Кадровый таймлайн: приёмы, переводы</li>
+<li>Алерты: просроченные паспорта / патенты</li>
+<li>Интеграция с 1С:ЗУП</li>
+</ul>
+<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
+</a>
+
+<a href="/modules/rotation" class="mod-card" aria-label="Модуль Перевахтовка — подробнее">
+<div class="mod-stripe" style="background:linear-gradient(90deg,#06b6d4,#0891b2)"></div>
+<div class="mod-head">
+<div class="mod-icon" style="background:rgba(6,182,212,0.12);color:#22d3ee">ВХТ</div>
+<span class="mod-badge badge-soon">Скоро</span>
+</div>
+<div class="mod-title">Перевахтовка</div>
+<div class="mod-sub">Специализация для вахтового найма. Управляет полным циклом смены — от билетов до допуска.</div>
+<ul class="mod-feats">
+<li>Таймлайн: Вахта → Дорога → Межвахта</li>
+<li>Чек-лист готовности к выезду</li>
+<li>Учёт билетов и трансферов</li>
+<li>Бронирование жилья на объекте</li>
+</ul>
+<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-off">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
+</a>
+
+<a href="/modules/hse" class="mod-card" aria-label="Модуль Охрана труда (HSE) — подробнее">
+<div class="mod-stripe" style="background:linear-gradient(90deg,#ef4444,#dc2626)"></div>
+<div class="mod-head">
+<div class="mod-icon" style="background:rgba(239,68,68,0.12);color:#f87171">HSE</div>
+<span class="mod-badge badge-soon">Скоро</span>
+</div>
+<div class="mod-title">Охрана труда</div>
+<div class="mod-sub">Безопасность на объекте. Блокировка выхода без допуска, реестр СИЗ, регистрация инцидентов.</div>
+<ul class="mod-feats">
+<li>Допуск к смене по статусу безопасности</li>
+<li>Реестр СИЗ по нормам должности</li>
+<li>Регистрация и разбор инцидентов</li>
+<li>Трекинг медосмотров и обучений</li>
+</ul>
+<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-off">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
+</a>
+
+</div>
+
+<div style="text-align:center;margin-top:24px;font-size:13px;color:var(--muted)">Кадры, Перевахтовка, Охрана труда — релиз Q3 2026</div>
+
+<div class="chain-box">
+<div class="chain-label">Сквозная цепочка</div>
+<div class="chain-row">
+<div class="chain-step" style="background:rgba(111,63,129,0.1);border:1px solid rgba(111,63,129,0.2);color:var(--accent2)">Заявка на подбор</div>
+<span class="chain-sep">→</span>
+<div class="chain-step" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:#34d399">Рекрутинг</div>
+<span class="chain-sep">→</span>
+<div class="chain-step" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:#fbbf24">Кадровое оформление</div>
+<span class="chain-sep">→</span>
+<div class="chain-step" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#f87171">Допуск HSE</div>
+<span class="chain-sep">→</span>
+<div class="chain-step" style="background:rgba(22,65,148,0.1);border:1px solid rgba(22,65,148,0.2);color:#7899d4">Табель + Вахта</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="integrations">
+<div class="container">
+<div class="section-tag">Интеграции</div>
+<h2 class="section-title">Работает с площадками, которые вы уже используете</h2>
+<div class="section-desc">Импорт из job-агрегаторов, выгрузка в 1С, уведомления в Telegram.</div>
+<div class="integrations">
+<div class="int-badge">hh.ru</div>
+<div class="int-badge">SuperJob</div>
+<div class="int-badge">Avito Работа</div>
+<div class="int-badge">Rabota.ru</div>
+<div class="int-badge">1С:ЗУП</div>
+<div class="int-badge">Telegram</div>
+<div class="int-badge">WhatsApp</div>
+<div class="int-badge">Email</div>
+<div class="int-badge">Google Calendar</div>
+<div class="int-badge">Битрикс24</div>
+<div class="int-badge">API</div>
+<div class="int-badge">CSV/Excel</div>
+</div>
+
+<div class="compare-wrap">
+<table class="compare">
+<tr>
+  <th>Параметр</th>
+  <th class="us-head">✦ LumiCRM</th>
+  <th>E-Staff</th>
+  <th>Huntflow</th>
+  <th>Talantix</th>
+  <th>СберПодбор</th>
+  <th>FriendWork</th>
+</tr>
+<tr>
+  <td>Цена/мес за рекрутера</td>
+  <td class="us"><strong>от 3 300 ₽</strong></td>
+  <td>от 1 667 ₽<br><span style="font-size:11px;color:var(--muted)">(20 т.р./год)</span></td>
+  <td>от 6 250 ₽</td>
+  <td>от 2 583 ₽</td>
+  <td>от 4 933 ₽</td>
+  <td>от 1 725 ₽</td>
+</tr>
+<tr>
+  <td>Фокус</td>
+  <td class="us yes">Массовый подбор МСБ</td>
+  <td>Массовый подбор крупных</td>
+  <td>Универсальная ATS</td>
+  <td>Экосистема hh.ru</td>
+  <td>Экосистема Сбер</td>
+  <td>CRM для рекрутинга</td>
+</tr>
+<tr>
+  <td>ИИ-функции</td>
+  <td class="us yes">Да (полноценный ассистент)</td>
+  <td>Да (AI-описания вакансий)</td>
+  <td>Да (ограниченно)</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+</tr>
+<tr>
+  <td>Внутренний мессенджер</td>
+  <td class="us yes">Да</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+</tr>
+<tr>
+  <td>Масштабируемость</td>
+  <td class="us yes">До корпораций</td>
+  <td>Очень высокая</td>
+  <td>Высокая</td>
+  <td>Средняя</td>
+  <td>Средняя</td>
+  <td>Средняя</td>
+</tr>
+<tr>
+  <td>Интеграция HH</td>
+  <td class="us yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+  <td>Нативная</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+</tr>
+<tr>
+  <td>Интеграция Avito</td>
+  <td class="us yes">Да</td>
+  <td class="no">Нет</td>
+  <td>Ограниченно</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+  <td class="no">Нет</td>
+</tr>
+<tr>
+  <td>Хранение в РФ</td>
+  <td class="us yes">Да</td>
+  <td>Да (on-premise)</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+</tr>
+<tr>
+  <td>152-ФЗ</td>
+  <td class="us yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+  <td class="yes">Да</td>
+</tr>
+</table>
+</div>
+</div>
+</section>
+
+<section id="testimonials">
+<div class="container">
+  <div style="text-align:center;margin-bottom:48px">
+    <div class="section-tag">Отзывы</div>
+    <h2 class="section-title">Что говорят HR-директора</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars" role="img" aria-label="Оценка 5 из 5 звёзд">★★★★★</div>
+      <div class="testi-text">«Раньше на скрининг 200 резюме уходило 2 дня. Теперь Lumi делает это за час и выдаёт мне 15 финалистов с объяснением. Я просто звоню. Закрываем вахту на месяц раньше срока.»</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#6f3f81,#5a3369)">МК</div>
+        <div>
+          <div class="testi-name">Марина Ковалёва</div>
+          <div class="testi-role">Руководитель подбора, строительный холдинг</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars" role="img" aria-label="Оценка 5 из 5 звёзд">★★★★★</div>
+      <div class="testi-text">«Наш главный страх был — потеряем ли мы кандидатов при автоматизации. Оказалось наоборот: конверсия выросла на 40%, потому что никто не "проваливается" между этапами. Всё на виду.»</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#164194,#0d2f6b)">АС</div>
+        <div>
+          <div class="testi-name">Алексей Соколов</div>
+          <div class="testi-role">HR-директор, охранная организация</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars" role="img" aria-label="Оценка 5 из 5 звёзд">★★★★★</div>
+      <div class="testi-text">«Операционка закрыла боль, которую мы лечили в Excel три года. Реестр вахтовиков, табель, выплаты — всё в одном месте. Бухгалтер перестала звонить рекрутерам с вопросами.»</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">НД</div>
+        <div>
+          <div class="testi-name">Наталья Данилова</div>
+          <div class="testi-role">HRD, производственное предприятие</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Частые вопросы</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Как импортировать данные из Excel?</summary>
+        <p>Загрузите файл через кнопку "Импорт" в разделе Сотрудники или Кандидаты. Поддерживаем .xlsx и .csv. Система автоматически определит колонки и найдёт дубликаты.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Есть ли мобильная версия?</summary>
+        <p>Да, интерфейс адаптирован для планшетов и телефонов. Полная функциональность доступна в браузере на любом устройстве.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Как считается зарплата?</summary>
+        <p>На основе ставки сотрудника и отработанных часов из табеля. Система автоматически учитывает авансы, штрафы, вычеты и налоги.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Безопасно ли хранить данные сотрудников?</summary>
+        <p>Данные хранятся в российском дата-центре, соответствуем ФЗ-152. Полная изоляция данных между клиентами, шифрование в покое и в передаче.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Можно ли интегрировать с 1С?</summary>
+        <p>Да, экспортируем данные реестра зарплат в форматах, совместимых с 1С:ЗУП. Прямая интеграция через API доступна на тарифе Корпорат.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+<div class="trust-bar" style="margin:0 0 48px">
+  <span>250K+ резюме обработано</span>
+  <span>15K часов сэкономлено</span>
+  <span>ФЗ-152 ✓</span>
+  <span>Данные в РФ ✓</span>
+</div>
+</div>
+
+<section id="pricing">
+<div class="container">
+<div class="section-tag">Тарифы</div>
+<h2 class="section-title">Начните бесплатно</h2>
+<div class="section-desc">Без карты. Без обязательств. Масштабируйте когда готовы.</div>
+<div class="pricing-grid">
+<div class="price-card">
+<div class="price-tag">ДЕМО</div>
+<div class="price-val">0 &#8381; <span>/ 14 дней</span></div>
+<div class="price-desc">1 рекрутер · без карты</div>
+<div class="price-per-user">Модуль: Рекрутинг</div>
+<ul class="price-list">
+<li>До 3 активных вакансий</li>
+<li>До 50 кандидатов</li>
+<li>Воронка найма</li>
+<li>hh.ru интеграция</li>
+<li>Email-поддержка</li>
+</ul>
+<button onclick="openDemoModal('pricing-demo')" class="price-btn price-btn-outline">Получить доступ →</button>
+</div>
+<div class="price-card">
+<div class="price-tag">СТАРТ</div>
+<div class="price-val">9 990 &#8381; <span>/ мес</span></div>
+<div class="price-desc">До 3 рекрутеров</div>
+<div class="price-per-user">≈ 3 330 ₽ за рекрутера</div>
+<ul class="price-list">
+<li>Безлимит вакансий</li>
+<li>До 500 кандидатов</li>
+<li>Воронка найма</li>
+<li>CSV импорт/экспорт</li>
+<li>hh.ru интеграция</li>
+<li>Email-поддержка</li>
+</ul>
+<button onclick="openDemoModal('pricing-start')" class="price-btn price-btn-outline">Получить демо</button>
+</div>
+<div class="price-card featured">
+<div class="price-tag">БИЗНЕС</div>
+<div class="price-val">29 990 &#8381; <span>/ мес</span></div>
+<div class="price-desc">До 10 рекрутеров</div>
+<div class="price-per-user">≈ 3 000 ₽ за рекрутера</div>
+<ul class="price-list">
+<li>Безлимит кандидатов</li>
+<li>AI Match-Score</li>
+<li>AI-парсинг резюме</li>
+<li>Telegram-бот скрининга</li>
+<li>hh.ru + SuperJob + Avito</li>
+<li>1С:ЗУП интеграция</li>
+<li>Аналитика + карта</li>
+<li>Модули: Рекрутинг + Операционка + Кадры + Заявки</li>
+<li>Приоритетная поддержка</li>
+</ul>
+<button onclick="openDemoModal('pricing-business')" class="price-btn price-btn-primary">Получить демо</button>
+</div>
+<div class="price-card">
+<div class="price-tag">КОРПОРАТ</div>
+<div class="price-val">от 59 990 &#8381; <span>/ мес</span></div>
+<div class="price-desc">Безлимит рекрутеров</div>
+<div class="price-per-user">Цена по договору</div>
+<ul class="price-list">
+<li>Все 6 модулей (+ Перевахтовка и HSE)</li>
+<li>Кастомная настройка</li>
+<li>API доступ</li>
+<li>Выделенный менеджер</li>
+<li>SLA 4 часа</li>
+<li>On-premise по запросу</li>
+</ul>
+<button onclick="openDemoModal('pricing-corporate')" class="price-btn price-btn-outline">Связаться</button>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div style="text-align:center">
+  <div class="section-tag">Разница</div>
+  <h2 class="section-title">Хаос против порядка</h2>
+  <div class="section-desc" style="margin:0 auto">Вот что меняется, когда весь подбор — в одном окне, а не в трёх таблицах</div>
+</div>
+<div class="chaos-order">
+  <div class="chaos-col chaos">
+    <div class="col-label"><span>✗</span> Хаос — как обычно</div>
+    <div class="col-item"><i class="icon">✗</i>Резюме в папке «Разное» — 200 файлов без имён и дат</div>
+    <div class="col-item"><i class="icon">✗</i>Статус кандидата узнаёшь по звонку коллеге</div>
+    <div class="col-item"><i class="icon">✗</i>Общая таблица Excel на 800 строк, которую ведут пятеро одновременно</div>
+    <div class="col-item"><i class="icon">✗</i>Документы кандидата — в почте, в чате, нигде</div>
+    <div class="col-item"><i class="icon">✗</i>Кто отправил оффер, когда и кому — никто уже не помнит</div>
+  </div>
+  <div class="chaos-col order">
+    <div class="col-label"><span>✓</span> Порядок — с Lumi</div>
+    <div class="col-item"><i class="icon">✓</i>AI парсит PDF за 5 секунд: имя, опыт, навыки уже в карточке</div>
+    <div class="col-item"><i class="icon">✓</i>Статус каждого виден всей команде — в реальном времени</div>
+    <div class="col-item"><i class="icon">✓</i>Воронка с этапами, историей и фильтрами — одно окно для всех</div>
+    <div class="col-item"><i class="icon">✓</i>Документы, чат и заметки прямо в карточке кандидата</div>
+    <div class="col-item"><i class="icon">✓</i>Таймлайн офферов, напоминания и аудит каждого действия</div>
+  </div>
+</div>
+</div>
+</section>
+
+<div class="final-cta">
+<div class="container">
+<h2>Начните найм<br><span class="gradient">без хаоса</span></h2>
+<p>14 дней бесплатно. Без карты. Без обязательств.</p>
+<button id="final-cta-btn" class="btn btn-primary" onclick="openDemoModal('final-cta')" style="position:relative;z-index:10">Начать бесплатно →</button>
+</div>
+</div>
+
+<div class="feedback-bar">
+<div class="container">
+  <span>Есть вопрос или предложение?</span>
+  <button onclick="openFeedbackModal()" class="btn btn-ghost" style="width:auto;max-width:none;position:relative;z-index:10">Обратная связь →</button>
+</div>
+</div>
+
+<footer><span>Lumi.CRM &copy; 2026</span></footer>
+
+<div class="modal-overlay" id="demoModal">
+<div class="modal-box">
+  <button class="modal-close" onclick="closeDemoModal()">✕</button>
+  <h3>Получить демо Lumi</h3>
+  <p class="modal-sub">Покажем систему живьём — без продажного давления. Ответим на любые вопросы.</p>
+  <form id="demoForm">
+    <div class="fg">
+      <label>Ваше имя *</label>
+      <input type="text" name="name" placeholder="Иван Иванов" required>
+    </div>
+    <div class="fg">
+      <label>Компания *</label>
+      <input type="text" name="company" placeholder="ООО Ромашка" required>
+    </div>
+    <div class="fg">
+      <label>Телефон или Email *</label>
+      <input type="text" name="contact" placeholder="+7 900 000-00-00 или email@company.ru" required>
+    </div>
+    <div class="fg">
+      <label>Количество рекрутеров</label>
+      <select name="size">
+        <option value="1-3">1–3 рекрутера</option>
+        <option value="4-10">4–10 рекрутеров</option>
+        <option value="10+">Больше 10</option>
+      </select>
+    </div>
+    <input type="hidden" id="demoSource" name="source" value="general">
+    <button type="submit" class="btn btn-primary modal-submit">Записаться на демо →</button>
+  </form>
+  <div class="modal-success" id="modalSuccess">
+    <div class="ok-icon">✅</div>
+    <h4>Заявка отправлена!</h4>
+    <p>Свяжемся с вами в течение рабочего дня.</p>
+  </div>
+</div>
+</div>
+
+<script>
+// Intersection Observer for animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.bento-card, .price-card, .metric').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// Pipeline tabs
+const ptabDetails = [
+  '<strong>До 500 позиций одновременно.</strong> AI скрининг, Telegram-бот для первичного отбора, автоматический перевод по этапам — рекрутер видит только финалистов.',
+  '<strong>Персональная воронка.</strong> Индивидуальные этапы под роль: Резюме → HR-интервью → Тест → Финальное → Оффер. История переписки и документы в одном окне.',
+  '<strong>Поток студентов без хаоса.</strong> Групповые отклики, авто-теги по университету, массовые приглашения на Assessment Centre одной кнопкой.',
+];
+document.querySelectorAll('.ptab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('ptab-detail').innerHTML = ptabDetails[+tab.dataset.idx];
+  });
+});
+
+// Animated counters
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let start = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start) + suffix;
+      if (start >= target) clearInterval(timer);
+    }, 16);
+    counterObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter[data-target]').forEach(el => counterObserver.observe(el));
+
+// Demo anchor target — scroll to features
+document.querySelector('a[href="#demo"]')?.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector('#how')?.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Wire CTA buttons via addEventListener (more reliable than inline onclick)
+document.querySelectorAll('[onclick^="openDemoModal"]').forEach(el => {
+  const src = (el.getAttribute('onclick').match(/'([^']+)'/) || [])[1] || 'general';
+  el.removeAttribute('onclick');
+  el.addEventListener('click', () => openDemoModal(src));
+});
+document.getElementById('final-cta-btn')?.addEventListener('click', () => openDemoModal('final-cta'));
+
+// Demo modal
+function openDemoModal(source) {
+  document.getElementById('demoModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('demoSource').value = source || 'general';
+}
+function closeDemoModal() {
+  document.getElementById('demoModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('demoModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeDemoModal();
+});
+
+function openFeedbackModal() {
+  document.getElementById('feedbackModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeFeedbackModal() {
+  document.getElementById('feedbackModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('feedbackModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeFeedbackModal();
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDemoModal();
+});
+
+document.getElementById('demoForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+  const data = Object.fromEntries(new FormData(e.target));
+  try {
+    await fetch('https://n8n.piano-sales.com/webhook/lumi-demo-request', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+  } catch(_) {}
+  e.target.style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+  setTimeout(closeDemoModal, 3500);
+});
+</script>
+
+
+<script>
+(function(){
+  var GLOW_CLASSES = ['glow-purple','glow-blue','glow-green','glow-amber'];
+  document.querySelectorAll('.bento-card').forEach(function(card){
+    var icon = card.querySelector('.bento-icon');
+    var glowClass = 'glow-purple';
+    if(icon){
+      if(icon.classList.contains('blue')) glowClass = 'glow-blue';
+      else if(icon.classList.contains('green')) glowClass = 'glow-green';
+      else if(icon.classList.contains('amber')) glowClass = 'glow-amber';
+    }
+    card.addEventListener('click', function(){
+      var el = this;
+      GLOW_CLASSES.forEach(function(c){ el.classList.remove(c); });
+      el.classList.add(glowClass);
+      setTimeout(function(){ el.classList.remove(glowClass); }, 700);
+    });
+  });
+})();
+</script>
+
+<div class="modal-overlay" id="feedbackModal">
+<div class="modal-box" style="max-width:460px">
+  <button class="modal-close" onclick="closeFeedbackModal()">✕</button>
+  <h3>Обратная связь</h3>
+  <p class="modal-sub">Готовы обсудить ваши задачи и предложить решение под ваш бизнес.</p>
+
+  <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:24px;display:flex;flex-direction:column;gap:10px">
+    <a href="mailto:support@lumicrm.ru" style="display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:14px">
+      <span style="font-size:18px">✉️</span> support@lumicrm.ru
+    </a>
+    <a href="tel:88002345085" style="display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:14px">
+      <span style="font-size:18px">📞</span> 8 (800) 234-50-85
+    </a>
+    <a href="https://t.me/Lumicrmbot" target="_blank" style="display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:14px">
+      <span style="font-size:18px">✈️</span> Связаться с нами в Telegram
+    </a>
+  </div>
+
+  <form id="feedbackForm" onsubmit="submitFeedback(event)">
+    <div class="fg">
+      <label>Ваше имя *</label>
+      <input type="text" name="name" placeholder="Иван Иванов" required>
+    </div>
+    <div class="fg">
+      <label>Контакт для ответа *</label>
+      <input type="text" name="contact" placeholder="+7 900 000-00-00 или email@company.ru" required>
+    </div>
+    <div class="fg">
+      <label>Ваше сообщение *</label>
+      <textarea name="message" placeholder="Опишите вашу задачу или вопрос..." required style="width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;font-family:inherit;resize:vertical;min-height:100px;box-sizing:border-box"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary modal-submit">Отправить →</button>
+  </form>
+  <div id="feedbackSuccess" style="display:none;text-align:center;padding:20px 0">
+    <div style="font-size:40px;margin-bottom:12px">✅</div>
+    <p style="font-weight:700;font-size:1.1rem;margin-bottom:6px">Сообщение отправлено!</p>
+    <p style="color:var(--muted);font-size:14px">Мы свяжемся с вами в течение рабочего дня.</p>
+  </div>
+</div>
+</div>
+
+<script>
+function submitFeedback(e) {
+  e.preventDefault();
+  const form = document.getElementById('feedbackForm');
+  const data = Object.fromEntries(new FormData(form));
+  fetch('https://n8n.piano-sales.com/webhook/lumi-feedback', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  }).catch(() => {});
+  form.style.display = 'none';
+  document.getElementById('feedbackSuccess').style.display = 'block';
+}
+
+// Star field
+(function(){
+  var f=document.getElementById('starField');
+  if(!f)return;
+  for(var i=0;i<140;i++){
+    var d=document.createElement('div');
+    var r=Math.random()*1.3+0.2;
+    var op=(Math.random()*.55+.12).toFixed(2);
+    d.style.cssText='position:absolute;width:'+(r*2)+'px;height:'+(r*2)+'px;border-radius:50%;background:rgba(255,255,255,'+op+');left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%';
+    f.appendChild(d);
+  }
+  var pos=[[8,28],[87,13],[22,68],[74,52],[48,82],[91,38],[15,54],[62,18],[38,40],[79,72],[5,75],[55,8]];
+  pos.forEach(function(p,i){
+    var s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    var sz=11+Math.random()*9;
+    s.setAttribute('viewBox','0 0 20 20');
+    s.setAttribute('class','sparkle-star');
+    s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+p[0]+'%;top:'+p[1]+'%;animation-delay:'+(i*0.4)+'s';
+    s.innerHTML='<path d="M10 0L11.8 8.2L20 10L11.8 11.8L10 20L8.2 11.8L0 10L8.2 8.2Z" fill="white"/>';
+    f.appendChild(s);
+  });
+})();
+</script>
+
+</body>
+</html>
