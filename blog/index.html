@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Блог Lumi.CRM — HR и рекрутинг</title>
+<meta name="description" content="Статьи об автоматизации HR-процессов, рекрутинге, управлении персоналом и трендах 2025 года. Практические советы от экспертов Lumi.CRM.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Блог Lumi.CRM — HR и рекрутинг">
+<meta property="og:description" content="Статьи об автоматизации HR-процессов, рекрутинге, управлении персоналом и трендах 2025 года.">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--accent-glow:rgba(111,63,129,0.15);--green:#10b981;--blue:#164194;--amber:#f59e0b;--red:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo,.section-title{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)!important}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.back-link:hover{color:var(--text)}
+
+/* Hero */
+.blog-hero{padding:120px 0 60px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.blog-hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:300px;background:var(--accent);border-radius:50%;filter:blur(120px);opacity:0.07;transform:translate(-50%,-50%);pointer-events:none}
+.section-tag{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);border:1px solid rgba(111,63,129,0.3);padding:4px 12px;border-radius:6px;margin-bottom:16px}
+.blog-hero h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;margin-bottom:14px;letter-spacing:-0.03em}
+.blog-hero p{color:var(--muted);font-size:1rem;max-width:480px;margin:0 auto}
+
+/* Grid */
+.blog-grid{padding:60px 0 80px}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.posts-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.posts-grid{grid-template-columns:1fr}}
+
+/* Card */
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.post-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(111,63,129,0.4),transparent);opacity:0;transition:opacity .3s}
+.post-card:hover{border-color:rgba(111,63,129,0.4);transform:translateY(-3px);box-shadow:0 0 0 1px rgba(111,63,129,0.2),0 8px 24px rgba(111,63,129,0.12)}
+.post-card:hover::before{opacity:1}
+.post-date{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.post-title{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;line-height:1.35;color:var(--text)}
+.post-excerpt{font-size:13px;color:var(--muted);line-height:1.6;flex:1}
+.post-read{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--accent2);margin-top:4px;transition:gap .2s}
+.post-card:hover .post-read{gap:10px}
+.post-read::after{content:'→'}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+.card-cover{width:100%;height:180px;overflow:hidden;border-radius:10px 10px 0 0;margin:-28px -28px 16px -28px;width:calc(100% + 56px)}
+.card-cover img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.8;transition:opacity .3s}
+.post-card:hover .card-cover img{opacity:1}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+  <a href="/" class="logo">
+    <span class="logo-text">Lumi.CRM</span>
+  </a>
+  <div class="nav-links">
+    <a href="/" class="back-link">← На главную</a>
+    <a href="https://app.lumicrm.ru/register" class="nav-cta">Попробовать бесплатно</a>
+  </div>
+</div>
+</nav>
+
+<div class="blog-hero">
+<div class="container">
+  <div class="section-tag">Блог</div>
+  <h1>HR и рекрутинг: экспертные статьи</h1>
+  <p>Практические материалы об автоматизации HR, подборе персонала и управлении командой</p>
+</div>
+</div>
+
+<section class="blog-grid">
+<div class="container">
+  <div class="posts-grid">
+
+    <a href="ats-vs-excel-kadrovye-agentstva.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=280&fit=crop&auto=format&q=75" alt="ATS против Excel для кадровых агентств" loading="lazy">
+    </div>
+      <div class="post-date">20 мая 2026</div>
+      <div class="post-title">ATS против Excel: почему кадровые агентства теряют клиентов без системы учёта кандидатов</div>
+      <div class="post-excerpt">Excel кажется удобным, но при росте агентства превращается в источник потерь: дубли, пропущенные кандидаты, медленный ответ клиентам.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="vakhtovik-tsifrovoy-onboarding.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=280&fit=crop&auto=format&q=75" alt="Цифровой онбординг вахтового персонала" loading="lazy">
+    </div>
+      <div class="post-date">19 мая 2026</div>
+      <div class="post-title">Цифровой онбординг вахтовика: как оформить 50 человек за один день без бумаг</div>
+      <div class="post-excerpt">Горы бумаг и ручной ввод при каждой смене — как цифровые анкеты и портал кандидата сокращают оформление с 3 дней до нескольких часов.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="kpi-rekrutera-2026.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=280&fit=crop&auto=format&q=75" alt="KPI рекрутера и метрики рекрутинга 2026" loading="lazy">
+    </div>
+      <div class="post-date">18 мая 2026</div>
+      <div class="post-title">12 KPI рекрутера которые важны в 2026 году: как измерить эффективность подбора</div>
+      <div class="post-excerpt">Time-to-hire, cost-per-hire, quality of hire и ещё 9 метрик. Что считать, как интерпретировать и как автоматически собирать данные из ATS.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="integraciya-hh-dreamjob-s-ats.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=280&fit=crop&auto=format&q=75" alt="Интеграция HH.ru и DreamJob с ATS" loading="lazy">
+    </div>
+      <div class="post-date">17 мая 2026</div>
+      <div class="post-title">Интеграция HH.ru и DreamJob с ATS: как автоматически импортировать резюме и не тратить часы на копирование</div>
+      <div class="post-excerpt">Рекрутеры тратят до 40% времени на ручное копирование резюме. Интеграция с job-порталами решает это — отклики попадают в воронку автоматически.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="messenger-v-ats-kommunikatsiya.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&h=280&fit=crop&auto=format&q=75" alt="Встроенный мессенджер в ATS" loading="lazy">
+    </div>
+      <div class="post-date">16 мая 2026</div>
+      <div class="post-title">Встроенный мессенджер в ATS: почему общение с кандидатами должно быть внутри системы</div>
+      <div class="post-excerpt">Переписка в WhatsApp и Telegram теряется при уходе рекрутера. Встроенный мессенджер оставляет всю историю общения внутри карточки кандидата.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="lumi-crm-dlya-hr.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=280&fit=crop&auto=format&q=75" alt="Lumi.CRM" loading="lazy">
+    </div>
+      <div class="post-date">18 мая 2026</div>
+      <div class="post-title">Lumi.CRM: ATS и CRM для рекрутинга — обзор возможностей системы</div>
+      <div class="post-excerpt">ATS, операционный модуль для вахтового персонала, встроенный мессенджер и AI-ассистент. Разбираем что умеет Lumi.CRM и кому она подходит.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="kadrovyy-audit-vyyavlyaem-riski.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1568992688065-536aad8a12f6?w=600&h=280&fit=crop&auto=format&q=75" alt="Кадровый аудит" loading="lazy">
+    </div>
+      <div class="post-date">24 августа 2025</div>
+      <div class="post-title">Кадровый аудит: выявляем риски штрафов и оптимизируем HR-процессы за 20 000 руб.</div>
+      <div class="post-excerpt">В 2025 году проверки ГИТ участились: 70% компаний рискуют штрафами до 500 000 руб. за нарушения в КДП. HR Advisor предлагает кадровый аудит — проверка документов, выявление рисков, рекомендации.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="aktualnye-novosti-dlya-buhgalterov.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=280&fit=crop&auto=format&q=75" alt="Финансы и бухгалтерия" loading="lazy">
+    </div>
+      <div class="post-date">20 июля 2025</div>
+      <div class="post-title">Актуальные новости для бухгалтеров и экономистов: что важно знать в 2025 году</div>
+      <div class="post-excerpt">Актуальные новости для бухгалтеров и экономистов: что важно знать в 2025 году. Новые стандарты бухучёта, налоговые изменения, экономические тренды и прогнозы.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="razrabotka-sistemy-motivatsii-kpi.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=280&fit=crop&auto=format&q=75" alt="Система мотивации KPI" loading="lazy">
+    </div>
+      <div class="post-date">23 августа 2025</div>
+      <div class="post-title">Разработка системы мотивации: как KPI и бонусы повысят производительность вашей команды</div>
+      <div class="post-excerpt">В 2025 году KPI и бонусы — ключ к росту: команды с ними показывают +18% производительности и лучше удерживают таланты. HR Advisor предлагает разработку систем мотивации.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="kak-avtomatizatsiya-hr-protsessov.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&h=280&fit=crop&auto=format&q=75" alt="Автоматизация HR" loading="lazy">
+    </div>
+      <div class="post-date">13 мая 2025</div>
+      <div class="post-title">Как автоматизация HR-процессов экономит время и повышает эффективность</div>
+      <div class="post-excerpt">Представьте: ваш HR-отдел утопает в рутинных задачах. Ведение табелей, обработка резюме, оформление новых сотрудников — всё это отнимает часы, которые можно было бы потратить на развитие команды.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="razvitie-kompetentsiy-sotrudnikov.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=280&fit=crop&auto=format&q=75" alt="Развитие компетенций" loading="lazy">
+    </div>
+      <div class="post-date">9 июля 2025</div>
+      <div class="post-title">Развитие компетенций сотрудников: как вырастить профессионалов будущего</div>
+      <div class="post-excerpt">В условиях быстро меняющегося рынка развитие компетенций сотрудников стало не просто трендом, а необходимостью. Компании, которые инвестируют в обучение, увеличивают продуктивность на 21-32%.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="sistema-menedzhmenta-kachestva.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=280&fit=crop&auto=format&q=75" alt="Менеджмент качества" loading="lazy">
+    </div>
+      <div class="post-date">19 мая 2025</div>
+      <div class="post-title">Система менеджмента качества: как компании добиваются совершенства</div>
+      <div class="post-excerpt">Система менеджмента качества (СМК) — это не просто модный термин, а реальный инструмент, который помогает компаниям достигать стабильных результатов в бизнесе.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="hr-advisor-nachal-podbor-personala.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=280&fit=crop&auto=format&q=75" alt="Подбор персонала логистика" loading="lazy">
+    </div>
+      <div class="post-date">4 июля 2025</div>
+      <div class="post-title">HR Advisor начал подбор персонала для нового проекта в сфере складской и производственной логистики</div>
+      <div class="post-excerpt">HR Advisor начал подбор персонала для нового проекта в сфере складской и производственной логистики. Упор — на скорость, надёжность и качественный поток кандидатов.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="kiberbezopasnost-v-kompanii.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1555212952613-be17e840e695?w=600&h=280&fit=crop&auto=format&q=75" alt="Кибербезопасность" loading="lazy">
+    </div>
+      <div class="post-date">15 мая 2025</div>
+      <div class="post-title">Кибербезопасность в компании: как защитить бизнес от цифровых угроз</div>
+      <div class="post-excerpt">В современном мире кибератаки становятся все более изощренными. Компании теряют не только деньги, но и репутацию. По статистике, каждая третья организация в России становилась жертвой киберпреступлений.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="it-konsalting-dlya-hr.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=280&fit=crop&auto=format&q=75" alt="IT консалтинг HR" loading="lazy">
+    </div>
+      <div class="post-date">26 августа 2025</div>
+      <div class="post-title">IT-консалтинг для HR: как автоматизация упростит подбор и оценку персонала</div>
+      <div class="post-excerpt">В 2025 году автоматизация HR-процессов — must-have для стартапов: сокращает время найма на 30% и повышает точность оценки на 25%. HR Advisor предлагает IT-консалтинг для стартапов.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="massovyy-rekruting-zakryt-50.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=280&fit=crop&auto=format&q=75" alt="Массовый рекрутинг" loading="lazy">
+    </div>
+      <div class="post-date">27 августа 2025</div>
+      <div class="post-title">Массовый рекрутинг: как закрыть 50+ вакансий за месяц без перерасхода бюджета с HR Advisor</div>
+      <div class="post-excerpt">В 2025 году массовый найм эволюционирует с AI: компании сокращают затраты на 20-30%, используя автоматизацию для скрининга и подбора. Узнайте, как мы помогаем малому бизнесу.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="gibridnyy-grafik-raboty.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=280&fit=crop&auto=format&q=75" alt="Гибридный график" loading="lazy">
+    </div>
+      <div class="post-date">7 мая 2025</div>
+      <div class="post-title">Гибридный график работы: новый стандарт или временная мода?</div>
+      <div class="post-excerpt">Гибридный график — это современный формат работы, который позволяет сотрудникам часть времени трудиться в офисе, а часть — удаленно. Это золотая середина между офисом и полной удалёнкой.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="aktualnye-novosti-dlya-yuristov.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=280&fit=crop&auto=format&q=75" alt="Новости для юристов" loading="lazy">
+    </div>
+      <div class="post-date">1 августа 2025</div>
+      <div class="post-title">Актуальные новости для юристов: главные изменения года</div>
+      <div class="post-excerpt">Актуальные новости для юристов: главные изменения года. Новеллы в ГПК РФ, ужесточение ответственности за утечки персональных данных, реформа банкротства и цифровизация права.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="konsalting-v-it-sfere.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=280&fit=crop&auto=format&q=75" alt="IT консалтинг" loading="lazy">
+    </div>
+      <div class="post-date">14 мая 2025</div>
+      <div class="post-title">Консалтинг в IT-сфере: как профессиональные консультации помогают бизнесу расти</div>
+      <div class="post-excerpt">IT-консалтинг — это профессиональная консультационная деятельность, направленная на оптимизацию бизнес-процессов компании с помощью информационных технологий.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="top-5-priznakov-konsalting.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=280&fit=crop&auto=format&q=75" alt="Консалтинг бизнес" loading="lazy">
+    </div>
+      <div class="post-date">12 августа 2025</div>
+      <div class="post-title">Топ-5 признаков того, что вашему бизнесу нужен консалтинг</div>
+      <div class="post-excerpt">Каждый предприниматель мечтает, чтобы его бизнес рос как на дрожжах. Но иногда вместо прогресса наступает застой. Рассказываем, как понять, что пора обратиться к консультантам.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="kak-motivatsiya-personala.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=280&fit=crop&auto=format&q=75" alt="Мотивация персонала" loading="lazy">
+    </div>
+      <div class="post-date">16 мая 2025</div>
+      <div class="post-title">Как мотивация персонала превращает бизнес-процессы в высокоэффективную машину</div>
+      <div class="post-excerpt">Бизнес-процессы — это сердце любой компании. От их эффективности зависит не только прибыль, но и репутация, конкурентоспособность и даже выживание организации.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="kak-rabotnye-ploschadki-menyayut.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=280&fit=crop&auto=format&q=75" alt="Работные площадки" loading="lazy">
+    </div>
+      <div class="post-date">3 июля 2025</div>
+      <div class="post-title">Как работные площадки меняют правила игры в подборе персонала: лайфхаки для HR-специалистов</div>
+      <div class="post-excerpt">Выбор подходящей работной площадки — как поиск ключа к замку. Разбираемся, как превратить платформы HeadHunter, SuperJob и нишевые сервисы в эффективный инструмент рекрутинга.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="novyy-kontrakt-novye-vozmozhnosti.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=280&fit=crop&auto=format&q=75" alt="Новый контракт" loading="lazy">
+    </div>
+      <div class="post-date">6 июля 2025</div>
+      <div class="post-title">НОВЫЙ КОНТРАКТ — НОВЫЕ ВОЗМОЖНОСТИ</div>
+      <div class="post-excerpt">Мы рады сообщить, что наша компания заключила договор с новым стратегическим заказчиком! В связи с расширением объёмов работ объявляем набор сотрудников на ключевые специальности.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="burnout-v-komande-strategii.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=280&fit=crop&auto=format&q=75" alt="Выгорание в команде" loading="lazy">
+    </div>
+      <div class="post-date">19 августа 2025</div>
+      <div class="post-title">Burnout в команде: стратегии мотивации с KPI для топ-менеджеров в 2025 году</div>
+      <div class="post-excerpt">В 2025 году 66% сотрудников сталкиваются с выгоранием, а топ-менеджеры тратят до 75% дня на встречи, что приводит к перегрузке. Как HR Advisor помогает бизнесу внедрять KPI, которые вдохновляют.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="ai-v-podbore-personala.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=280&fit=crop&auto=format&q=75" alt="AI в рекрутинге" loading="lazy">
+    </div>
+      <div class="post-date">20 августа 2025</div>
+      <div class="post-title">AI в подборе персонала: как сэкономить 50% времени на рекрутинге в 2025 году</div>
+      <div class="post-excerpt">В 2025 году AI меняет правила игры в HR: 76% компаний внедряют его, сокращая время подбора на 50%. HR Advisor использует AI, чтобы находить идеальных специалистов быстро и без лишних затрат.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+    <a href="hr-buduschego-upravlenie-2035.html" class="post-card">
+    <div class="card-cover">
+      <img src="https://images.unsplash.com/photo-1488229297570-58520851e868?w=600&h=280&fit=crop&auto=format&q=75" alt="HR будущего 2035" loading="lazy">
+    </div>
+      <div class="post-date">7 мая 2025</div>
+      <div class="post-title">HR будущего: как изменится управление персоналом к 2035 году</div>
+      <div class="post-excerpt">Хочу немного пофантазировать на тему будущего, как это видят сами эксперты в области HR и что нам стоит ожидать. Цифровая трансформация HR и новые подходы к найму.</div>
+      <span class="post-read">Читать</span>
+    </a>
+
+  </div>
+</div>
+</section>
+
+<footer><span>Lumi.CRM &copy; 2026 &mdash; <a href="/">На главную</a></span></footer>
+
+</body>
+</html>

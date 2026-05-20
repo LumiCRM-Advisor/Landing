@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi.CRM — ATS и CRM для рекрутинга: обзор возможностей системы — Блог Lumi.CRM</title>
+<meta name="description" content="Lumi.CRM — российская система управления подбором персонала. ATS, операционный модуль, встроенный мессенджер, AI-ассистент. Как это работает и кому подходит.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lumi.CRM — ATS и CRM для рекрутинга: обзор возможностей системы">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--green:#10b981;--blue:#164194}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)!important}
+.post-hero{padding:120px 0 50px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:300px;background:var(--accent);border-radius:50%;filter:blur(120px);opacity:0.07;transform:translate(-50%,-50%);pointer-events:none}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb a:hover{color:var(--text)}
+.post-meta{font-size:12px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.post-hero h1{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:900;line-height:1.2;letter-spacing:-0.03em;max-width:780px}
+.lead{color:var(--muted);font-size:1.05rem;margin-top:16px;max-width:680px;line-height:1.7}
+.post-body{padding:60px 0}
+.content{max-width:760px;font-size:1rem;line-height:1.8;color:#d4d4da}
+.content p{margin-bottom:1.2em}
+.content h3{font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2em 0 0.8em}
+.content ul,.content ol{margin:0.8em 0 1.2em 1.4em}
+.content li{margin-bottom:0.4em;color:#d4d4da}
+.content strong{color:var(--text)}
+.tags{margin-top:2em;display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:12px;background:rgba(111,63,129,0.15);border:1px solid rgba(111,63,129,0.3);color:var(--accent2);padding:4px 10px;border-radius:6px}
+.post-cta{margin-top:3em;padding:2em;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center}
+.post-cta p{color:var(--muted);margin-bottom:1em}
+.cta-btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;font-size:14px;transition:background .2s}
+.cta-btn:hover{background:var(--accent2);color:#fff}
+.back-nav{padding:32px 0;border-top:1px solid var(--border)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.back-link:hover{color:var(--text)}
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+.post-cover{width:100%;max-height:460px;overflow:hidden;background:var(--card)}
+.post-cover img{width:100%;height:460px;object-fit:cover;display:block;opacity:0.85}
+@media(max-width:768px){.post-cover img{height:240px}}
+.highlight-box{background:rgba(111,63,129,0.08);border:1px solid rgba(111,63,129,0.25);border-radius:12px;padding:20px 24px;margin:1.5em 0}
+.highlight-box p{margin-bottom:0;color:var(--text)}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:1em 0 1.5em}
+.module-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.module-card strong{display:block;font-size:13px;color:var(--text);margin-bottom:4px}
+.module-card span{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+  <a href="/" class="logo"><span class="logo-text">Lumi.CRM</span></a>
+  <div class="nav-links">
+    <a href="./index.html" class="back-link">← Все статьи</a>
+    <a href="https://app.lumicrm.ru/register" class="nav-cta">Попробовать бесплатно</a>
+  </div>
+</div>
+</nav>
+
+<div class="post-hero">
+<div class="container">
+  <div class="breadcrumb"><a href="./index.html">Блог</a> / <span>О продукте</span></div>
+  <div class="post-meta">18 мая 2026</div>
+  <h1>Lumi.CRM: как работает система управления персоналом, которую мы строили для российского рекрутинга</h1>
+  <p class="lead">ATS, операционный модуль для вахтового персонала, встроенный мессенджер и AI-ассистент — разбираем что умеет Lumi.CRM и кому она подходит.</p>
+</div>
+</div>
+
+<article class="post-body">
+<div class="post-cover">
+  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=500&fit=crop&auto=format&q=80" alt="Lumi.CRM — система управления рекрутингом" loading="lazy">
+</div>
+<div class="container">
+<div class="content">
+  <p>Lumi.CRM появилась из конкретной боли: российские HR-команды работают в Excel, мессенджерах и разрозненных таблицах. Полноценных отечественных ATS практически не было — особенно для сегмента вахтового и массового подбора. Мы решили это исправить.</p>
+
+  <div class="highlight-box">
+    <p><strong>Lumi.CRM — мультимодульная HR-платформа</strong> с апреля 2026 года на продакшне. Работает на реальных клиентах, активно дорабатывается по обратной связи.</p>
+  </div>
+
+  <h3>Из чего состоит система</h3>
+  <p>Lumi.CRM построена по модульному принципу. Каждый модуль решает конкретный слой HR-процесса, и их можно подключать по мере роста компании.</p>
+
+  <div class="module-grid">
+    <div class="module-card"><strong>ATS Рекрутинг</strong><span>Воронка кандидатов, вакансии, интеграция с HH.ru и DreamJob</span></div>
+    <div class="module-card"><strong>ОПС Операционка</strong><span>Управление сотрудниками, смены, документооборот</span></div>
+    <div class="module-card"><strong>WF Заявки</strong><span>Заявки на подбор от внутренних заказчиков</span></div>
+    <div class="module-card"><strong>HRM Кадры</strong><span>Личные дела, военный учёт, контракты</span></div>
+    <div class="module-card"><strong>BXT Перевахтовка</strong><span>Управление вахтовым персоналом</span></div>
+    <div class="module-card"><strong>HSE Охрана труда</strong><span>Инструктажи, нормативы, происшествия</span></div>
+  </div>
+
+  <h3>ATS: воронка подбора без Excel</h3>
+  <p>В основе рекрутингового модуля — Kanban-доска с кастомными статусами кандидатов. Вакансии публикуются на HH.ru и DreamJob напрямую из системы, отклики приходят автоматически. На каждого кандидата — карточка с историей взаимодействий, документами и комментариями команды.</p>
+  <ul>
+    <li>Парсинг резюме и OCR документов</li>
+    <li>AI-генерация описаний вакансий</li>
+    <li>Встроенная оценка кандидатов и согласование с заказчиком</li>
+    <li>Кандидатский портал для самостоятельной подачи заявок</li>
+  </ul>
+
+  <h3>Мессенджер и коммуникации</h3>
+  <p>Отдельная особенность Lumi.CRM — встроенный корпоративный мессенджер. Это значит, что переписка по кандидату хранится прямо в системе, а не в личных Telegram-чатах рекрутеров. Каналы, личные сообщения, уведомления о смене статуса — всё внутри одного интерфейса.</p>
+
+  <h3>Аналитика и отчёты</h3>
+  <p>Дашборд руководителя показывает воронку подбора в разрезе источников, сроки закрытия вакансий, эффективность рекрутеров. Настраиваемые фильтры, экспорт в Excel. Для массового подбора — отдельный вид с метриками по потоку кандидатов.</p>
+
+  <h3>AI-ассистент Люми</h3>
+  <p>Встроенный AI-помощник умеет составлять описания вакансий, анализировать резюме и отвечать на вопросы по кандидатам. Работает на базе Anthropic Claude, интегрирован в интерфейс системы. Не отдельный чат-бот, а контекстный помощник прямо в карточке вакансии или кандидата.</p>
+
+  <h3>Кому подходит Lumi.CRM</h3>
+  <p>Система ориентирована на три сегмента:</p>
+  <ul>
+    <li><strong>Корпоративный HR-отдел</strong> — от 5 рекрутеров, несколько направлений подбора, нужна единая воронка и аналитика</li>
+    <li><strong>Рекрутинговое агентство</strong> — мультитенантность, работа с разными заказчиками в одной системе</li>
+    <li><strong>Вахтовые предприятия</strong> — массовый подбор + операционный учёт сотрудников + перевахтовка</li>
+  </ul>
+
+  <h3>Тарифы</h3>
+  <p>Три плана — Старт (малые команды), Бизнес (средний корпоративный), Энтерпрайз (кастомизация, SLA, выделенная поддержка). Все цены в рублях, оплата от юрлица. Есть бесплатный пробный период на 14 дней без карты.</p>
+
+  <div class="highlight-box">
+    <p>Lumi.CRM соответствует требованиям 152-ФЗ, данные хранятся на серверах в России. Это принципиально для предприятий с иностранными рабочими и персональными данными.</p>
+  </div>
+
+  <h3>Что дальше</h3>
+  <p>В дорожной карте — модуль тендеров (44-ФЗ / 223-ФЗ), мобильное приложение для кандидатов, более глубокая интеграция с МТС и телефонией, партнёрская программа для рекрутинговых агентств. Платформа развивается итерациями, и обратная связь клиентов напрямую влияет на приоритеты.</p>
+
+  <p>Хотите посмотреть как это работает на реальных данных — демо-доступ доступен сразу после регистрации.</p>
+
+  <div class="tags">
+    <span>#LumiCRM</span>
+    <span>#ATS</span>
+    <span>#HR-автоматизация</span>
+    <span>#Рекрутинг</span>
+    <span>#HRM</span>
+    <span>#Российское-ПО</span>
+  </div>
+</div>
+<div class="post-cta">
+  <p>Попробуйте Lumi.CRM на своих задачах — 14 дней бесплатно, без карты</p>
+  <a href="https://app.lumicrm.ru/register" class="cta-btn">Начать бесплатно →</a>
+</div>
+</div>
+</article>
+
+<div class="back-nav">
+<div class="container">
+  <a href="./index.html" class="back-link">← Все статьи блога</a>
+</div>
+</div>
+
+<footer><span>© 2026 Lumi.CRM — система управления персоналом</span></footer>
+</body>
+</html>

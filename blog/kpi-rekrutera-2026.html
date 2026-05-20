@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 KPI рекрутера которые важны в 2026 году: как измерить эффективность подбора — Блог Lumi.CRM</title>
+<meta name="description" content="Time-to-hire, cost-per-hire, quality of hire и ещё 9 ключевых метрик рекрутинга. Как считать, что значат и как их улучшать с помощью данных из ATS-системы.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12 KPI рекрутера которые важны в 2026 году: как измерить эффективность подбора — Блог Lumi.CRM">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--green:#10b981;--blue:#164194}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)!important}
+.post-hero{padding:120px 0 50px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:300px;background:var(--accent);border-radius:50%;filter:blur(120px);opacity:0.07;transform:translate(-50%,-50%);pointer-events:none}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb a:hover{color:var(--text)}
+.post-meta{font-size:12px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.post-hero h1{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:900;line-height:1.2;letter-spacing:-0.03em;max-width:780px}
+.lead{color:var(--muted);font-size:1.05rem;margin-top:16px;max-width:680px;line-height:1.7}
+.post-body{padding:60px 0}
+.content{max-width:760px;font-size:1rem;line-height:1.8;color:#d4d4da}
+.content p{margin-bottom:1.2em}
+.content h3{font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2em 0 0.8em}
+.content ul,.content ol{margin:0.8em 0 1.2em 1.4em}
+.content li{margin-bottom:0.4em;color:#d4d4da}
+.content strong{color:var(--text)}
+.content table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.9rem}
+.content th{background:var(--card);border:1px solid var(--border);padding:10px 14px;text-align:left;font-weight:700;color:var(--text)}
+.content td{border:1px solid var(--border);padding:10px 14px;color:#d4d4da}
+.content tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.tags{margin-top:2em;display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:12px;background:rgba(111,63,129,0.15);border:1px solid rgba(111,63,129,0.3);color:var(--accent2);padding:4px 10px;border-radius:6px}
+.post-cta{margin-top:3em;padding:2em;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center}
+.post-cta p{color:var(--muted);margin-bottom:1em}
+.cta-btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;font-size:14px;transition:background .2s}
+.cta-btn:hover{background:var(--accent2);color:#fff}
+.back-nav{padding:32px 0;border-top:1px solid var(--border)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.back-link:hover{color:var(--text)}
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+.post-cover{width:100%;max-height:460px;overflow:hidden;background:var(--card)}
+.post-cover img{width:100%;height:460px;object-fit:cover;display:block;opacity:0.85}
+@media(max-width:768px){.post-cover img{height:240px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+  <a href="/" class="logo"><span class="logo-text">Lumi.CRM</span></a>
+  <div class="nav-links">
+    <a href="./index.html" class="back-link">← Все статьи</a>
+    <a href="https://app.lumicrm.ru/register" class="nav-cta">Попробовать бесплатно</a>
+  </div>
+</div>
+</nav>
+
+<div class="post-hero">
+<div class="container">
+  <div class="breadcrumb"><a href="./index.html">Блог</a> / <span>HR-аналитика</span></div>
+  <div class="post-meta">18 мая 2026</div>
+  <h1>12 KPI рекрутера которые важны в 2026 году: как измерить эффективность подбора</h1>
+  <p class="lead">Как управлять тем, что не измеряешь? Разбираем 12 ключевых метрик рекрутинга: от time-to-hire до quality of hire — что считать, как интерпретировать и как улучшать.</p>
+</div>
+</div>
+
+<article class="post-body">
+<div class="post-cover">
+  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=500&fit=crop&auto=format&q=80" alt="HR-аналитика и дашборды рекрутинга" loading="lazy">
+</div>
+<div class="container">
+<div class="content">
+
+  <p>Многие HR-директора и руководители кадровых агентств оценивают работу рекрутера интуитивно: «Антон быстро закрывает вакансии, хорошо работает». Но что значит «быстро»? Быстрее кого? И не снижается ли при этом качество найма? Без метрик любая оценка субъективна — а значит, невозможно ни улучшить процесс, ни обоснованно принять кадровое решение.</p>
+  <p>В 2026 году данные о рекрутинге — не роскошь, а базовый инструмент управления. Разбираем 12 KPI, которые реально показывают что происходит в вашем процессе подбора.</p>
+
+  <h3>1. Time-to-Fill (время закрытия вакансии)</h3>
+  <p><strong>Что это:</strong> количество дней от открытия вакансии до принятия оффера кандидатом.</p>
+  <p><strong>Как считать:</strong> дата принятия оффера минус дата открытия вакансии в системе.</p>
+  <p><strong>Ориентир:</strong> по данным SHRM, медианный time-to-fill в России в 2025 году составил 28 дней. Для массового подбора — 10–14 дней, для топ-менеджмента — 60+ дней норма.</p>
+  <p><strong>На что влияет:</strong> операционные потери бизнеса от незакрытой позиции, нагрузка на команду.</p>
+
+  <h3>2. Time-to-Hire (время найма)</h3>
+  <p><strong>Что это:</strong> количество дней от первого контакта с кандидатом до принятия им оффера. В отличие от time-to-fill — отражает скорость именно рекрутинговой воронки, а не скорость поступления заявки.</p>
+  <p><strong>Как считать:</strong> дата принятия оффера минус дата первого контакта/отклика.</p>
+  <p><strong>Ориентир:</strong> 7–14 дней для большинства позиций.</p>
+
+  <h3>3. Cost-per-Hire (стоимость найма)</h3>
+  <p><strong>Что это:</strong> полные затраты на закрытие одной вакансии.</p>
+  <p><strong>Как считать:</strong> (внутренние затраты на рекрутинг + внешние затраты) / количество нанятых сотрудников. Внутренние — зарплата рекрутеров, доля времени нанимающих менеджеров. Внешние — реклама вакансий, услуги агентств, платные инструменты.</p>
+  <p><strong>Ориентир:</strong> сильно зависит от индустрии и уровня позиции. Для рабочего персонала — 5 000–20 000 руб., для специалистов — 30 000–150 000 руб.</p>
+
+  <h3>4. Quality of Hire (качество найма)</h3>
+  <p>Это самый важный и самый сложно измеримый KPI. Показывает, насколько нанятые сотрудники соответствуют ожиданиям.</p>
+  <p><strong>Как считать:</strong> комбинированный индекс из нескольких показателей нанятого сотрудника: оценка по итогам испытательного срока + оценка руководителя через 3 и 6 месяцев + процент удержания через год. Каждый показатель нормализуется к шкале 0–100, берётся среднее.</p>
+  <p><strong>Ориентир:</strong> индекс выше 70 считается хорошим результатом.</p>
+
+  <h3>5. Offer Acceptance Rate (процент принятых офферов)</h3>
+  <p><strong>Что это:</strong> доля кандидатов, принявших оффер от общего числа сделанных офферов.</p>
+  <p><strong>Как считать:</strong> (принятые офферы / сделанные офферы) × 100%</p>
+  <p><strong>Ориентир:</strong> 80–90% — хороший показатель. Ниже 70% — сигнал проблемы: либо с компенсацией, либо с процессом переговоров.</p>
+  <p><strong>На что влияет:</strong> если процент низкий, стоит анализировать причины отказов — они часто указывают на конкурентность предложения или проблемы в коммуникации на финальных этапах.</p>
+
+  <h3>6. Source Effectiveness (эффективность каналов)</h3>
+  <p><strong>Что это:</strong> откуда приходят лучшие кандидаты — HH.ru, DreamJob, рекомендации, LinkedIn, прямой поиск.</p>
+  <p><strong>Как считать:</strong> для каждого источника считаются: количество кандидатов, conversion rate до оффера, quality of hire по нанятым из этого источника, стоимость лида.</p>
+  <p>Ключевая ошибка — оценивать канал только по количеству резюме. Важен качественный выход: сколько из пришедших дошли до оффера и как они работают.</p>
+
+  <h3>7. Candidate Drop-off Rate (отсев на каждом этапе)</h3>
+  <p><strong>Что это:</strong> процент кандидатов, выпадающих на каждом этапе воронки подбора.</p>
+  <p><strong>Как анализировать:</strong> если на этапе «телефонное интервью» выпадает 70% — либо слишком широкий поток на входе, либо плохая квалификация до звонка. Если на этапе «оффер» — проблема с компенсацией или финальным этапом.</p>
+
+  <h3>8. Time-in-Stage (время на каждом этапе)</h3>
+  <p><strong>Что это:</strong> сколько дней в среднем кандидат проводит на каждом этапе воронки.</p>
+  <p>Этот KPI выявляет узкие места. Если кандидат ждёт решения после финального интервью 7 дней — это потеря: за это время его перехватит конкурент. Нормальный срок — 1–2 рабочих дня.</p>
+
+  <h3>9. Retention Rate (удержание нанятых)</h3>
+  <p><strong>Что это:</strong> процент нанятых сотрудников, проработавших более 3, 6 и 12 месяцев.</p>
+  <p><strong>Как считать:</strong> (сотрудники, проработавшие N месяцев / все нанятые за период) × 100%</p>
+  <p><strong>Ориентир:</strong> удержание за первые 90 дней ниже 80% — тревожный сигнал о несоответствии ожиданий при найме.</p>
+
+  <h3>10. Hiring Manager Satisfaction (удовлетворённость нанимающих)</h3>
+  <p>Простой опрос нанимающего менеджера через 30 дней после закрытия вакансии: оценка качества кандидатов в шортлисте, скорости процесса, коммуникации с рекрутером. 5-балльная шкала, 3 вопроса — занимает 2 минуты, даёт ценный сигнал.</p>
+
+  <h3>11. Diversity Metrics (разнообразие в воронке)</h3>
+  <p>В 2026 году компании всё чаще отслеживают состав воронки: соотношение кандидатов по полу, возрасту, региону на входе и на выходе (в нанятых). Это помогает выявлять неосознанные фильтры в процессе подбора.</p>
+
+  <h3>12. Requisition Load per Recruiter (нагрузка рекрутера)</h3>
+  <p><strong>Что это:</strong> количество открытых вакансий на одного рекрутера одновременно.</p>
+  <p><strong>Ориентир:</strong> 15–20 позиций — рабочая нагрузка. Более 25 — снижение качества неизбежно. Этот KPI помогает руководителю принять решение о найме дополнительного рекрутера.</p>
+
+  <h3>Как собирать эти метрики на практике</h3>
+  <p>Главная проблема с KPI рекрутера — их ручной сбор. Если рекрутер должен сам заполнять таблицу с датами, на это уходит время и данные неизбежно неточны.</p>
+  <p>В Lumi.CRM все перечисленные метрики считаются автоматически на основе действий в системе: дата открытия вакансии, дата смены статуса кандидата, дата оффера, источник откуда пришёл кандидат — всё фиксируется в процессе работы. На дашборде руководитель видит актуальную картину по каждому рекрутеру и каждой вакансии без дополнительных усилий команды.</p>
+
+  <div class="tags">
+    <span>#KPI рекрутера</span>
+    <span>#HR-аналитика</span>
+    <span>#Time-to-hire</span>
+    <span>#Метрики рекрутинга</span>
+    <span>#Эффективность подбора</span>
+  </div>
+</div>
+<div class="post-cta">
+  <p>Хотите видеть все 12 метрик в реальном времени по каждому рекрутеру? Lumi.CRM считает KPI автоматически — без таблиц и ручного ввода.</p>
+  <a href="https://app.lumicrm.ru/register" class="cta-btn">Попробовать Lumi.CRM бесплатно →</a>
+</div>
+</div>
+</article>
+
+<div class="back-nav">
+<div class="container">
+  <a href="./index.html" class="back-link">← Все статьи блога</a>
+</div>
+</div>
+
+<footer><span>© 2026 Lumi.CRM — система управления персоналом</span></footer>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как работные площадки меняют правила игры в подборе персонала — Блог Lumi.CRM</title>
+<meta name="description" content="Лайфхаки для HR-специалистов: когда использовать HeadHunter vs SuperJob, как оптимизировать вакансии, где искать редкие таланты и как автоматизировать подбор.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как работные площадки меняют правила игры в подборе персонала — Блог Lumi.CRM">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--green:#10b981;--blue:#164194}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)!important}
+.post-hero{padding:120px 0 50px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:300px;background:var(--accent);border-radius:50%;filter:blur(120px);opacity:0.07;transform:translate(-50%,-50%);pointer-events:none}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb a:hover{color:var(--text)}
+.post-meta{font-size:12px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.post-hero h1{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:900;line-height:1.2;letter-spacing:-0.03em;max-width:780px}
+.lead{color:var(--muted);font-size:1.05rem;margin-top:16px;max-width:680px;line-height:1.7}
+.post-body{padding:60px 0}
+.content{max-width:760px;font-size:1rem;line-height:1.8;color:#d4d4da}
+.content p{margin-bottom:1.2em}
+.content h3{font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2em 0 0.8em}
+.content ul,.content ol{margin:0.8em 0 1.2em 1.4em}
+.content li{margin-bottom:0.4em;color:#d4d4da}
+.content strong{color:var(--text)}
+.post-cta{margin-top:3em;padding:2em;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center}
+.post-cta p{color:var(--muted);margin-bottom:1em}
+.cta-btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;font-size:14px;transition:background .2s}
+.cta-btn:hover{background:var(--accent2);color:#fff}
+.back-nav{padding:32px 0;border-top:1px solid var(--border)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.back-link:hover{color:var(--text)}
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+.post-cover{width:100%;max-height:460px;overflow:hidden;background:var(--card)}
+.post-cover img{width:100%;height:460px;object-fit:cover;display:block;opacity:0.85}
+@media(max-width:768px){.post-cover img{height:240px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+  <a href="/" class="logo"><span class="logo-text">Lumi.CRM</span></a>
+  <div class="nav-links">
+    <a href="./index.html" class="back-link">← Все статьи</a>
+    <a href="https://app.lumicrm.ru/register" class="nav-cta">Попробовать бесплатно</a>
+  </div>
+</div>
+</nav>
+
+<div class="post-hero">
+<div class="container">
+  <div class="breadcrumb"><a href="./index.html">Блог</a> / <span>Работные площадки</span></div>
+  <div class="post-meta">3 июля 2025</div>
+  <h1>Как работные площадки меняют правила игры в подборе персонала: лайфхаки для HR-специалистов</h1>
+  <p class="lead">Выбор подходящей работной площадки — как поиск ключа к замку. Неправильный ключ? Дверь не откроется. Правильный? Получите поток мотивированных кандидатов. Разбираемся, как превратить платформы в эффективный инструмент рекрутинга.</p>
+</div>
+</div>
+
+<article class="post-body">
+<div class="post-cover">
+  <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=500&fit=crop&auto=format&q=80" alt="Карьера и работа" loading="lazy">
+</div>
+<div class="container">
+<div class="content">
+  <h3>1. HeadHunter vs SuperJob: когда что выбрать</h3>
+  <ul>
+    <li><strong>HeadHunter</strong> — лидер по охвату (20 млн пользователей) и функционалу. Идеален для поиска узких специалистов и IT-профи. Здесь есть «HeadHunter Pro» для глубокого анализа резюме, но тарифы выше.</li>
+    <li><strong>SuperJob</strong> — демократичные цены и простота. Лучше подходит для малого бизнеса и массового подбора. Например, для курьеров или менеджеров продаж.</li>
+  </ul>
+  <p><strong>Совет:</strong> Используйте оба сервиса в тандеме. HH — для «белых воротничков», SJ — для оперативных вакансий.</p>
+  <h3>2. Оптимизируйте вакансии: не просто текст, а продающий пост</h3>
+  <ul>
+    <li>Добавляйте видеоотзывы сотрудников — это повышает доверие на 40%.</li>
+    <li>Указывайте не только зарплату, но и «плюшки»: ДМС, обучение, гибкий график. Пример: KazanExpress внедрил CRM-систему Talantix для автоматизации рассылок и анализа конверсий. Теперь 70% кандидатов приходят через WhatsApp-сообщения.</li>
+    <li>Используйте SEO-ключи в описании. Например, для IT-вакансий: «Python-разработчик (Django, Flask)», а не просто «Программист».</li>
+  </ul>
+  <h3>3. Где искать редкие таланты: нишевые площадки</h3>
+  <ul>
+    <li>Habr Career — для IT-специалистов.</li>
+    <li>Behance — для дизайнеров.</li>
+    <li>RelocateMe — для кандидатов, готовых к переезду.</li>
+  </ul>
+  <p><strong>Кейс:</strong> Компания из сферы логистики увеличила отклики на 25%, разместив вакансии водителей на «Авито» и региональных job-порталах.</p>
+  <h3>4. HR-брендинг: почему важен даже для курьеров</h3>
+  <ul>
+    <li>Создайте страницу компании на Glassdoor с отзывами сотрудников. 89% соискателей изучают мнение работников перед откликом.</li>
+    <li>Размещайте в соцсетях истории «день из жизни» сотрудников.</li>
+  </ul>
+  <h3>5. Автоматизация — ваш друг</h3>
+  <ul>
+    <li>Внедрите чат-ботов для первичного скрининга. Например, задавайте вопросы: «Какой опыт работы с 1С?» и автоматически отсеивайте неподходящих.</li>
+    <li>Используйте аналитику: отслеживайте конверсию на каждом этапе воронки. Если 80% кандидатов «отваливаются» после тестового задания — пересмотрите его сложность.</li>
+  </ul>
+  <h3>Тренды-2025 (по данным РБК)</h3>
+  <ul>
+    <li>Рост спроса на платформы с AI-подбором (например, HeadHunter внедряет нейросети для анализа резюме).</li>
+    <li>Удаленные вакансии будут занимать 60% рынка — акцент на сервисы вроде Upwork.</li>
+  </ul>
+  <p><strong>Финал:</strong> Экспериментируйте! Тестируйте разные площадки, добавляйте в процесс элемент геймификации (например, бонус за реферала) — и кандидаты потянутся рекой.</p>
+</div>
+<div class="post-cta">
+  <p>Хотите автоматизировать HR-процессы?</p>
+  <a href="https://app.lumicrm.ru/register" class="cta-btn">Попробовать Lumi.CRM бесплатно →</a>
+</div>
+</div>
+</article>
+
+<div class="back-nav">
+<div class="container">
+  <a href="./index.html" class="back-link">← Все статьи блога</a>
+</div>
+</div>
+
+<footer><span>© 2025 Lumi.CRM — система управления персоналом</span></footer>
+</body>
+</html>

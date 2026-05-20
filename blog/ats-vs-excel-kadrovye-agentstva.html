@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATS против Excel: почему кадровые агентства теряют клиентов без системы учёта кандидатов — Блог Lumi.CRM</title>
+<meta name="description" content="Ведёте базу кандидатов в Excel? Разбираем, как ATS-система устраняет потери кандидатов, дубли и медленный ответ клиентам — и почему без неё агентство теряет деньги.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ATS против Excel: почему кадровые агентства теряют клиентов без системы учёта кандидатов — Блог Lumi.CRM">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--green:#10b981;--blue:#164194}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)!important}
+.post-hero{padding:120px 0 50px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:300px;background:var(--accent);border-radius:50%;filter:blur(120px);opacity:0.07;transform:translate(-50%,-50%);pointer-events:none}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb a:hover{color:var(--text)}
+.post-meta{font-size:12px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.post-hero h1{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:900;line-height:1.2;letter-spacing:-0.03em;max-width:780px}
+.lead{color:var(--muted);font-size:1.05rem;margin-top:16px;max-width:680px;line-height:1.7}
+.post-body{padding:60px 0}
+.content{max-width:760px;font-size:1rem;line-height:1.8;color:#d4d4da}
+.content p{margin-bottom:1.2em}
+.content h3{font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2em 0 0.8em}
+.content ul,.content ol{margin:0.8em 0 1.2em 1.4em}
+.content li{margin-bottom:0.4em;color:#d4d4da}
+.content strong{color:var(--text)}
+.content table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.9rem}
+.content th{background:var(--card);border:1px solid var(--border);padding:10px 14px;text-align:left;font-weight:700;color:var(--text)}
+.content td{border:1px solid var(--border);padding:10px 14px;color:#d4d4da}
+.content tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.tags{margin-top:2em;display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:12px;background:rgba(111,63,129,0.15);border:1px solid rgba(111,63,129,0.3);color:var(--accent2);padding:4px 10px;border-radius:6px}
+.post-cta{margin-top:3em;padding:2em;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center}
+.post-cta p{color:var(--muted);margin-bottom:1em}
+.cta-btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;font-size:14px;transition:background .2s}
+.cta-btn:hover{background:var(--accent2);color:#fff}
+.back-nav{padding:32px 0;border-top:1px solid var(--border)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.back-link:hover{color:var(--text)}
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+.post-cover{width:100%;max-height:460px;overflow:hidden;background:var(--card)}
+.post-cover img{width:100%;height:460px;object-fit:cover;display:block;opacity:0.85}
+@media(max-width:768px){.post-cover img{height:240px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+  <a href="/" class="logo"><span class="logo-text">Lumi.CRM</span></a>
+  <div class="nav-links">
+    <a href="./index.html" class="back-link">← Все статьи</a>
+    <a href="https://app.lumicrm.ru/register" class="nav-cta">Попробовать бесплатно</a>
+  </div>
+</div>
+</nav>
+
+<div class="post-hero">
+<div class="container">
+  <div class="breadcrumb"><a href="./index.html">Блог</a> / <span>ATS и автоматизация</span></div>
+  <div class="post-meta">20 мая 2026</div>
+  <h1>ATS против Excel: почему кадровые агентства теряют клиентов без системы учёта кандидатов</h1>
+  <p class="lead">Большинство небольших кадровых агентств до сих пор ведут базу кандидатов в таблицах. Разбираем, во что это обходится на практике и как ATS меняет ситуацию.</p>
+</div>
+</div>
+
+<article class="post-body">
+<div class="post-cover">
+  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=500&fit=crop&auto=format&q=80" alt="Рекрутер работает с базой кандидатов" loading="lazy">
+</div>
+<div class="container">
+<div class="content">
+
+  <p>Если спросить руководителя небольшого кадрового агентства, в чём ведётся база кандидатов — в 7 из 10 случаев ответ будет «в Excel» или «в Google Таблицах». Это не плохо само по себе: на старте такой подход работает. Проблемы начинаются, когда агентство вырастает до 3–5 рекрутеров и 200+ активных кандидатов одновременно.</p>
+
+  <h3>Что реально происходит при работе в Excel</h3>
+  <p>На поверхности Excel кажется удобным: привычный интерфейс, фильтры, нет затрат на ПО. Но за этим удобством скрывается несколько системных проблем.</p>
+  <p><strong>Дубли кандидатов.</strong> Иван Петров откликается повторно через полгода — его заносят как нового. Или два рекрутера добавляют одного человека с разным написанием имени. В итоге база раздувается, а при звонке кандидату выясняется неловкая ситуация.</p>
+  <p><strong>Потеря истории коммуникаций.</strong> Кто последний звонил Марине Смирновой? Что она сказала по поводу предложения компании N? Если рекрутер не записал заметку в комментарии к ячейке — эта информация потеряна.</p>
+  <p><strong>Нет воронки подбора.</strong> В таблице можно поставить статус «в работе», но отследить сколько кандидатов на этапе «телефонное интервью» против «финальное собеседование» — задача нетривиальная. Руководитель не видит узкие места в процессе.</p>
+
+  <h3>Три сценария потери клиентов из-за Excel</h3>
+  <p>Эти ситуации повторяются регулярно в агентствах без ATS-системы.</p>
+  <ul>
+    <li><strong>Медленный ответ на заявку.</strong> Клиент присылает вакансию инженера-механика, 3–5 лет опыта, Москва. Рекрутер открывает таблицу на 1800 строк и начинает листать вручную. Через 2 часа отправляет 3 резюме — а конкурент с ATS прислал 7 за 20 минут.</li>
+    <li><strong>Предложение «уже отказавшего» кандидата.</strong> Год назад Антонов сказал, что не интересуется вакансиями в производстве. Агентство об этом не помнит и предлагает его снова — кандидат раздражён, клиент получает неактуальный отклик.</li>
+    <li><strong>Потеря кандидата при смене рекрутера.</strong> Ведущий рекрутер уходит из агентства. Вся его переписка с кандидатами — в личном почтовом ящике или мессенджере. Агентство фактически теряет контакты вместе с сотрудником.</li>
+  </ul>
+
+  <h3>Что меняет ATS-система</h3>
+  <p>Applicant Tracking System — это не просто база данных с красивым интерфейсом. Ключевое отличие от таблицы — <strong>единая среда для всего процесса подбора</strong>: от получения резюме до передачи кандидата клиенту.</p>
+  <p>Современный ATS решает перечисленные проблемы конкретными механизмами:</p>
+  <ul>
+    <li>Автоматическое определение дублей по телефону и email при добавлении кандидата</li>
+    <li>Карточка кандидата с полной историей: звонки, письма, собеседования, отказы с причинами</li>
+    <li>Воронка подбора по каждой вакансии с визуальным Kanban-видом</li>
+    <li>Быстрый поиск по навыкам, опыту, городу и тегам за секунды</li>
+    <li>Разграничение доступа — каждый рекрутер видит своих кандидатов, руководитель — всех</li>
+  </ul>
+
+  <h3>Сравнение: Excel vs ATS по ключевым критериям</h3>
+  <table>
+    <tr>
+      <th>Критерий</th>
+      <th>Excel / Google Таблицы</th>
+      <th>ATS-система</th>
+    </tr>
+    <tr>
+      <td>Поиск кандидата</td>
+      <td>Ручной Ctrl+F, фильтры</td>
+      <td>Полнотекстовый поиск с тегами, секунды</td>
+    </tr>
+    <tr>
+      <td>История коммуникаций</td>
+      <td>Заметки в ячейках (если вспомнили)</td>
+      <td>Автоматически, хронологически</td>
+    </tr>
+    <tr>
+      <td>Воронка подбора</td>
+      <td>Статус в столбце</td>
+      <td>Kanban с аналитикой по этапам</td>
+    </tr>
+    <tr>
+      <td>Дубли</td>
+      <td>Возникают постоянно</td>
+      <td>Автоматическое обнаружение</td>
+    </tr>
+    <tr>
+      <td>Работа нескольких рекрутеров</td>
+      <td>Конфликты версий, путаница</td>
+      <td>Единая база, права доступа</td>
+    </tr>
+    <tr>
+      <td>Аналитика</td>
+      <td>Ручные сводные таблицы</td>
+      <td>Автоматические дашборды</td>
+    </tr>
+    <tr>
+      <td>Стоимость</td>
+      <td>Бесплатно</td>
+      <td>От 3 000 руб./мес.</td>
+    </tr>
+  </table>
+
+  <h3>Когда Excel перестаёт справляться: конкретные пороги</h3>
+  <p>Вот сигналы, после которых переход на ATS — уже не вопрос удобства, а вопрос выживания агентства:</p>
+  <ul>
+    <li>В базе более 500 кандидатов — поиск нужного человека занимает больше 5 минут</li>
+    <li>Работают 3+ рекрутера — часто возникают конфликты при одновременном редактировании</li>
+    <li>Больше 5 открытых вакансий одновременно — статусы кандидатов путаются между позициями</li>
+    <li>Клиенты начали жаловаться на скорость или качество подбора</li>
+    <li>Любой рекрутер может в любой момент «унести» базу при увольнении</li>
+  </ul>
+
+  <h3>Как выглядит переход в реальности</h3>
+  <p>Главный страх руководителей агентств при переходе на ATS — «надо переносить всю базу вручную». На практике это не так болезненно, как кажется. Большинство систем умеют импортировать данные из CSV/Excel-файла. Мигрировать можно за 1–2 рабочих дня.</p>
+  <p>Второй страх — обучение команды. Современные ATS проектируются с расчётом на рекрутеров, а не на IT-специалистов. Базовый онбординг занимает 2–3 часа, после чего большинство рекрутеров работают самостоятельно.</p>
+  <p>В Lumi.CRM, например, пользователи отмечают, что уже через неделю после внедрения скорость поиска кандидатов в базе выросла в 4–5 раз по сравнению с таблицами. Voronka подбора с Kanban-видом стала стандартным инструментом работы, а не «лишней опцией».</p>
+
+  <h3>Что важно при выборе ATS для агентства</h3>
+  <p>Кадровые агентства отличаются от корпоративных HR-отделов: им нужна не только база кандидатов, но и привязка к вакансиям клиентов, управление несколькими заказчиками одновременно. Поэтому при выборе ATS стоит обратить внимание на:</p>
+  <ul>
+    <li>Возможность вести базу клиентов (компаний-заказчиков) отдельно от базы кандидатов</li>
+    <li>Связь кандидата с несколькими вакансиями и историей по каждой из них</li>
+    <li>Импорт резюме с job-порталов (HH.ru, DreamJob) без ручного копирования</li>
+    <li>Настраиваемые теги и поля под специфику ниши агентства</li>
+    <li>Гибкие права доступа для разных рекрутеров и клиентов</li>
+  </ul>
+
+  <h3>Итог: сколько стоит «бесплатный» Excel</h3>
+  <p>Давайте посчитаем. Если рекрутер тратит 40 минут в день на поиск кандидатов вручную, при стоимости его рабочего времени 500 руб./час — это 333 руб. в день или ~7 000 руб. в месяц на одного человека. При команде из 5 рекрутеров — 35 000 руб. потерянного времени ежемесячно. Плюс потерянные клиенты из-за медленного ответа — их стоимость уже в десятки раз выше.</p>
+  <p>ATS не является панацеей от всех проблем агентства. Но она устраняет именно те потери, которые невидимы в моменте, но критичны на дистанции.</p>
+
+  <div class="tags">
+    <span>#ATS</span>
+    <span>#Кадровое агентство</span>
+    <span>#Автоматизация рекрутинга</span>
+    <span>#База кандидатов</span>
+    <span>#HR-технологии</span>
+  </div>
+</div>
+<div class="post-cta">
+  <p>Ведёте базу в Excel и чувствуете, что теряете кандидатов? Попробуйте Lumi.CRM — ATS с воронкой подбора, поиском по тегам и автоматическим определением дублей. Первые 14 дней бесплатно.</p>
+  <a href="https://app.lumicrm.ru/register" class="cta-btn">Попробовать Lumi.CRM бесплатно →</a>
+</div>
+</div>
+</article>
+
+<div class="back-nav">
+<div class="container">
+  <a href="./index.html" class="back-link">← Все статьи блога</a>
+</div>
+</div>
+
+<footer><span>© 2026 Lumi.CRM — система управления персоналом</span></footer>
+</body>
+</html>

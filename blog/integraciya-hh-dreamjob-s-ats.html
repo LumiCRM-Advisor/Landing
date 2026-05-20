@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Интеграция HH.ru и DreamJob с ATS: как автоматически импортировать резюме — Блог Lumi.CRM</title>
+<meta name="description" content="Рекрутеры тратят 30–40% времени на ручное копирование резюме. Рассказываем как интеграция HH.ru и DreamJob с ATS устраняет эту проблему полностью.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Интеграция HH.ru и DreamJob с ATS: как автоматически импортировать резюме — Блог Lumi.CRM">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Lumi.CRM">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--green:#10b981;--blue:#164194}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.logo{font-family:'Montserrat',sans-serif}
+a{color:var(--accent2);text-decoration:none;transition:color .2s}
+a:hover{color:#c4a8d4}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(2,10,10,0.8);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#fff 20%,var(--accent2) 60%,var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;font-family:'Montserrat',sans-serif}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:8px;font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--accent2)!important}
+.post-hero{padding:120px 0 50px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.post-hero::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:300px;background:var(--accent);border-radius:50%;filter:blur(120px);opacity:0.07;transform:translate(-50%,-50%);pointer-events:none}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb a:hover{color:var(--text)}
+.post-meta{font-size:12px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.post-hero h1{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:900;line-height:1.2;letter-spacing:-0.03em;max-width:780px}
+.lead{color:var(--muted);font-size:1.05rem;margin-top:16px;max-width:680px;line-height:1.7}
+.post-body{padding:60px 0}
+.content{max-width:760px;font-size:1rem;line-height:1.8;color:#d4d4da}
+.content p{margin-bottom:1.2em}
+.content h3{font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2em 0 0.8em}
+.content ul,.content ol{margin:0.8em 0 1.2em 1.4em}
+.content li{margin-bottom:0.4em;color:#d4d4da}
+.content strong{color:var(--text)}
+.content table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.9rem}
+.content th{background:var(--card);border:1px solid var(--border);padding:10px 14px;text-align:left;font-weight:700;color:var(--text)}
+.content td{border:1px solid var(--border);padding:10px 14px;color:#d4d4da}
+.content tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.tags{margin-top:2em;display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:12px;background:rgba(111,63,129,0.15);border:1px solid rgba(111,63,129,0.3);color:var(--accent2);padding:4px 10px;border-radius:6px}
+.post-cta{margin-top:3em;padding:2em;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center}
+.post-cta p{color:var(--muted);margin-bottom:1em}
+.cta-btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;font-size:14px;transition:background .2s}
+.cta-btn:hover{background:var(--accent2);color:#fff}
+.back-nav{padding:32px 0;border-top:1px solid var(--border)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.back-link:hover{color:var(--text)}
+footer{border-top:1px solid var(--border);padding:32px 0;display:flex;justify-content:center}
+footer span{font-size:13px;color:var(--muted)}
+.post-cover{width:100%;max-height:460px;overflow:hidden;background:var(--card)}
+.post-cover img{width:100%;height:460px;object-fit:cover;display:block;opacity:0.85}
+@media(max-width:768px){.post-cover img{height:240px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+  <a href="/" class="logo"><span class="logo-text">Lumi.CRM</span></a>
+  <div class="nav-links">
+    <a href="./index.html" class="back-link">← Все статьи</a>
+    <a href="https://app.lumicrm.ru/register" class="nav-cta">Попробовать бесплатно</a>
+  </div>
+</div>
+</nav>
+
+<div class="post-hero">
+<div class="container">
+  <div class="breadcrumb"><a href="./index.html">Блог</a> / <span>Интеграции</span></div>
+  <div class="post-meta">17 мая 2026</div>
+  <h1>Интеграция HH.ru и DreamJob с ATS: как автоматически импортировать резюме и не тратить часы на копирование</h1>
+  <p class="lead">Рекрутеры тратят 30–40% рабочего времени на ручное копирование резюме из HH.ru в таблицы и CRM. Рассказываем, как интеграция с job-порталами решает эту задачу раз и навсегда.</p>
+</div>
+</div>
+
+<article class="post-body">
+<div class="post-cover">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=500&fit=crop&auto=format&q=80" alt="Интеграция систем и автоматизация" loading="lazy">
+</div>
+<div class="container">
+<div class="content">
+
+  <p>Если спросить рекрутера, на что уходит больше всего времени в течение рабочего дня — большинство назовут одно и то же: открываю HH.ru, просматриваю отклики, копирую данные из резюме в нашу систему учёта, перехожу к следующему. Снова и снова. Час за часом.</p>
+  <p>По данным опросов HR-специалистов, в среднем ручной перенос данных одного резюме из job-портала в CRM занимает 4–7 минут. При потоке 50 откликов в день — это 3–6 часов чистого механического труда. Труда, который ничего не создаёт сам по себе.</p>
+
+  <h3>Почему ручное копирование — это не просто потеря времени</h3>
+  <p>Казалось бы, решение простое: нанять ещё одного человека для ввода данных или смириться. Но проблема глубже, чем просто потеря рабочих часов.</p>
+  <p><strong>Ошибки при переносе.</strong> Человек устаёт, делает опечатки. Телефон 8-916 vs 8-961, перепутанные цифры в дате рождения — и контакт потерян или карточка задвоена.</p>
+  <p><strong>Задержка реакции.</strong> Лучшие кандидаты на рынке получают несколько предложений одновременно. Если отклик пришёл в 9 утра, а рекрутер добрался до него в 14:00, конкурент уже позвонил первым.</p>
+  <p><strong>Разрыв между откликом и воронкой.</strong> Пока кандидат не занесён в систему — он не существует для воронки подбора. Руководитель не видит его в аналитике, не может оценить скорость реакции команды.</p>
+  <p><strong>Потеря контекста.</strong> На HH.ru видно всё резюме с форматированием. В таблице рекрутер копирует только то, что считает нужным — и часть важных данных теряется.</p>
+
+  <h3>Как работает автоматический импорт резюме</h3>
+  <p>Интеграция ATS с HH.ru и DreamJob строится через официальный API этих платформ. Механика такая:</p>
+  <ol>
+    <li>Рекрутер публикует вакансию в Lumi.CRM — система синхронизирует её с HH.ru и/или DreamJob автоматически или одним кликом</li>
+    <li>Кандидаты откликаются на job-портале как обычно — ничего не меняется с их стороны</li>
+    <li>Каждый отклик автоматически попадает в Lumi.CRM: создаётся карточка кандидата с полными данными из резюме, прикреплённым PDF, контактами, опытом работы, навыками</li>
+    <li>Кандидат сразу появляется в воронке по нужной вакансии — рекрутер видит его в Kanban-доске и может начать работу</li>
+    <li>Статусы синхронизируются обратно: если рекрутер переместил кандидата на этап «Приглашён», статус на HH.ru обновляется автоматически</li>
+  </ol>
+
+  <h3>Что именно импортируется из резюме</h3>
+  <p>Качество импорта зависит от того, что предоставляет API конкретного портала. По HH.ru и DreamJob доступны:</p>
+  <ul>
+    <li>ФИО, дата рождения, пол, город</li>
+    <li>Контактные данные: телефон, email</li>
+    <li>Желаемая должность и зарплата</li>
+    <li>Опыт работы с датами, названиями компаний, должностями</li>
+    <li>Образование</li>
+    <li>Ключевые навыки (теги)</li>
+    <li>Сопроводительное письмо к отклику</li>
+    <li>Оригинальное резюме в PDF</li>
+  </ul>
+  <p>Все эти данные структурированно заполняют карточку кандидата в ATS — без ручного ввода.</p>
+
+  <h3>Дедупликация: что происходит с повторными откликами</h3>
+  <p>Частая ситуация: кандидат откликался на вашу вакансию полгода назад, потом снова откликнулся сейчас. Без интеграции с ATS создаётся новая запись, и рекрутер не знает об истории взаимодействия. С интеграцией система находит существующую карточку по email и телефону и привязывает новый отклик к ней, сохраняя всю историю.</p>
+
+  <h3>Прямой поиск по базе HH.ru из ATS</h3>
+  <p>Помимо обработки входящих откликов, интеграция открывает возможность поиска резюме прямо из интерфейса ATS — без переключения в браузер. Рекрутер задаёт параметры: должность, город, опыт, ключевые навыки — и видит результаты из HH.ru внутри Lumi.CRM. Понравившиеся резюме добавляются в базу одним кликом.</p>
+  <p>Это особенно ценно для активного поиска (sourcing): когда не ждёшь откликов, а сам ищёшь кандидатов на сложные позиции.</p>
+
+  <h3>Сравнение: ручной процесс vs интегрированный ATS</h3>
+  <table>
+    <tr>
+      <th>Действие</th>
+      <th>Без интеграции</th>
+      <th>С интеграцией HH + ATS</th>
+    </tr>
+    <tr>
+      <td>Занесение 50 откликов</td>
+      <td>3–5 часов ручного ввода</td>
+      <td>Автоматически, мгновенно</td>
+    </tr>
+    <tr>
+      <td>Скорость реакции на отклик</td>
+      <td>Зависит от занятости рекрутера</td>
+      <td>Немедленно (уведомление в ATS)</td>
+    </tr>
+    <tr>
+      <td>История кандидата</td>
+      <td>Теряется при повторном отклике</td>
+      <td>Автоматическое объединение</td>
+    </tr>
+    <tr>
+      <td>Статус на HH.ru</td>
+      <td>Обновляется вручную</td>
+      <td>Синхронизируется автоматически</td>
+    </tr>
+    <tr>
+      <td>Аналитика по источнику</td>
+      <td>Невозможна без доп. работы</td>
+      <td>Автоматически в дашборде</td>
+    </tr>
+  </table>
+
+  <h3>Как подключить интеграцию: технические детали без лишней сложности</h3>
+  <p>Для подключения интеграции с HH.ru нужна учётная запись работодателя на платформе с активной подпиской. DreamJob подключается аналогично. Авторизация происходит через OAuth — рекрутер нажимает «Подключить HH.ru» в настройках Lumi.CRM, проходит авторизацию на сайте HH и возвращается в систему. Технических знаний не требуется.</p>
+  <p>После подключения настраивается маппинг: какие поля из резюме HH.ru соответствуют каким полям в карточке кандидата Lumi.CRM. Стандартный маппинг уже преднастроен, при необходимости его можно скорректировать.</p>
+
+  <h3>Что даёт интеграция на уровне бизнеса</h3>
+  <p>Помимо экономии времени рекрутеров, автоматический импорт резюме даёт несколько стратегических преимуществ.</p>
+  <p>Во-первых, <strong>скорость — это конкурентное преимущество</strong>. Когда лучший кандидат откликается на вашу вакансию, он одновременно рассматривает 3–5 других предложений. Первый, кто позвонит — имеет значимое преимущество. Автоматический импорт + уведомление рекрутера позволяют реагировать за минуты, а не часы.</p>
+  <p>Во-вторых, <strong>данные становятся полными</strong>. Когда всё, что пришло с портала, автоматически попадает в базу — руководитель видит реальный поток кандидатов, a не ту часть, которую рекрутер успел занести вручную.</p>
+  <p>В Lumi.CRM интеграции с HH.ru и DreamJob включены в базовый тариф — без дополнительных платежей за «коннектор» или «API-доступ».</p>
+
+  <div class="tags">
+    <span>#Интеграция HH.ru</span>
+    <span>#DreamJob</span>
+    <span>#Импорт резюме</span>
+    <span>#ATS</span>
+    <span>#Автоматизация рекрутинга</span>
+  </div>
+</div>
+<div class="post-cta">
+  <p>Подключите HH.ru и DreamJob к Lumi.CRM — отклики будут попадать в воронку автоматически, без ручного копирования. Настройка занимает 10 минут.</p>
+  <a href="https://app.lumicrm.ru/register" class="cta-btn">Попробовать Lumi.CRM бесплатно →</a>
+</div>
+</div>
+</article>
+
+<div class="back-nav">
+<div class="container">
+  <a href="./index.html" class="back-link">← Все статьи блога</a>
+</div>
+</div>
+
+<footer><span>© 2026 Lumi.CRM — система управления персоналом</span></footer>
+</body>
+</html>
