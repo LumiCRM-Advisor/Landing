@@ -320,9 +320,39 @@ footer span{font-size:13px;color:var(--muted)}
 .feedback-bar{background:var(--surface);border-top:1px solid var(--border);padding:20px 0}
 .feedback-bar .container{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
 .feedback-bar span{color:var(--muted);font-size:.95rem}
+
+/* Interactive system: cursor, trail, ripples, noise, scroll progress */
+html{cursor:none}
+.noise-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0.025;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cursor{position:fixed;width:16px;height:16px;border-radius:50%;background:var(--accent2);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;mix-blend-mode:screen;box-shadow:0 0 20px rgba(111,63,129,0.8)}
+.cursor.expand{width:40px;height:40px;opacity:.6}
+.cursor-label{position:fixed;font-size:11px;font-weight:600;color:#fff;pointer-events:none;z-index:10000;transform:translate(-50%,16px);white-space:nowrap;opacity:0;transition:opacity .2s;letter-spacing:.05em;text-transform:uppercase}
+.cursor-label.visible{opacity:1}
+@media(hover:none){html,body,*{cursor:auto!important}.cursor,.noise-overlay,.cursor-trail-container,.ripple-container{display:none!important}}
+.cursor-trail-container{position:fixed;inset:0;z-index:9997;pointer-events:none;overflow:hidden}
+.trail-particle{position:absolute;border-radius:50%;pointer-events:none;will-change:transform,opacity}
+.trail-particle.dot{width:4px;height:4px;background:rgba(111,63,129,0.8);box-shadow:0 0 10px rgba(111,63,129,0.6)}
+.trail-particle.glow{width:20px;height:20px;background:radial-gradient(circle,rgba(111,63,129,0.3) 0%,transparent 70%)}
+.trail-particle.spark{width:2px;height:2px;background:rgba(255,255,255,0.9)}
+.ripple-container{position:fixed;inset:0;z-index:9996;pointer-events:none;overflow:hidden}
+.ripple{position:absolute;border-radius:50%;transform:translate(-50%,-50%) scale(0);animation:ripple-out .8s ease-out forwards}
+.ripple.purple{border:1px solid rgba(111,63,129,0.6);background:transparent}
+.ripple.white{border:1px solid rgba(255,255,255,0.2);background:transparent}
+.ripple.glow{background:radial-gradient(circle,rgba(111,63,129,0.15) 0%,transparent 60%)}
+@keyframes ripple-out{to{transform:translate(-50%,-50%) scale(8);opacity:0}}
+.scroll-progress{position:fixed;right:0;top:0;width:3px;height:100vh;z-index:9995;background:rgba(255,255,255,0.05)}
+.progress-fill{width:100%;height:0%;background:linear-gradient(180deg,var(--accent2),var(--blue,#164194));transition:height .1s linear}
+.fade-up{opacity:0;transform:translateY(32px)}
+.magnetic-shift{transition:transform .1s var(--ease,ease-out)!important}
 </style>
 </head>
 <body>
+<div class="noise-overlay"></div>
+<div class="cursor-trail-container" id="trail-container"></div>
+<div class="ripple-container" id="ripple-container"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-label" id="cursor-label"></div>
+<div class="scroll-progress"><div class="progress-fill" id="progress-fill"></div></div>
 
 <nav>
 <div class="container">
@@ -1192,6 +1222,162 @@ function submitFeedback(e) {
     s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+p[0]+'%;top:'+p[1]+'%;animation-delay:'+(i*0.4)+'s';
     s.innerHTML='<path d="M10 0L11.8 8.2L20 10L11.8 11.8L10 20L8.2 11.8L0 10L8.2 8.2Z" fill="white"/>';
     f.appendChild(s);
+  });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+  if(isTouchDevice) return;
+  if(typeof gsap === 'undefined'){ document.documentElement.style.cursor='auto'; return; }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // --- Cursor ---
+  const cursor = document.getElementById('cursor');
+  const cursorLabel = document.getElementById('cursor-label');
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  let cx = mx, cy = my;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  document.addEventListener('mouseleave', () => { cursor.style.opacity='0'; });
+  document.addEventListener('mouseenter', () => { cursor.style.opacity='1'; });
+
+  function lerpCursor(){
+    cx += (mx-cx)*0.15;
+    cy += (my-cy)*0.15;
+    cursor.style.left = cx+'px';
+    cursor.style.top = cy+'px';
+    cursorLabel.style.left = cx+'px';
+    cursorLabel.style.top = cy+'px';
+    requestAnimationFrame(lerpCursor);
+  }
+  lerpCursor();
+
+  // Cursor expand on interactive elements
+  document.querySelectorAll('a,button,[data-cursor]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('expand');
+      const label = el.getAttribute('data-cursor');
+      if(label){ cursorLabel.textContent = label; cursorLabel.classList.add('visible'); }
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('expand');
+      cursorLabel.classList.remove('visible');
+    });
+  });
+
+  // --- Trail ---
+  const trailContainer = document.getElementById('trail-container');
+  const trailParticles = [];
+  const TYPES = ['dot','dot','glow','spark'];
+
+  function createTrailParticle(x, y){
+    const type = TYPES[Math.floor(Math.random()*TYPES.length)];
+    const p = document.createElement('div');
+    p.className = 'trail-particle ' + type;
+    p.style.left = x+'px';
+    p.style.top = y+'px';
+    trailContainer.appendChild(p);
+    trailParticles.push({
+      el: p,
+      x, y,
+      vx: (Math.random()-.5)*2,
+      vy: (Math.random()-.5)*2 - 1,
+      life: 1,
+      decay: 0.02 + Math.random()*0.04
+    });
+    if(trailParticles.length > 60){
+      const old = trailParticles.shift();
+      old.el.remove();
+    }
+  }
+
+  let lastTrailX=0, lastTrailY=0, frameCount=0;
+  function updateTrail(){
+    frameCount++;
+    const dx = mx-lastTrailX, dy = my-lastTrailY;
+    if(Math.sqrt(dx*dx+dy*dy) > 4){
+      createTrailParticle(mx, my);
+      lastTrailX = mx; lastTrailY = my;
+    }
+    for(let i=trailParticles.length-1; i>=0; i--){
+      const p = trailParticles[i];
+      p.life -= p.decay;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.el.style.transform = `translate(${p.x-parseFloat(p.el.style.left)}px,${p.y-parseFloat(p.el.style.top)}px)`;
+      p.el.style.opacity = p.life;
+      if(p.life <= 0){ p.el.remove(); trailParticles.splice(i,1); }
+    }
+    requestAnimationFrame(updateTrail);
+  }
+  updateTrail();
+
+  // --- Ripple on click ---
+  const rippleContainer = document.getElementById('ripple-container');
+  function createRipple(x, y, type='purple'){
+    const r = document.createElement('div');
+    r.className = 'ripple ' + type;
+    r.style.cssText = `width:20px;height:20px;left:${x}px;top:${y}px`;
+    rippleContainer.appendChild(r);
+    setTimeout(()=>r.remove(), 800);
+  }
+  document.addEventListener('click', e => {
+    createRipple(e.clientX, e.clientY, 'purple');
+    createRipple(e.clientX, e.clientY, 'white');
+    createRipple(e.clientX, e.clientY, 'glow');
+  });
+
+  // --- Scroll progress ---
+  const progressFill = document.getElementById('progress-fill');
+  window.addEventListener('scroll', ()=>{
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    progressFill.style.height = pct + '%';
+  });
+
+  // --- GSAP fade-up ---
+  document.querySelectorAll('.step-card,.bento-card,.testi-card,.mod-card,.metric-card,.price-card').forEach(el => {
+    el.classList.add('fade-up');
+    gsap.to(el, { opacity:1, y:0, duration:0.7, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 88%' }
+    });
+  });
+
+  // Section titles
+  document.querySelectorAll('.section-title, .section-tag, .hero h1, .hero p').forEach((el,i) => {
+    gsap.from(el, { opacity:0, y:24, duration:0.8, delay:i*0.08, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 90%' }
+    });
+  });
+
+  // --- Magnetic on step cards ---
+  document.querySelectorAll('.step-card,.bento-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const cx2 = rect.left+rect.width/2, cy2 = rect.top+rect.height/2;
+      const dx = e.clientX-cx2, dy = e.clientY-cy2;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if(dist < 200){
+        const pull = (1-dist/200)*0.2;
+        card.style.transform = `translateY(-3px) translate(${dx*pull}px,${dy*pull}px)`;
+        card.classList.add('magnetic-shift');
+      }
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.classList.remove('magnetic-shift');
+    });
+  });
+
+  // --- Parallax on hero ---
+  gsap.to('.hero', {
+    backgroundPositionY: '30%',
+    ease:'none',
+    scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }
   });
 })();
 </script>
