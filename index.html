@@ -294,6 +294,40 @@ footer span{font-size:13px;color:var(--muted)}
 .chain-step{padding:9px 16px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap}
 .chain-sep{color:var(--muted);font-size:16px;flex-shrink:0}
 
+/* Chain scroll animated */
+.chain-scroll-section{margin-top:64px;padding:0}
+.chain-scroll-label{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:40px}
+.chain-blocks{display:flex;align-items:flex-start;gap:0;justify-content:center;flex-wrap:wrap;gap:8px}
+.cblock{display:flex;flex-direction:column;align-items:center;min-width:160px;max-width:190px;opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.cblock.revealed{opacity:1;transform:translateY(0)}
+.cblock .ccard{width:100%;padding:18px 16px;border-radius:12px;text-align:center;position:relative;overflow:hidden}
+.cblock .ccard::before{content:'';position:absolute;inset:0;border-radius:12px;padding:1.5px;background:linear-gradient(135deg,var(--gc1),var(--gc2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}
+.cblock .ccard::after{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse at center,var(--gc1),transparent 70%);opacity:.08;pointer-events:none}
+.cblock .cnum{font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--gc1);margin-bottom:.35rem;opacity:.7;position:relative;z-index:1}
+.cblock .ctitle{font-size:.9rem;font-weight:600;color:#e2d9f3;line-height:1.3;position:relative;z-index:1}
+.cblock .cdesc{font-size:.7rem;line-height:1.5;color:#aaa;margin-top:.5rem;position:relative;z-index:1}
+.carrow{display:flex;align-items:center;justify-content:center;width:32px;flex-shrink:0;opacity:0;transition:opacity .5s ease;padding-top:28px}
+.carrow.revealed{opacity:1}
+.carrow svg{width:16px;height:16px;fill:#444}
+.cblock-1{--gc1:#b794f6;--gc2:#9f7aea;} .cblock-1 .ccard{background:rgba(159,122,234,.06)}
+.cblock-2{--gc1:#68d391;--gc2:#48bb78;} .cblock-2 .ccard{background:rgba(72,187,120,.06)}
+.cblock-3{--gc1:#f6e05e;--gc2:#d69e2e;} .cblock-3 .ccard{background:rgba(214,158,46,.06)}
+.cblock-4{--gc1:#fc8181;--gc2:#e53e3e;} .cblock-4 .ccard{background:rgba(229,62,62,.06)}
+.cblock-5{--gc1:#63b3ed;--gc2:#4299e1;} .cblock-5 .ccard{background:rgba(66,153,225,.06)}
+@media(max-width:900px){.carrow{display:none}.chain-blocks{gap:10px}}
+
+/* Partner models */
+.partner-section{padding:96px 0;border-top:1px solid var(--border)}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:0}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:all .3s}
+.pcard:hover{border-color:rgba(111,63,129,.4);transform:translateY(-3px);box-shadow:0 0 0 1px rgba(111,63,129,.2),0 8px 32px rgba(111,63,129,.12)}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
+.pcard-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:rgba(111,63,129,.12);color:var(--accent2)}
+.pcard-icon svg{width:22px;height:22px}
+.pcard h3{font-size:1rem;font-weight:700;margin-bottom:10px}
+.pcard p{font-size:13.5px;color:var(--muted);line-height:1.65}
+@media(max-width:768px){.cards-3{grid-template-columns:1fr}}
+
 /* Interactive modules — two-column scroll-activated layout */
 .modules-interactive{display:flex;gap:48px;align-items:flex-start;margin-top:8px}
 .mi-list{flex:0 0 40%;max-width:40%;display:flex;flex-direction:column}
@@ -737,21 +771,99 @@ html{cursor:none}
 
 </div>
 
-<div class="chain-box">
-<div class="chain-label">Сквозная цепочка</div>
-<div class="chain-row">
-<div class="chain-step" style="background:rgba(111,63,129,0.1);border:1px solid rgba(111,63,129,0.2);color:var(--accent2)">Заявка на подбор</div>
-<span class="chain-sep">→</span>
-<div class="chain-step" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:#34d399">Рекрутинг</div>
-<span class="chain-sep">→</span>
-<div class="chain-step" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:#fbbf24">Кадровое оформление</div>
-<span class="chain-sep">→</span>
-<div class="chain-step" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#f87171">Допуск HSE</div>
-<span class="chain-sep">→</span>
-<div class="chain-step" style="background:rgba(22,65,148,0.1);border:1px solid rgba(22,65,148,0.2);color:#7899d4">Табель + Вахта</div>
-</div>
+<div class="chain-scroll-section">
+  <div class="chain-scroll-label">Сквозная цепочка</div>
+  <div class="chain-blocks" id="chainBlocks">
+    <div class="cblock cblock-1" data-delay="0">
+      <div class="ccard"><div class="cnum">ЭТАП 01</div><div class="ctitle">Заявка на подбор</div><div class="cdesc">Формирование требований к кандидату, сроков и условий работы</div></div>
+    </div>
+    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+    <div class="cblock cblock-2" data-delay="120">
+      <div class="ccard"><div class="cnum">ЭТАП 02</div><div class="ctitle">Рекрутинг</div><div class="cdesc">AI-скрининг резюме, Telegram-бот, Match-Score 0–100</div></div>
+    </div>
+    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+    <div class="cblock cblock-3" data-delay="240">
+      <div class="ccard"><div class="cnum">ЭТАП 03</div><div class="ctitle">Кадровое оформление</div><div class="cdesc">Договор, документы, внесение в кадровую систему</div></div>
+    </div>
+    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+    <div class="cblock cblock-4" data-delay="360">
+      <div class="ccard"><div class="cnum">ЭТАП 04</div><div class="ctitle">Допуск HSE</div><div class="cdesc">Охрана труда, инструктажи, выдача допуска к работе</div></div>
+    </div>
+    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+    <div class="cblock cblock-5" data-delay="480">
+      <div class="ccard"><div class="cnum">ЭТАП 05</div><div class="ctitle">Табель + Вахта</div><div class="cdesc">Учёт времени, формирование табеля, вахтовый метод</div></div>
+    </div>
+  </div>
 </div>
 
+</div>
+</section>
+
+<section class="partner-section">
+<div class="container">
+  <div style="text-align:center;margin-bottom:48px">
+    <div class="section-tag">Кто может стать партнёром</div>
+    <h2 class="section-title">Три модели партнёрства</h2>
+    <div class="section-desc" style="margin:0 auto">Выберите формат, который подходит вашей компании.</div>
+  </div>
+  <div class="cards-3">
+    <div class="pcard">
+      <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <h3>Сертифицированный интегратор</h3>
+      <p>Внедряете Lumi CRM под ключ. Для IT-компаний и консалтинга, которые сопровождают клиентов от анализа процессов до настройки воронок и интеграций.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+      <h3>Технологический партнёр</h3>
+      <p>Разрабатываете продукт или интеграцию поверх Lumi. Sandbox, документация и поддержка команды — чтобы выпустить готовое решение быстро.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+      <h3>Реселлер</h3>
+      <p>Продаёте подписки своим клиентам. Минимальный порог входа: даёте реферальный код — получаете 20% с платежей клиента, пока он с нами.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:72px">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="section-tag">Как это работает</div>
+      <h2 class="section-title">Четыре шага до первой выплаты</h2>
+      <div class="section-desc" style="margin:0 auto">Старт за один вечер. Никакой бюрократии и долгих согласований.</div>
+    </div>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+        <h3>Регистрация</h3>
+        <p>Регистрируетесь как партнёр в Lumi CRM. Указываете компанию и формат сотрудничества.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <h3>Реферальный код</h3>
+        <p>Получаете персональный реферальный код и доступ в партнёрский кабинет с аналитикой.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Приводите клиентов</h3>
+        <p>Клиенты указывают ваш код при регистрации — система сама фиксирует привязку к вам.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Получаете 20%</h3>
+        <p>Получаете 20% с их ежемесячных платежей автоматически. Выплаты прозрачные, по графику.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:48px">
+    <a href="/partners.html" class="btn btn-primary">Стать партнёром →</a>
+  </div>
 </div>
 </section>
 
@@ -1533,6 +1645,30 @@ function submitFeedback(e) {
       });
     });
   }
+})();
+</script>
+
+<script>
+// Chain scroll reveal
+(function(){
+  const chainBlocks = document.querySelectorAll('#chainBlocks .cblock');
+  const chainArrows = document.querySelectorAll('#chainBlocks .carrow');
+  if(!chainBlocks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const delay = parseInt(entry.target.dataset.delay||0);
+        setTimeout(()=>{ entry.target.classList.add('revealed'); }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.2});
+  chainBlocks.forEach(b => observer.observe(b));
+  // arrows appear after first block
+  const arrowObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('revealed'),200); arrowObs.unobserve(e.target); }});
+  },{threshold:0.5});
+  chainArrows.forEach(a=>arrowObs.observe(a));
 })();
 </script>
 
