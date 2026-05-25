@@ -293,7 +293,59 @@ footer span{font-size:13px;color:var(--muted)}
 .chain-row{display:flex;align-items:center;gap:10px;min-width:max-content}
 .chain-step{padding:9px 16px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap}
 .chain-sep{color:var(--muted);font-size:16px;flex-shrink:0}
+
+/* Interactive modules — two-column scroll-activated layout */
+.modules-interactive{display:flex;gap:48px;align-items:flex-start;margin-top:8px}
+.mi-list{flex:0 0 40%;max-width:40%;display:flex;flex-direction:column}
+.mi-card{position:relative;padding:32px 4px;border-top:1px solid var(--border);cursor:none;opacity:0.4;transition:opacity .5s cubic-bezier(0.16,1,0.3,1),transform .3s ease}
+.mi-card:first-child{border-top:none}
+.mi-card.active{opacity:1}
+.mi-card .mi-glow{position:absolute;inset:-1px;border-radius:16px;opacity:0;pointer-events:none;z-index:0;transition:opacity .4s;background:radial-gradient(180px circle at var(--gx,50%) var(--gy,50%),rgba(111,63,129,0.22) 0%,transparent 70%)}
+.mi-card:hover .mi-glow,.mi-card.active .mi-glow{opacity:1}
+.mi-card.active{border-left:2px solid transparent;box-shadow:none}
+.mi-card.active::before{content:'';position:absolute;left:-24px;top:32px;bottom:32px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--mi-color,var(--accent2)),transparent)}
+.mi-inner{position:relative;z-index:1}
+.mi-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.mi-num{font-size:13px;font-weight:700;letter-spacing:0.05em;color:var(--muted);transition:color .4s}
+.mi-card.active .mi-num{color:var(--mi-color,var(--accent2))}
+.mi-icon{width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;color:var(--muted);transition:all .4s}
+.mi-card.active .mi-icon{color:var(--mi-color,var(--accent2));border-color:var(--mi-color,var(--accent2));background:color-mix(in srgb,var(--mi-color,var(--accent2)) 12%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--mi-color,var(--accent2)) 28%,transparent)}
+.mi-icon svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mi-title{font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-0.02em;margin-bottom:18px;transition:color .4s}
+.mi-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px;max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s,transform .4s}
+.mi-card.active .mi-feats,.mi-card:hover .mi-feats{max-height:240px;opacity:1;transform:translateY(0)}
+.mi-feats li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
+.mi-check{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:rgba(16,185,129,0.12);color:var(--green)}
+.mi-status{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted)}
+.mi-status .mi-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.mi-status.s-work{color:#34d399;border-color:rgba(16,185,129,0.25);background:rgba(16,185,129,0.08)}
+.mi-status.s-soon{color:#22d3ee;border-color:rgba(6,182,212,0.25);background:rgba(6,182,212,0.08)}
+
+/* Right column — CSS mock visual */
+.mi-visual{flex:1 1 60%;position:sticky;top:96px;align-self:flex-start;height:480px;display:flex;align-items:center;justify-content:center}
+.mi-stage{position:relative;width:100%;max-width:560px;aspect-ratio:4/3;perspective:1000px}
+.mi-frame{position:absolute;inset:0;border-radius:24px;overflow:hidden;opacity:0;transform:translateY(24px) scale(0.98);transition:opacity .6s cubic-bezier(0.16,1,0.3,1),transform .6s cubic-bezier(0.16,1,0.3,1);background:linear-gradient(145deg,#15121b 0%,#0c0c11 100%);border:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:40px}
+.mi-frame.active{opacity:1;transform:translateY(0) scale(1)}
+.mi-frame::after{content:'';position:absolute;inset:0;border-radius:24px;background:radial-gradient(120% 120% at 80% 0%,color-mix(in srgb,var(--mi-color,var(--accent)) 30%,transparent) 0%,transparent 55%);opacity:0.6;pointer-events:none}
+.mi-frame-border{position:absolute;inset:-1px;border-radius:25px;padding:1px;background:linear-gradient(145deg,color-mix(in srgb,var(--mi-color,var(--accent)) 55%,transparent),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.mi-frame-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.mi-frame-icon{width:72px;height:72px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--mi-color,var(--accent)) 16%,transparent);border:1px solid color-mix(in srgb,var(--mi-color,var(--accent)) 35%,transparent);color:var(--mi-color,var(--accent2));box-shadow:0 0 40px color-mix(in srgb,var(--mi-color,var(--accent)) 30%,transparent)}
+.mi-frame-icon svg{width:36px;height:36px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mi-frame-num{font-family:'Montserrat',sans-serif;font-size:120px;font-weight:900;line-height:0.8;letter-spacing:-0.04em;color:color-mix(in srgb,var(--mi-color,var(--accent2)) 22%,transparent)}
+.mi-frame-bottom{position:relative;z-index:1}
+.mi-frame-title{font-family:'Montserrat',sans-serif;font-size:34px;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;color:var(--text)}
+.mi-frame-status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 16px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)}
+.mi-frame-status .mi-dot{width:8px;height:8px;border-radius:50%;background:var(--mi-color,var(--accent2));box-shadow:0 0 10px var(--mi-color,var(--accent2));animation:miPulse 2s ease infinite}
+@keyframes miPulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
 @media(max-width:900px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1024px){
+.modules-interactive{display:block}
+.mi-list{max-width:100%;flex:none}
+.mi-visual{display:none}
+.mi-card{opacity:1;cursor:pointer;padding:28px 0}
+.mi-feats{max-height:240px;opacity:1;transform:none}
+}
 @media(max-width:768px){
 .nav-links a:not(.nav-cta){display:none}
 .nav-demo{display:none}
@@ -518,116 +570,172 @@ html{cursor:none}
 <div style="text-align:center;margin-bottom:56px">
 <div class="section-tag">Платформа</div>
 <h2 class="section-title">Полный цикл от найма до вахты</h2>
-<div class="section-desc" style="margin:0 auto">Шесть модулей — одна экосистема. Два уже в работе, остальные выходят в Q3 2026. Подключайте по мере роста.</div>
+<div class="section-desc" style="margin:0 auto">Пять модулей — одна экосистема. Три уже в работе, остальные выходят в Q3 2026. Подключайте по мере роста.</div>
 </div>
 
-<div class="modules-grid">
+<div class="modules-interactive" id="modules-interactive">
 
-<a href="/modules/recruiting" class="mod-card" aria-label="Модуль Рекрутинг — подробнее">
-<div class="mod-stripe" style="background:linear-gradient(90deg,#10b981,#059669)"></div>
-<div class="mod-head">
-<div class="mod-icon" style="background:rgba(16,185,129,0.12);color:#34d399">ATS</div>
-<span class="mod-badge badge-live">Доступно</span>
+<div class="mi-list" id="mi-list">
+
+<article class="mi-card active" data-index="0" data-cursor="смотреть" style="--mi-color:#10B981">
+<div class="mi-glow"></div>
+<div class="mi-inner">
+<div class="mi-head">
+<span class="mi-num">01</span>
+<div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
 </div>
-<div class="mod-title">Рекрутинг</div>
-<div class="mod-sub">ATS для массового и точечного найма. AI-скоринг, воронка, парсинг резюме.</div>
-<ul class="mod-feats">
-<li>AI Match-Score 0–100 с объяснением</li>
-<li>Telegram-бот первичного скрининга</li>
-<li>Портал самоотклика кандидата</li>
-<li>hh.ru / SuperJob / Avito интеграция</li>
+<h3 class="mi-title">Рекрутинг</h3>
+<ul class="mi-feats">
+<li><span class="mi-check">✓</span><span>Воронка кандидатов с AI-скорингом</span></li>
+<li><span class="mi-check">✓</span><span>Парсинг hh.ru, Avito, SuperJob</span></li>
+<li><span class="mi-check">✓</span><span>Telegram-бот для первичного скрининга</span></li>
+<li><span class="mi-check">✓</span><span>Match-Score 0–100 с объяснением</span></li>
 </ul>
-<div class="mod-plans"><span class="mp mp-on">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
-</a>
-
-<a href="/modules/operations" class="mod-card" aria-label="Модуль Операционка — подробнее">
-<div class="mod-stripe" style="background:linear-gradient(90deg,#164194,#0d2f6b)"></div>
-<div class="mod-head">
-<div class="mod-icon" style="background:rgba(22,65,148,0.12);color:#7899d4">ОПС</div>
-<span class="mod-badge badge-live">Доступно</span>
+<span class="mi-status s-work"><span class="mi-dot"></span>В работе</span>
 </div>
-<div class="mod-title">Операционка</div>
-<div class="mod-sub">Табель учёта времени, смены, выплаты. Реестр сотрудников на объектах.</div>
-<ul class="mod-feats">
-<li>Табель с ежедневными часами</li>
-<li>Excel-импорт и экспорт реестра</li>
-<li>Группировка по объектам</li>
-<li>История выплат и движения кадров</li>
+</article>
+
+<article class="mi-card" data-index="1" data-cursor="смотреть" style="--mi-color:#F59E0B">
+<div class="mi-glow"></div>
+<div class="mi-inner">
+<div class="mi-head">
+<span class="mi-num">02</span>
+<div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+</div>
+<h3 class="mi-title">Кадры</h3>
+<ul class="mi-feats">
+<li><span class="mi-check">✓</span><span>Реестр документов с контролем сроков</span></li>
+<li><span class="mi-check">✓</span><span>Алерты: просроченные паспорта / патенты</span></li>
+<li><span class="mi-check">✓</span><span>Кадровый таймлайн: приёмы, переводы</span></li>
+<li><span class="mi-check">✓</span><span>Интеграция с 1С:ЗУП</span></li>
 </ul>
-<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
-</a>
-
-<a href="/modules/requests" class="mod-card" aria-label="Модуль Заявки на подбор — подробнее">
-<div class="mod-stripe" style="background:linear-gradient(90deg,#6f3f81,#5a3369)"></div>
-<div class="mod-head">
-<div class="mod-icon" style="background:rgba(111,63,129,0.12);color:var(--accent2)">WF</div>
-<span class="mod-badge badge-live">Доступно</span>
+<span class="mi-status s-work"><span class="mi-dot"></span>В работе</span>
 </div>
-<div class="mod-title">Заявки на подбор</div>
-<div class="mod-sub">Связующее звено системы. Любое действие — от подбора до выплаты — инициируется заявкой.</div>
-<ul class="mod-feats">
-<li>Конструктор маршрутов согласования</li>
-<li>SLA и автоконтроль сроков</li>
-<li>Статусная машина с историей</li>
-<li>Уведомления исполнителям</li>
+</article>
+
+<article class="mi-card" data-index="2" data-cursor="смотреть" style="--mi-color:#3B82F6">
+<div class="mi-glow"></div>
+<div class="mi-inner">
+<div class="mi-head">
+<span class="mi-num">03</span>
+<div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+</div>
+<h3 class="mi-title">Мессенджер</h3>
+<ul class="mi-feats">
+<li><span class="mi-check">✓</span><span>Встроенный чат внутри CRM</span></li>
+<li><span class="mi-check">✓</span><span>Каналы по вакансиям и командам</span></li>
+<li><span class="mi-check">✓</span><span>История переписки в карточке кандидата</span></li>
+<li><span class="mi-check">✓</span><span>Push-уведомления</span></li>
 </ul>
-<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
-</a>
-
-<a href="/modules/hrm" class="mod-card" aria-label="Модуль Кадры (HRM) — подробнее">
-<div class="mod-stripe" style="background:linear-gradient(90deg,#f59e0b,#d97706)"></div>
-<div class="mod-head">
-<div class="mod-icon" style="background:rgba(245,158,11,0.12);color:#fbbf24">HRM</div>
-<span class="mod-badge badge-live">Доступно</span>
+<span class="mi-status s-work"><span class="mi-dot"></span>В работе</span>
 </div>
-<div class="mod-title">Кадры</div>
-<div class="mod-sub">Юридическая чистота персонала. Документы, кадровая история, контроль сроков.</div>
-<ul class="mod-feats">
-<li>Реестр документов с контролем сроков</li>
-<li>Кадровый таймлайн: приёмы, переводы</li>
-<li>Алерты: просроченные паспорта / патенты</li>
-<li>Интеграция с 1С:ЗУП</li>
+</article>
+
+<article class="mi-card" data-index="3" data-cursor="смотреть" style="--mi-color:#06B6D4">
+<div class="mi-glow"></div>
+<div class="mi-inner">
+<div class="mi-head">
+<span class="mi-num">04</span>
+<div class="mi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+</div>
+<h3 class="mi-title">Перевахтовка</h3>
+<ul class="mi-feats">
+<li><span class="mi-check">✓</span><span>Таймлайн: Вахта → Дорога → Межвахта</span></li>
+<li><span class="mi-check">✓</span><span>Чек-лист готовности к выезду</span></li>
+<li><span class="mi-check">✓</span><span>Учёт билетов и трансферов</span></li>
+<li><span class="mi-check">✓</span><span>Бронирование жилья на объекте</span></li>
 </ul>
-<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-on">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
-</a>
-
-<a href="/modules/rotation" class="mod-card" aria-label="Модуль Перевахтовка — подробнее">
-<div class="mod-stripe" style="background:linear-gradient(90deg,#06b6d4,#0891b2)"></div>
-<div class="mod-head">
-<div class="mod-icon" style="background:rgba(6,182,212,0.12);color:#22d3ee">ВХТ</div>
-<span class="mod-badge badge-soon">Скоро</span>
+<span class="mi-status s-soon"><span class="mi-dot"></span>Скоро</span>
 </div>
-<div class="mod-title">Перевахтовка</div>
-<div class="mod-sub">Специализация для вахтового найма. Управляет полным циклом смены — от билетов до допуска.</div>
-<ul class="mod-feats">
-<li>Таймлайн: Вахта → Дорога → Межвахта</li>
-<li>Чек-лист готовности к выезду</li>
-<li>Учёт билетов и трансферов</li>
-<li>Бронирование жилья на объекте</li>
+</article>
+
+<article class="mi-card" data-index="4" data-cursor="смотреть" style="--mi-color:#EF4444">
+<div class="mi-glow"></div>
+<div class="mi-inner">
+<div class="mi-head">
+<span class="mi-num">05</span>
+<div class="mi-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+</div>
+<h3 class="mi-title">Охрана труда</h3>
+<ul class="mi-feats">
+<li><span class="mi-check">✓</span><span>Допуск к смене по статусу безопасности</span></li>
+<li><span class="mi-check">✓</span><span>Реестр СИЗ по нормам должности</span></li>
+<li><span class="mi-check">✓</span><span>Регистрация и разбор инцидентов</span></li>
+<li><span class="mi-check">✓</span><span>Трекинг медосмотров и обучений</span></li>
 </ul>
-<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-off">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
-</a>
-
-<a href="/modules/hse" class="mod-card" aria-label="Модуль Охрана труда (HSE) — подробнее">
-<div class="mod-stripe" style="background:linear-gradient(90deg,#ef4444,#dc2626)"></div>
-<div class="mod-head">
-<div class="mod-icon" style="background:rgba(239,68,68,0.12);color:#f87171">HSE</div>
-<span class="mod-badge badge-soon">Скоро</span>
+<span class="mi-status s-soon"><span class="mi-dot"></span>Скоро</span>
 </div>
-<div class="mod-title">Охрана труда</div>
-<div class="mod-sub">Безопасность на объекте. Блокировка выхода без допуска, реестр СИЗ, регистрация инцидентов.</div>
-<ul class="mod-feats">
-<li>Допуск к смене по статусу безопасности</li>
-<li>Реестр СИЗ по нормам должности</li>
-<li>Регистрация и разбор инцидентов</li>
-<li>Трекинг медосмотров и обучений</li>
-</ul>
-<div class="mod-plans"><span class="mp mp-off">Старт</span><span class="mp mp-off">Бизнес</span><span class="mp mp-on">Корпорат</span></div>
-</a>
+</article>
 
 </div>
 
-<div style="text-align:center;margin-top:24px;font-size:13px;color:var(--muted)">Перевахтовка, Охрана труда — релиз Q3 2026</div>
+<div class="mi-visual">
+<div class="mi-stage" id="mi-stage">
+
+<div class="mi-frame active" data-index="0" style="--mi-color:#10B981">
+<div class="mi-frame-border"></div>
+<div class="mi-frame-top">
+<div class="mi-frame-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
+<span class="mi-frame-num">01</span>
+</div>
+<div class="mi-frame-bottom">
+<div class="mi-frame-title">Рекрутинг</div>
+<span class="mi-frame-status"><span class="mi-dot"></span>В работе</span>
+</div>
+</div>
+
+<div class="mi-frame" data-index="1" style="--mi-color:#F59E0B">
+<div class="mi-frame-border"></div>
+<div class="mi-frame-top">
+<div class="mi-frame-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+<span class="mi-frame-num">02</span>
+</div>
+<div class="mi-frame-bottom">
+<div class="mi-frame-title">Кадры</div>
+<span class="mi-frame-status"><span class="mi-dot"></span>В работе</span>
+</div>
+</div>
+
+<div class="mi-frame" data-index="2" style="--mi-color:#3B82F6">
+<div class="mi-frame-border"></div>
+<div class="mi-frame-top">
+<div class="mi-frame-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+<span class="mi-frame-num">03</span>
+</div>
+<div class="mi-frame-bottom">
+<div class="mi-frame-title">Мессенджер</div>
+<span class="mi-frame-status"><span class="mi-dot"></span>В работе</span>
+</div>
+</div>
+
+<div class="mi-frame" data-index="3" style="--mi-color:#06B6D4">
+<div class="mi-frame-border"></div>
+<div class="mi-frame-top">
+<div class="mi-frame-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+<span class="mi-frame-num">04</span>
+</div>
+<div class="mi-frame-bottom">
+<div class="mi-frame-title">Перевахтовка</div>
+<span class="mi-frame-status"><span class="mi-dot"></span>Скоро</span>
+</div>
+</div>
+
+<div class="mi-frame" data-index="4" style="--mi-color:#EF4444">
+<div class="mi-frame-border"></div>
+<div class="mi-frame-top">
+<div class="mi-frame-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<span class="mi-frame-num">05</span>
+</div>
+<div class="mi-frame-bottom">
+<div class="mi-frame-title">Охрана труда</div>
+<span class="mi-frame-status"><span class="mi-dot"></span>Скоро</span>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 
 <div class="chain-box">
 <div class="chain-label">Сквозная цепочка</div>
@@ -1379,6 +1487,52 @@ function submitFeedback(e) {
     ease:'none',
     scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }
   });
+
+  // --- Interactive modules: scroll-activated cards + CSS mock visual ---
+  const miCards = Array.from(document.querySelectorAll('.mi-card'));
+  const miFrames = Array.from(document.querySelectorAll('.mi-frame'));
+  if(miCards.length && miFrames.length){
+    let miActive = 0;
+
+    function setModule(index){
+      if(index === miActive) return;
+      miActive = index;
+      miCards.forEach((c,i)=>c.classList.toggle('active', i===index));
+      miFrames.forEach((f,i)=>f.classList.toggle('active', i===index));
+      const frame = miFrames[index];
+      gsap.fromTo(frame.querySelector('.mi-frame-title'),
+        { y:18, opacity:0.4 },
+        { y:0, opacity:1, duration:0.6, ease:'power3.out' });
+      gsap.fromTo(frame.querySelector('.mi-frame-icon'),
+        { scale:0.85, opacity:0.4 },
+        { scale:1, opacity:1, duration:0.6, ease:'power3.out' });
+    }
+
+    // Scroll activation
+    miCards.forEach((card,index)=>{
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 55%',
+        end: 'bottom 45%',
+        onEnter: ()=>setModule(index),
+        onEnterBack: ()=>setModule(index)
+      });
+    });
+
+    // Click activation
+    miCards.forEach((card,index)=>{
+      card.addEventListener('click', ()=>setModule(index));
+    });
+
+    // Glow follow inside cards
+    miCards.forEach(card=>{
+      card.addEventListener('mousemove', e=>{
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--gx', ((e.clientX-r.left)/r.width*100)+'%');
+        card.style.setProperty('--gy', ((e.clientY-r.top)/r.height*100)+'%');
+      });
+    });
+  }
 })();
 </script>
 
