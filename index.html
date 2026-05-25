@@ -1742,6 +1742,19 @@ function submitFeedback(e) {
       card.addEventListener('click', ()=>setModule(index));
     });
 
+    // Mobile: IntersectionObserver replaces GSAP ScrollTrigger on touch devices
+    if(window.matchMedia('(max-width:1024px)').matches){
+      const mio = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const idx = parseInt(entry.target.dataset.index||'0');
+            miCards.forEach((c,i)=>c.classList.toggle('active', i===idx));
+          }
+        });
+      }, { rootMargin:'-30% 0px -45% 0px', threshold:0 });
+      miCards.forEach(c=>mio.observe(c));
+    }
+
     // Glow follow inside cards
     miCards.forEach(card=>{
       card.addEventListener('mousemove', e=>{
