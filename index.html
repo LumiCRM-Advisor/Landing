@@ -8,18 +8,21 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#6f3f81">
 <link rel="canonical" href="https://lumicrm.ru/">
+<meta name="keywords" content="ATS система, CRM рекрутинг, управление персоналом, HR автоматизация, вахтовый учёт, кадровое оформление, Lumi CRM, массовый подбор персонала">
+<meta name="author" content="Lumi CRM">
+<meta name="language" content="ru">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lumicrm.ru/">
-<meta property="og:title" content="Lumi.CRM — Массовый подбор без хаоса">
-<meta property="og:description" content="AI-платформа для рекрутинга. Скрининг 100 резюме за 10 минут. Интеграция hh.ru, SuperJob, 1С. Бесплатный старт.">
+<meta property="og:title" content="Lumi.CRM — AI-платформа для HR и рекрутинга">
+<meta property="og:description" content="Скрининг 100 резюме за 10 минут. Единая цепочка от заявки до табеля. Интеграция hh.ru, SuperJob, 1С. Бесплатный старт 14 дней.">
 <meta property="og:image" content="https://lumicrm.ru/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Lumi.CRM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lumi.CRM — Массовый подбор без хаоса">
-<meta name="twitter:description" content="AI-платформа для рекрутинга. Скрининг 100 резюме за 10 минут.">
+<meta name="twitter:title" content="Lumi.CRM — AI-платформа для HR">
+<meta name="twitter:description" content="Скрининг 100 резюме за 10 минут. Единая цепочка от заявки до табеля.">
 <meta name="twitter:image" content="https://lumicrm.ru/og-image.png">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/favicon.png">
@@ -28,6 +31,8 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Lumi.CRM","url":"https://lumicrm.ru/","description":"AI-платформа для массового рекрутинга","contactPoint":{"@type":"ContactPoint","contactType":"sales","availableLanguage":"Russian"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;--text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;--accent-glow:rgba(111,63,129,0.15);--green:#10b981;--blue:#164194;--amber:#f59e0b;--red:#ef4444;--light-gray:#F4F4F4;--text-gray:#4A4A4A}
@@ -429,6 +434,108 @@ html{cursor:none}
 .progress-fill{width:100%;height:0%;background:linear-gradient(180deg,var(--accent2),var(--blue,#164194));transition:height .1s linear}
 .fade-up{opacity:0;transform:translateY(32px)}
 .magnetic-shift{transition:transform .1s var(--ease,ease-out)!important}
+
+/* ===== MOBILE ADAPTATION ===== */
+
+/* Touch cursor: скрыть кастомный курсор и частицы */
+@media(hover:none){
+  #cursor,#trail-container,#ripple-container,.noise-overlay{display:none!important}
+  html,body,*{cursor:auto!important}
+}
+
+/* Hero mobile */
+@media(max-width:600px){
+  .hero{padding:100px 0 60px}
+  .hero h1{font-size:clamp(2rem,8vw,4.5rem)}
+  .hero p{font-size:clamp(0.9rem,3.5vw,1.3rem)}
+  .hero-btns{flex-direction:column;align-items:center;gap:10px}
+  .hero-btns .btn{width:100%;max-width:320px;text-align:center}
+}
+
+/* Секции — padding на mobile */
+@media(max-width:768px){
+  section{padding:48px 0}
+  .container{padding:0 16px}
+  body{font-size:16px}
+  /* Touch targets */
+  a,button,.ptab,.int-badge,.price-btn,.faq-item summary,.nav-cta,.nav-demo{min-height:44px;display:inline-flex;align-items:center}
+  .faq-item summary{display:flex}
+  /* Modal width */
+  .modal-box{width:95vw;max-width:95vw;padding:28px 20px}
+}
+
+/* Модули interactive — на mobile убрать sticky панель, стопка */
+@media(max-width:768px){
+  .modules-interactive{display:block}
+  .mi-list{max-width:100%;flex:none}
+  .mi-visual{display:none}
+  .mi-card{opacity:1;cursor:pointer;padding:20px 0}
+  .mi-feats{max-height:none;opacity:1;transform:none}
+  /* Nav-list как горизонтальный скролл-стрип */
+  .mi-list{display:flex;flex-direction:column;gap:0}
+}
+
+/* Chain scroll section — убрать стрелки, 2-col grid */
+@media(max-width:768px){
+  .chain-blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .carrow{display:none!important}
+  .cblock{opacity:1;transform:none;min-width:unset;max-width:unset}
+}
+@media(max-width:480px){
+  .chain-blocks{grid-template-columns:1fr}
+}
+
+/* Partner sections (три модели / четыре шага) */
+@media(max-width:600px){
+  .cards-3{grid-template-columns:1fr}
+  /* steps-row уже адаптирован через существующий media 768px */
+}
+
+/* Таблица сравнения — горизонтальный скролл */
+@media(max-width:768px){
+  .compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .compare{min-width:600px}
+}
+
+/* Метрики bar */
+@media(max-width:480px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .trust-bar{gap:8px 12px}
+  .trust-industry{font-size:11px;padding:3px 8px}
+}
+
+/* Pricing cards */
+@media(max-width:480px){
+  .pricing-grid{grid-template-columns:1fr}
+  .price-card.featured{padding-top:48px}
+}
+
+/* Bento on mobile */
+@media(max-width:600px){
+  .bento{grid-template-columns:1fr}
+  .bento-large{grid-column:span 1}
+}
+
+/* Testimonials — уже адаптировано, оставить */
+
+/* Section title size on mobile */
+@media(max-width:480px){
+  .section-title{font-size:clamp(1.4rem,6vw,2rem)}
+  .section-desc{font-size:14px}
+}
+
+/* Chaos-order columns */
+@media(max-width:600px){
+  .chaos-order{grid-template-columns:1fr}
+}
+
+/* Final CTA */
+@media(max-width:480px){
+  .final-cta{padding:60px 0}
+  .final-cta h2{font-size:clamp(1.6rem,7vw,2.4rem)}
+}
+
+/* ===== END MOBILE ADAPTATION ===== */
 </style>
 </head>
 <body>
@@ -442,7 +549,7 @@ html{cursor:none}
 <nav>
 <div class="container">
 <a href="https://lumicrm.ru" class="logo">
-  <img src="logo.png" width="40" height="40" alt="Lumi.CRM" style="flex-shrink:0;filter:drop-shadow(0 0 14px rgba(124,58,237,0.6))">
+  <img src="logo.png" width="40" height="40" alt="Lumi.CRM" loading="eager" decoding="async" style="flex-shrink:0;filter:drop-shadow(0 0 14px rgba(124,58,237,0.6))">
   <span class="logo-text">Lumi<span style="-webkit-text-fill-color:#a67bbe">.CRM</span></span>
 </a>
 <div class="nav-links">
@@ -771,7 +878,7 @@ html{cursor:none}
 </div>
 
 <div class="chain-scroll-section">
-  <div class="chain-scroll-label">Сквозная цепочка</div>
+  <h2 class="chain-scroll-label">Сквозная цепочка</h2>
   <div class="chain-blocks" id="chainBlocks">
     <div class="cblock cblock-1" data-delay="0">
       <div class="ccard"><div class="cnum">ЭТАП 01</div><div class="ctitle">Заявка на подбор</div><div class="cdesc">Формирование требований к кандидату, сроков и условий работы</div></div>
