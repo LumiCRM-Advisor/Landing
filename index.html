@@ -469,6 +469,9 @@ footer span{font-size:13px;color:var(--muted)}
 .mi-frame-status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 16px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)}
 .mi-frame-status .mi-dot{width:8px;height:8px;border-radius:50%;background:var(--mi-color,var(--accent2));box-shadow:0 0 10px var(--mi-color,var(--accent2));animation:miPulse 2s ease infinite}
 @keyframes miPulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.mi-foot{display:flex;align-items:center;gap:14px;margin-top:14px}
+.mi-more{font-size:12.5px;font-weight:600;color:var(--mi-color,var(--accent2));opacity:0.8;transition:opacity .3s}
+.mi-more:hover{opacity:1}
 
 @media(max-width:900px){.modules-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:1024px){
@@ -824,7 +827,7 @@ html,body,*{cursor:none!important}
 <li><span class="mi-check">✓</span><span>Telegram-бот для первичного скрининга</span></li>
 <li><span class="mi-check">✓</span><span>Match-Score 0–100 с объяснением</span></li>
 </ul>
-<span class="mi-status s-work"><span class="mi-dot"></span>В работе</span>
+<div class="mi-foot"><span class="mi-status s-work"><span class="mi-dot"></span>В работе</span><a href="modules/recruiting.html" class="mi-more">Подробнее →</a></div>
 </div>
 </article>
 
@@ -842,7 +845,7 @@ html,body,*{cursor:none!important}
 <li><span class="mi-check">✓</span><span>Кадровый таймлайн: приёмы, переводы</span></li>
 <li><span class="mi-check">✓</span><span>Интеграция с 1С:ЗУП</span></li>
 </ul>
-<span class="mi-status s-work"><span class="mi-dot"></span>В работе</span>
+<div class="mi-foot"><span class="mi-status s-work"><span class="mi-dot"></span>В работе</span><a href="modules/hrm.html" class="mi-more">Подробнее →</a></div>
 </div>
 </article>
 
@@ -878,7 +881,7 @@ html,body,*{cursor:none!important}
 <li><span class="mi-check">✓</span><span>Учёт билетов и трансферов</span></li>
 <li><span class="mi-check">✓</span><span>Бронирование жилья на объекте</span></li>
 </ul>
-<span class="mi-status s-soon"><span class="mi-dot"></span>Скоро</span>
+<div class="mi-foot"><span class="mi-status s-soon"><span class="mi-dot"></span>Скоро</span><a href="modules/rotation.html" class="mi-more">Подробнее →</a></div>
 </div>
 </article>
 
@@ -896,7 +899,7 @@ html,body,*{cursor:none!important}
 <li><span class="mi-check">✓</span><span>Регистрация и разбор инцидентов</span></li>
 <li><span class="mi-check">✓</span><span>Трекинг медосмотров и обучений</span></li>
 </ul>
-<span class="mi-status s-soon"><span class="mi-dot"></span>Скоро</span>
+<div class="mi-foot"><span class="mi-status s-soon"><span class="mi-dot"></span>Скоро</span><a href="modules/hse.html" class="mi-more">Подробнее →</a></div>
 </div>
 </article>
 
@@ -1002,7 +1005,7 @@ html,body,*{cursor:none!important}
 </ul>
 <div class="ch-mi-foot">
 <span class="ch-mi-tag">Заявки</span>
-<a href="#modules" class="ch-mi-more">Подробнее →</a>
+<a href="modules/requests.html" class="ch-mi-more">Подробнее →</a>
 </div>
 </div>
 </article>
@@ -1023,7 +1026,7 @@ html,body,*{cursor:none!important}
 </ul>
 <div class="ch-mi-foot">
 <span class="ch-mi-tag">AI</span>
-<a href="#modules" class="ch-mi-more">Подробнее →</a>
+<a href="modules/recruiting.html" class="ch-mi-more">Подробнее →</a>
 </div>
 </div>
 </article>
@@ -1044,7 +1047,7 @@ html,body,*{cursor:none!important}
 </ul>
 <div class="ch-mi-foot">
 <span class="ch-mi-tag">Кадры</span>
-<a href="#modules" class="ch-mi-more">Подробнее →</a>
+<a href="modules/hrm.html" class="ch-mi-more">Подробнее →</a>
 </div>
 </div>
 </article>
@@ -1065,7 +1068,7 @@ html,body,*{cursor:none!important}
 </ul>
 <div class="ch-mi-foot">
 <span class="ch-mi-tag">HSE</span>
-<a href="#modules" class="ch-mi-more">Подробнее →</a>
+<a href="modules/hse.html" class="ch-mi-more">Подробнее →</a>
 </div>
 </div>
 </article>
@@ -1086,7 +1089,7 @@ html,body,*{cursor:none!important}
 </ul>
 <div class="ch-mi-foot">
 <span class="ch-mi-tag">Вахта</span>
-<a href="#modules" class="ch-mi-more">Подробнее →</a>
+<a href="modules/rotation.html" class="ch-mi-more">Подробнее →</a>
 </div>
 </div>
 </article>
