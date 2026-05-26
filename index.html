@@ -260,18 +260,16 @@ footer span{font-size:13px;color:var(--muted)}
 @media(max-width:768px){.steps-row-orig{grid-template-columns:1fr}.step-arrow-orig{display:none}}
 
 /* Steps sticky scroll */
-.steps-sticky-outer{position:relative;height:350vh}
-.steps-sticky-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.steps-sticky-outer{position:relative}
+.steps-sticky-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:60px 20px}
 .steps-row{display:flex;align-items:flex-start;gap:0;flex-wrap:nowrap;justify-content:center;padding:0 1rem;width:100%}
-.step-card{min-width:180px;max-width:210px;flex-shrink:0;text-align:center;padding:28px 20px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);opacity:0;transform:translateY(40px) scale(0.92);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
-.step-card.revealed{opacity:1;transform:translateY(0) scale(1)}
+.step-card{min-width:180px;max-width:210px;flex-shrink:0;text-align:center;padding:28px 20px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid var(--border)}
 .step-num{font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--muted);margin-bottom:12px}
 .step-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border-radius:12px;background:rgba(111,63,129,0.1);border:1px solid rgba(111,63,129,0.25);color:var(--accent2)}
 .step-icon svg{width:22px;height:22px}
 .step-card h3{font-size:15px;font-weight:700;margin-bottom:10px;color:var(--text)}
 .step-card p{font-size:12.5px;color:var(--muted);line-height:1.6}
-.step-arrow{display:flex;align-items:center;padding-top:20px;flex-shrink:0;width:40px;justify-content:center;font-size:18px;color:#444;opacity:0;transition:opacity .5s ease}
-.step-arrow.revealed{opacity:1}
+.step-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:48px;padding-bottom:60px;color:#b794f6;font-size:22px;font-weight:700;opacity:0}
 
 /* Testimonials */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -313,20 +311,18 @@ footer span{font-size:13px;color:var(--muted)}
 .chain-sep{color:var(--muted);font-size:16px;flex-shrink:0}
 
 /* Chain scroll animated */
-.chain-sticky-outer{position:relative;height:450vh}
-.chain-sticky-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.chain-sticky-outer{position:relative}
+.chain-sticky-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:60px 20px}
 .chain-scroll-label{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:40px}
 .chain-blocks{display:flex;align-items:center;gap:0;flex-wrap:nowrap;justify-content:center;padding:1rem}
-.cblock{display:flex;flex-direction:column;align-items:center;min-width:155px;max-width:175px;flex-shrink:0;opacity:0;transform:translateY(50px) scale(0.9);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
-.cblock.revealed{opacity:1;transform:translateY(0) scale(1)}
+.cblock{display:flex;flex-direction:column;align-items:center;min-width:155px;max-width:175px;flex-shrink:0}
 .cblock .ccard{width:100%;padding:18px 16px;border-radius:12px;text-align:center;position:relative;overflow:hidden}
 .cblock .ccard::before{content:'';position:absolute;inset:0;border-radius:12px;padding:1.5px;background:linear-gradient(135deg,var(--gc1),var(--gc2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}
 .cblock .ccard::after{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse at center,var(--gc1),transparent 70%);opacity:.08;pointer-events:none}
 .cblock .cnum{font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--gc1);margin-bottom:.35rem;opacity:.7;position:relative;z-index:1}
 .cblock .ctitle{font-size:.9rem;font-weight:600;color:#e2d9f3;line-height:1.3;position:relative;z-index:1}
 .cblock .cdesc{font-size:.7rem;line-height:1.5;color:#aaa;margin-top:.5rem;position:relative;z-index:1}
-.carrow{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0;opacity:0;transform:scale(0.5);transition:opacity .5s cubic-bezier(0.16,1,0.3,1),transform .5s cubic-bezier(0.16,1,0.3,1)}
-.carrow.revealed{opacity:1;transform:scale(1)}
+.carrow{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0}
 .carrow svg{width:16px;height:16px;fill:#444}
 .chain-progress{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:160px;height:2px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
 .chain-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#888,#ccc);border-radius:2px;transition:width .1s linear}
@@ -494,9 +490,8 @@ html{cursor:none}
 
 /* Chain scroll section — убрать стрелки, 2-col grid */
 @media(max-width:768px){
-  .chain-blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
   .carrow{display:none!important}
-  .cblock{opacity:1;transform:none;min-width:unset;max-width:unset}
+  .cblock{min-width:unset;max-width:unset}
 }
 @media(max-width:480px){
   .chain-blocks{grid-template-columns:1fr}
@@ -554,15 +549,15 @@ html{cursor:none}
 
 /* Chain + Steps sticky scroll mobile */
 @media(max-width:768px){
-  .chain-sticky-outer{height:auto!important;position:relative}
-  .chain-sticky-inner{position:relative!important;top:auto!important;height:auto;min-height:auto;padding:48px 1rem}
+  .chain-sticky-outer{position:relative}
+  .chain-sticky-inner{min-height:auto;padding:40px 16px}
   .chain-blocks{flex-wrap:wrap;gap:10px;justify-content:center}
-  .cblock{min-width:140px;max-width:160px;opacity:1!important;transform:none!important}
+  .cblock{min-width:140px;max-width:160px}
   .carrow{display:none!important}
-  .steps-sticky-outer{height:auto!important;position:relative}
-  .steps-sticky-inner{position:relative!important;top:auto!important;height:auto;padding:48px 1rem}
+  .steps-sticky-outer{position:relative}
+  .steps-sticky-inner{min-height:auto;padding:40px 16px}
   .steps-row{flex-wrap:wrap;gap:16px;justify-content:center}
-  .step-card{min-width:140px;max-width:100%;opacity:1!important;transform:none!important}
+  .step-card{min-width:140px;max-width:100%}
   .step-arrow{display:none!important}
 }
 
@@ -985,21 +980,21 @@ html{cursor:none}
         <h3>Регистрация</h3>
         <p>Регистрируетесь как партнёр в Lumi CRM. Указываете компанию и формат сотрудничества.</p>
       </div>
-      <div class="step-arrow" data-sarrow="0">→</div>
+      <div class="step-arrow" data-sarrow="0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       <div class="step-card" data-step="1">
         <div class="step-num">02</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
         <h3>Реферальный код</h3>
         <p>Получаете персональный реферальный код и доступ в партнёрский кабинет с аналитикой.</p>
       </div>
-      <div class="step-arrow" data-sarrow="1">→</div>
+      <div class="step-arrow" data-sarrow="1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       <div class="step-card" data-step="2">
         <div class="step-num">03</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Приводите клиентов</h3>
         <p>Клиенты указывают ваш код при регистрации — система сама фиксирует привязку к вам.</p>
       </div>
-      <div class="step-arrow" data-sarrow="2">→</div>
+      <div class="step-arrow" data-sarrow="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       <div class="step-card" data-step="3">
         <div class="step-num">04</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
@@ -1378,7 +1373,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.bento-card, .price-card, .metric').forEach(el => {
+document.querySelectorAll('.metric').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -1705,10 +1700,17 @@ function submitFeedback(e) {
     progressFill.style.height = pct + '%';
   });
 
-  // --- GSAP fade-up ---
-  document.querySelectorAll('.step-card,.bento-card,.testi-card,.mod-card,.metric-card,.price-card').forEach(el => {
+  // --- GSAP fade-up (step-card excluded: handled by pinned timeline) ---
+  document.querySelectorAll('.testi-card,.mod-card,.metric-card,.price-card').forEach(el => {
     el.classList.add('fade-up');
     gsap.to(el, { opacity:1, y:0, duration:0.7, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 88%' }
+    });
+  });
+  // Bento cards: slower reveal
+  document.querySelectorAll('.bento-card').forEach(el => {
+    el.classList.add('fade-up');
+    gsap.to(el, { opacity:1, y:0, duration:1.2, ease:'power3.out',
       scrollTrigger:{ trigger:el, start:'top 88%' }
     });
   });
@@ -1808,74 +1810,112 @@ function submitFeedback(e) {
 </script>
 
 <script>
-// Chain sticky scroll
+// Chain + Steps: GSAP ScrollTrigger pin animations
 (function(){
-  const outer = document.getElementById('chainOuter');
-  const fill = document.getElementById('chainFill');
+  const chainInner = document.querySelector('.chain-sticky-inner');
+  const stepsInner = document.querySelector('.steps-sticky-inner');
   const cblocks = Array.from(document.querySelectorAll('#chainBlocks .cblock'));
   const carrows = Array.from(document.querySelectorAll('#chainBlocks .carrow'));
-  if(!outer || !cblocks.length) return;
-
-  const totalItems = cblocks.length; // 5
-
-  function updateChain(){
-    const rect = outer.getBoundingClientRect();
-    const scrolled = -rect.top;
-    const scrollable = outer.offsetHeight - window.innerHeight;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollable));
-
-    if(fill) fill.style.width = (progress * 100) + '%';
-
-    const blockInterval = 1 / (totalItems + 0.5);
-
-    cblocks.forEach((block, i) => {
-      const threshold = i * blockInterval * 0.85;
-      if(progress >= threshold) {
-        block.classList.add('revealed');
-      }
-    });
-
-    carrows.forEach((arrow, i) => {
-      const threshold = (i + 0.6) * blockInterval * 0.85;
-      if(progress >= threshold) {
-        arrow.classList.add('revealed');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateChain, { passive: true });
-  window.addEventListener('resize', updateChain);
-  updateChain();
-})();
-
-// Steps sticky scroll
-(function(){
-  const outer = document.getElementById('stepsOuter');
   const scards = Array.from(document.querySelectorAll('#stepsRow .step-card'));
   const sarrows = Array.from(document.querySelectorAll('#stepsRow .step-arrow'));
-  if(!outer || !scards.length) return;
 
-  const total = scards.length; // 4
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
 
-  function updateSteps(){
-    const rect = outer.getBoundingClientRect();
-    const scrolled = -rect.top;
-    const scrollable = outer.offsetHeight - window.innerHeight;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+  const isMobile = window.innerWidth <= 768;
 
-    const interval = 1 / (total + 0.3);
+  // --- Chain ---
+  if(chainInner && cblocks.length) {
+    gsap.set(cblocks, { opacity:0, y:50, scale:0.9 });
+    gsap.set(carrows, { opacity:0, scale:0.5 });
 
-    scards.forEach((card, i) => {
-      if(progress >= i * interval * 0.9) card.classList.add('revealed');
-    });
-    sarrows.forEach((arrow, i) => {
-      if(progress >= (i + 0.7) * interval * 0.9) arrow.classList.add('revealed');
-    });
+    if(isMobile) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:0.7});
+          else gsap.to(e.target, {opacity:0, y:50, scale:0.9, duration:0.4});
+        });
+      }, { threshold: 0.3 });
+      cblocks.forEach(el => obs.observe(el));
+      const fill = document.getElementById('chainFill');
+      if(fill) fill.style.width = '100%';
+    } else {
+      const chainTl = gsap.timeline({
+        scrollTrigger:{
+          trigger: '.chain-sticky-outer',
+          start: 'top top',
+          end: '+=400%',
+          scrub: 0.8,
+          pin: chainInner,
+          anticipatePin: 1
+        }
+      });
+
+      cblocks.forEach((block, i) => {
+        chainTl.to(block,
+          { opacity:1, y:0, scale:1, duration:0.6, ease:'power3.out' },
+          i * 0.8
+        );
+      });
+      carrows.forEach((arrow, i) => {
+        chainTl.to(arrow,
+          { opacity:1, scale:1, duration:0.3, ease:'power2.out' },
+          i * 0.8 + 0.5
+        );
+      });
+
+      const fill = document.getElementById('chainFill');
+      if(fill) {
+        ScrollTrigger.create({
+          trigger: '.chain-sticky-outer',
+          start: 'top top',
+          end: '+=400%',
+          onUpdate: self => { fill.style.width = (self.progress * 100) + '%'; }
+        });
+      }
+    }
   }
 
-  window.addEventListener('scroll', updateSteps, { passive: true });
-  window.addEventListener('resize', updateSteps);
-  updateSteps();
+  // --- Steps ---
+  if(stepsInner && scards.length) {
+    gsap.set(scards, { opacity:0, y:40, scale:0.92 });
+    gsap.set(sarrows, { opacity:0 });
+
+    if(isMobile) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:0.7});
+          else gsap.to(e.target, {opacity:0, y:40, scale:0.92, duration:0.4});
+        });
+      }, { threshold: 0.3 });
+      scards.forEach(el => obs.observe(el));
+      gsap.set(sarrows, {opacity:1});
+    } else {
+      const stepsTl = gsap.timeline({
+        scrollTrigger:{
+          trigger: '.steps-sticky-outer',
+          start: 'top top',
+          end: '+=300%',
+          scrub: 0.8,
+          pin: stepsInner,
+          anticipatePin: 1
+        }
+      });
+
+      scards.forEach((card, i) => {
+        stepsTl.to(card,
+          { opacity:1, y:0, scale:1, duration:0.6, ease:'power3.out' },
+          i * 0.8
+        );
+      });
+      sarrows.forEach((arrow, i) => {
+        stepsTl.to(arrow,
+          { opacity:1, duration:0.3, ease:'power2.out' },
+          i * 0.8 + 0.5
+        );
+      });
+    }
+  }
 })();
 </script>
 
