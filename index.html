@@ -111,7 +111,7 @@ section{padding:80px 0}
 
 /* Bento grid */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto;gap:16px}
-.bento-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;transition:all .3s;cursor:pointer}
+.bento-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;transition:all .4s cubic-bezier(0.16,1,0.3,1);cursor:pointer}
 .bento-card:hover{border-color:rgba(111,63,129,0.4);transform:translateY(-2px);box-shadow:0 0 0 1px rgba(111,63,129,0.25),0 8px 24px rgba(111,63,129,0.12)}
 .bento-card.glow-purple{box-shadow:0 0 0 2px rgba(111,63,129,0.6),0 0 24px 4px rgba(111,63,129,0.25);border-color:rgba(111,63,129,0.7)}
 .bento-card.glow-blue{box-shadow:0 0 0 2px rgba(22,65,148,0.6),0 0 24px 4px rgba(22,65,148,0.25);border-color:rgba(22,65,148,0.7)}
@@ -137,7 +137,7 @@ section{padding:80px 0}
 .score-detail{font-size:12px;color:var(--muted)}
 
 /* Integrations */
-.integrations{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.integrations{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;justify-content:flex-start}
 .int-badge{padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s}
 .int-badge:hover{border-color:var(--accent);color:var(--text)}
 
@@ -246,18 +246,32 @@ footer span{font-size:13px;color:var(--muted)}
 .trust-sep{color:var(--border);font-size:16px}
 .trust-industry{font-size:12px;color:var(--muted);padding:3px 10px;background:rgba(255,255,255,0.03);border-radius:100px;border:1px solid var(--border)}
 
-/* How it works */
-.steps-row{display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr;align-items:start;gap:0;margin-top:8px}
-.step-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:all .3s}
-.step-card:hover{border-color:rgba(111,63,129,0.5);transform:translateY(-3px);box-shadow:0 0 0 1px rgba(111,63,129,0.3),0 8px 32px rgba(111,63,129,0.15)}
-.step-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
-.step-num{font-size:3rem;font-weight:900;color:rgba(111,63,129,0.32);line-height:1;margin-bottom:12px;letter-spacing:-0.04em}
-.step-icon{width:48px;height:48px;margin-bottom:16px;color:var(--accent2)}
-.step-icon svg{width:100%;height:100%}
-.step-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
-.step-card p{font-size:13.5px;color:var(--muted);line-height:1.6}
-.step-arrow{display:flex;align-items:center;justify-content:center;color:rgba(111,63,129,0.55);font-size:28px;padding-top:60px}
-@media(max-width:768px){.steps-row{grid-template-columns:1fr}.step-arrow{display:none}}
+/* How it works — original 3-step section */
+.steps-row-orig{display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr;align-items:start;gap:0;margin-top:8px}
+.step-card-orig{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:all .3s}
+.step-card-orig:hover{border-color:rgba(111,63,129,0.5);transform:translateY(-3px);box-shadow:0 0 0 1px rgba(111,63,129,0.3),0 8px 32px rgba(111,63,129,0.15)}
+.step-card-orig::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent)}
+.step-num-orig{font-size:3rem;font-weight:900;color:rgba(111,63,129,0.32);line-height:1;margin-bottom:12px;letter-spacing:-0.04em}
+.step-icon-orig{width:48px;height:48px;margin-bottom:16px;color:var(--accent2)}
+.step-icon-orig svg{width:100%;height:100%}
+.step-card-orig h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.step-card-orig p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.step-arrow-orig{display:flex;align-items:center;justify-content:center;color:rgba(111,63,129,0.55);font-size:28px;padding-top:60px}
+@media(max-width:768px){.steps-row-orig{grid-template-columns:1fr}.step-arrow-orig{display:none}}
+
+/* Steps sticky scroll */
+.steps-sticky-outer{position:relative;height:350vh}
+.steps-sticky-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.steps-row{display:flex;align-items:flex-start;gap:0;flex-wrap:nowrap;justify-content:center;padding:0 1rem;width:100%}
+.step-card{min-width:180px;max-width:210px;flex-shrink:0;text-align:center;padding:28px 20px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);opacity:0;transform:translateY(40px) scale(0.92);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
+.step-card.revealed{opacity:1;transform:translateY(0) scale(1)}
+.step-num{font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--muted);margin-bottom:12px}
+.step-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border-radius:12px;background:rgba(111,63,129,0.1);border:1px solid rgba(111,63,129,0.25);color:var(--accent2)}
+.step-icon svg{width:22px;height:22px}
+.step-card h3{font-size:15px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.step-card p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.step-arrow{display:flex;align-items:center;padding-top:20px;flex-shrink:0;width:40px;justify-content:center;font-size:18px;color:#444;opacity:0;transition:opacity .5s ease}
+.step-arrow.revealed{opacity:1}
 
 /* Testimonials */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -299,26 +313,29 @@ footer span{font-size:13px;color:var(--muted)}
 .chain-sep{color:var(--muted);font-size:16px;flex-shrink:0}
 
 /* Chain scroll animated */
-.chain-scroll-section{margin-top:64px;padding:0}
+.chain-sticky-outer{position:relative;height:450vh}
+.chain-sticky-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
 .chain-scroll-label{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:40px}
-.chain-blocks{display:flex;align-items:flex-start;gap:0;justify-content:center;flex-wrap:wrap;gap:8px}
-.cblock{display:flex;flex-direction:column;align-items:center;min-width:160px;max-width:190px;opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
-.cblock.revealed{opacity:1;transform:translateY(0)}
+.chain-blocks{display:flex;align-items:center;gap:0;flex-wrap:nowrap;justify-content:center;padding:1rem}
+.cblock{display:flex;flex-direction:column;align-items:center;min-width:155px;max-width:175px;flex-shrink:0;opacity:0;transform:translateY(50px) scale(0.9);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1)}
+.cblock.revealed{opacity:1;transform:translateY(0) scale(1)}
 .cblock .ccard{width:100%;padding:18px 16px;border-radius:12px;text-align:center;position:relative;overflow:hidden}
 .cblock .ccard::before{content:'';position:absolute;inset:0;border-radius:12px;padding:1.5px;background:linear-gradient(135deg,var(--gc1),var(--gc2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}
 .cblock .ccard::after{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse at center,var(--gc1),transparent 70%);opacity:.08;pointer-events:none}
 .cblock .cnum{font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--gc1);margin-bottom:.35rem;opacity:.7;position:relative;z-index:1}
 .cblock .ctitle{font-size:.9rem;font-weight:600;color:#e2d9f3;line-height:1.3;position:relative;z-index:1}
 .cblock .cdesc{font-size:.7rem;line-height:1.5;color:#aaa;margin-top:.5rem;position:relative;z-index:1}
-.carrow{display:flex;align-items:center;justify-content:center;width:32px;flex-shrink:0;opacity:0;transition:opacity .5s ease;padding-top:28px}
-.carrow.revealed{opacity:1}
+.carrow{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0;opacity:0;transform:scale(0.5);transition:opacity .5s cubic-bezier(0.16,1,0.3,1),transform .5s cubic-bezier(0.16,1,0.3,1)}
+.carrow.revealed{opacity:1;transform:scale(1)}
 .carrow svg{width:16px;height:16px;fill:#444}
+.chain-progress{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:160px;height:2px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
+.chain-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#888,#ccc);border-radius:2px;transition:width .1s linear}
 .cblock-1{--gc1:#b794f6;--gc2:#9f7aea;} .cblock-1 .ccard{background:rgba(159,122,234,.06)}
 .cblock-2{--gc1:#68d391;--gc2:#48bb78;} .cblock-2 .ccard{background:rgba(72,187,120,.06)}
 .cblock-3{--gc1:#f6e05e;--gc2:#d69e2e;} .cblock-3 .ccard{background:rgba(214,158,46,.06)}
 .cblock-4{--gc1:#fc8181;--gc2:#e53e3e;} .cblock-4 .ccard{background:rgba(229,62,62,.06)}
 .cblock-5{--gc1:#63b3ed;--gc2:#4299e1;} .cblock-5 .ccard{background:rgba(66,153,225,.06)}
-@media(max-width:900px){.carrow{display:none}.chain-blocks{gap:10px}}
+@media(max-width:900px){.carrow{display:none!important}}
 
 /* Partner models */
 .partner-section{padding:96px 0;border-top:1px solid var(--border)}
@@ -335,7 +352,7 @@ footer span{font-size:13px;color:var(--muted)}
 /* Interactive modules — two-column scroll-activated layout */
 .modules-interactive{display:flex;gap:48px;align-items:flex-start;margin-top:8px}
 .mi-list{flex:0 0 40%;max-width:40%;display:flex;flex-direction:column}
-.mi-card{position:relative;padding:32px 4px;border-top:1px solid var(--border);cursor:none;opacity:0.4;transition:opacity .5s cubic-bezier(0.16,1,0.3,1),transform .3s ease}
+.mi-card{position:relative;padding:32px 4px;border-top:1px solid var(--border);cursor:none;opacity:0.4;transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .3s ease}
 .mi-card:first-child{border-top:none}
 .mi-card.active{opacity:1}
 .mi-card .mi-glow{position:absolute;inset:-1px;border-radius:16px;opacity:0;pointer-events:none;z-index:0;transition:opacity .4s;background:radial-gradient(180px circle at var(--gx,50%) var(--gy,50%),rgba(111,63,129,0.22) 0%,transparent 70%)}
@@ -350,7 +367,7 @@ footer span{font-size:13px;color:var(--muted)}
 .mi-card.active .mi-icon{color:var(--mi-color,var(--accent2));border-color:var(--mi-color,var(--accent2));background:color-mix(in srgb,var(--mi-color,var(--accent2)) 12%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--mi-color,var(--accent2)) 28%,transparent)}
 .mi-icon svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .mi-title{font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-0.02em;margin-bottom:18px;transition:color .4s}
-.mi-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px;max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s,transform .4s}
+.mi-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px;max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);transition:max-height .7s cubic-bezier(0.16,1,0.3,1),opacity .5s,transform .5s}
 .mi-card.active .mi-feats,.mi-card:hover .mi-feats{max-height:240px;opacity:1;transform:translateY(0)}
 .mi-feats li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
 .mi-check{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:rgba(16,185,129,0.12);color:var(--green)}
@@ -362,7 +379,7 @@ footer span{font-size:13px;color:var(--muted)}
 /* Right column — CSS mock visual */
 .mi-visual{flex:1 1 60%;position:sticky;top:96px;align-self:flex-start;height:480px;display:flex;align-items:center;justify-content:center}
 .mi-stage{position:relative;width:100%;max-width:560px;aspect-ratio:4/3;perspective:1000px}
-.mi-frame{position:absolute;inset:0;border-radius:24px;overflow:hidden;opacity:0;transform:translateY(24px) scale(0.98);transition:opacity .6s cubic-bezier(0.16,1,0.3,1),transform .6s cubic-bezier(0.16,1,0.3,1);background:linear-gradient(145deg,#15121b 0%,#0c0c11 100%);border:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:40px}
+.mi-frame{position:absolute;inset:0;border-radius:24px;overflow:hidden;opacity:0;transform:translateY(24px) scale(0.98);transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1);background:linear-gradient(145deg,#15121b 0%,#0c0c11 100%);border:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:40px}
 .mi-frame.active{opacity:1;transform:translateY(0) scale(1)}
 .mi-frame::after{content:'';position:absolute;inset:0;border-radius:24px;background:radial-gradient(120% 120% at 80% 0%,color-mix(in srgb,var(--mi-color,var(--accent)) 30%,transparent) 0%,transparent 55%);opacity:0.6;pointer-events:none}
 .mi-frame-border{position:absolute;inset:-1px;border-radius:25px;padding:1px;background:linear-gradient(145deg,color-mix(in srgb,var(--mi-color,var(--accent)) 55%,transparent),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
@@ -535,6 +552,20 @@ html{cursor:none}
   .final-cta h2{font-size:clamp(1.6rem,7vw,2.4rem)}
 }
 
+/* Chain + Steps sticky scroll mobile */
+@media(max-width:768px){
+  .chain-sticky-outer{height:auto!important;position:relative}
+  .chain-sticky-inner{position:relative!important;top:auto!important;height:auto;min-height:auto;padding:48px 1rem}
+  .chain-blocks{flex-wrap:wrap;gap:10px;justify-content:center}
+  .cblock{min-width:140px;max-width:160px;opacity:1!important;transform:none!important}
+  .carrow{display:none!important}
+  .steps-sticky-outer{height:auto!important;position:relative}
+  .steps-sticky-inner{position:relative!important;top:auto!important;height:auto;padding:48px 1rem}
+  .steps-row{flex-wrap:wrap;gap:16px;justify-content:center}
+  .step-card{min-width:140px;max-width:100%;opacity:1!important;transform:none!important}
+  .step-arrow{display:none!important}
+}
+
 /* ===== END MOBILE ADAPTATION ===== */
 </style>
 </head>
@@ -624,24 +655,24 @@ html{cursor:none}
     <h2 class="section-title">Три шага до первого найма</h2>
     <div class="section-desc" style="margin:0 auto">Запустите систему за один день. Без IT-отдела и долгого внедрения.</div>
   </div>
-  <div class="steps-row">
-    <div class="step-card">
-      <div class="step-num">01</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
+  <div class="steps-row-orig">
+    <div class="step-card-orig">
+      <div class="step-num-orig">01</div>
+      <div class="step-icon-orig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
       <h3>Создайте вакансию</h3>
       <p>Опишите требования в свободной форме. AI сам формирует критерии оценки и подключает нужные каналы — hh.ru, Avito, Telegram-бот скрининга.</p>
     </div>
-    <div class="step-arrow">→</div>
-    <div class="step-card">
-      <div class="step-num">02</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+    <div class="step-arrow-orig">→</div>
+    <div class="step-card-orig">
+      <div class="step-num-orig">02</div>
+      <div class="step-icon-orig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
       <h3>AI работает за вас</h3>
       <p>Система разбирает входящие резюме, задаёт уточняющие вопросы в Telegram и выставляет каждому кандидату оценку 0–100 с объяснением.</p>
     </div>
-    <div class="step-arrow">→</div>
-    <div class="step-card">
-      <div class="step-num">03</div>
-      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
+    <div class="step-arrow-orig">→</div>
+    <div class="step-card-orig">
+      <div class="step-num-orig">03</div>
+      <div class="step-icon-orig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
       <h3>Вы видите только лучших</h3>
       <p>В воронке — только кандидаты прошедшие скрининг. Открывайте карточку, читайте аргументы AI и звоните тем, кто реально подходит.</p>
     </div>
@@ -877,32 +908,36 @@ html{cursor:none}
 
 </div>
 
-<div class="chain-scroll-section">
-  <h2 class="chain-scroll-label">Сквозная цепочка</h2>
-  <div class="chain-blocks" id="chainBlocks">
-    <div class="cblock cblock-1" data-delay="0">
-      <div class="ccard"><div class="cnum">ЭТАП 01</div><div class="ctitle">Заявка на подбор</div><div class="cdesc">Формирование требований к кандидату, сроков и условий работы</div></div>
-    </div>
-    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-    <div class="cblock cblock-2" data-delay="120">
-      <div class="ccard"><div class="cnum">ЭТАП 02</div><div class="ctitle">Рекрутинг</div><div class="cdesc">AI-скрининг резюме, Telegram-бот, Match-Score 0–100</div></div>
-    </div>
-    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-    <div class="cblock cblock-3" data-delay="240">
-      <div class="ccard"><div class="cnum">ЭТАП 03</div><div class="ctitle">Кадровое оформление</div><div class="cdesc">Договор, документы, внесение в кадровую систему</div></div>
-    </div>
-    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-    <div class="cblock cblock-4" data-delay="360">
-      <div class="ccard"><div class="cnum">ЭТАП 04</div><div class="ctitle">Допуск HSE</div><div class="cdesc">Охрана труда, инструктажи, выдача допуска к работе</div></div>
-    </div>
-    <div class="carrow"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-    <div class="cblock cblock-5" data-delay="480">
-      <div class="ccard"><div class="cnum">ЭТАП 05</div><div class="ctitle">Табель + Вахта</div><div class="cdesc">Учёт времени, формирование табеля, вахтовый метод</div></div>
-    </div>
-  </div>
-</div>
 
 </div>
+</section>
+
+<section class="chain-sticky-outer" id="chainOuter">
+  <div class="chain-sticky-inner">
+    <h2 class="chain-scroll-label">Сквозная цепочка</h2>
+    <div class="chain-blocks" id="chainBlocks">
+      <div class="cblock cblock-1" data-delay="0">
+        <div class="ccard"><div class="cnum">ЭТАП 01</div><div class="ctitle">Заявка на подбор</div><div class="cdesc">Формирование требований к кандидату, сроков и условий работы</div></div>
+      </div>
+      <div class="carrow" data-arrow="0"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+      <div class="cblock cblock-2" data-delay="0">
+        <div class="ccard"><div class="cnum">ЭТАП 02</div><div class="ctitle">Рекрутинг</div><div class="cdesc">AI-скрининг резюме, Telegram-бот, Match-Score 0–100</div></div>
+      </div>
+      <div class="carrow" data-arrow="1"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+      <div class="cblock cblock-3" data-delay="0">
+        <div class="ccard"><div class="cnum">ЭТАП 03</div><div class="ctitle">Кадровое оформление</div><div class="cdesc">Договор, документы, внесение в кадровую систему</div></div>
+      </div>
+      <div class="carrow" data-arrow="2"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+      <div class="cblock cblock-4" data-delay="0">
+        <div class="ccard"><div class="cnum">ЭТАП 04</div><div class="ctitle">Допуск HSE</div><div class="cdesc">Охрана труда, инструктажи, выдача допуска к работе</div></div>
+      </div>
+      <div class="carrow" data-arrow="3"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+      <div class="cblock cblock-5" data-delay="0">
+        <div class="ccard"><div class="cnum">ЭТАП 05</div><div class="ctitle">Табель + Вахта</div><div class="cdesc">Учёт времени, формирование табеля, вахтовый метод</div></div>
+      </div>
+    </div>
+    <div class="chain-progress"><div class="chain-progress-fill" id="chainFill"></div></div>
+  </div>
 </section>
 
 <section class="partner-section">
@@ -930,47 +965,52 @@ html{cursor:none}
     </div>
   </div>
 
-  <div style="margin-top:72px">
+  <div style="text-align:center;margin-top:48px">
+    <a href="/partners.html" class="btn btn-primary">Стать партнёром →</a>
+  </div>
+</div>
+</section>
+
+<section class="steps-sticky-outer" id="stepsOuter">
+  <div class="steps-sticky-inner">
     <div style="text-align:center;margin-bottom:40px">
       <div class="section-tag">Как это работает</div>
       <h2 class="section-title">Четыре шага до первой выплаты</h2>
       <div class="section-desc" style="margin:0 auto">Старт за один вечер. Никакой бюрократии и долгих согласований.</div>
     </div>
-    <div class="steps-row">
-      <div class="step-card">
+    <div class="steps-row" id="stepsRow">
+      <div class="step-card" data-step="0">
         <div class="step-num">01</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
         <h3>Регистрация</h3>
         <p>Регистрируетесь как партнёр в Lumi CRM. Указываете компанию и формат сотрудничества.</p>
       </div>
-      <div class="step-arrow">→</div>
-      <div class="step-card">
+      <div class="step-arrow" data-sarrow="0">→</div>
+      <div class="step-card" data-step="1">
         <div class="step-num">02</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
         <h3>Реферальный код</h3>
         <p>Получаете персональный реферальный код и доступ в партнёрский кабинет с аналитикой.</p>
       </div>
-      <div class="step-arrow">→</div>
-      <div class="step-card">
+      <div class="step-arrow" data-sarrow="1">→</div>
+      <div class="step-card" data-step="2">
         <div class="step-num">03</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Приводите клиентов</h3>
         <p>Клиенты указывают ваш код при регистрации — система сама фиксирует привязку к вам.</p>
       </div>
-      <div class="step-arrow">→</div>
-      <div class="step-card">
+      <div class="step-arrow" data-sarrow="2">→</div>
+      <div class="step-card" data-step="3">
         <div class="step-num">04</div>
         <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
         <h3>Получаете 20%</h3>
         <p>Получаете 20% с их ежемесячных платежей автоматически. Выплаты прозрачные, по графику.</p>
       </div>
     </div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="/partners.html" class="btn btn-primary">Стать партнёром →</a>
+    </div>
   </div>
-
-  <div style="text-align:center;margin-top:48px">
-    <a href="/partners.html" class="btn btn-primary">Стать партнёром →</a>
-  </div>
-</div>
 </section>
 
 <section id="integrations">
@@ -991,6 +1031,7 @@ html{cursor:none}
 <div class="int-badge">Битрикс24</div>
 <div class="int-badge">API</div>
 <div class="int-badge">CSV/Excel</div>
+<div class="int-badge">Вахта.го</div>
 </div>
 
 <div class="compare-wrap">
@@ -1573,8 +1614,7 @@ function submitFeedback(e) {
   document.addEventListener('mouseenter', () => { cursor.style.opacity='1'; });
 
   function lerpCursor(){
-    cx += (mx-cx)*0.15;
-    cy += (my-cy)*0.15;
+    cx = mx; cy = my;
     cursor.style.left = cx+'px';
     cursor.style.top = cy+'px';
     cursorLabel.style.left = cx+'px';
@@ -1720,10 +1760,10 @@ function submitFeedback(e) {
       const frame = miFrames[index];
       gsap.fromTo(frame.querySelector('.mi-frame-title'),
         { y:18, opacity:0.4 },
-        { y:0, opacity:1, duration:0.6, ease:'power3.out' });
+        { y:0, opacity:1, duration:0.6, ease:'power3.out', overwrite:true });
       gsap.fromTo(frame.querySelector('.mi-frame-icon'),
         { scale:0.85, opacity:0.4 },
-        { scale:1, opacity:1, duration:0.6, ease:'power3.out' });
+        { scale:1, opacity:1, duration:0.6, ease:'power3.out', overwrite:true });
     }
 
     // Scroll activation
@@ -1768,26 +1808,74 @@ function submitFeedback(e) {
 </script>
 
 <script>
-// Chain scroll reveal
+// Chain sticky scroll
 (function(){
-  const chainBlocks = document.querySelectorAll('#chainBlocks .cblock');
-  const chainArrows = document.querySelectorAll('#chainBlocks .carrow');
-  if(!chainBlocks.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const delay = parseInt(entry.target.dataset.delay||0);
-        setTimeout(()=>{ entry.target.classList.add('revealed'); }, delay);
-        observer.unobserve(entry.target);
+  const outer = document.getElementById('chainOuter');
+  const fill = document.getElementById('chainFill');
+  const cblocks = Array.from(document.querySelectorAll('#chainBlocks .cblock'));
+  const carrows = Array.from(document.querySelectorAll('#chainBlocks .carrow'));
+  if(!outer || !cblocks.length) return;
+
+  const totalItems = cblocks.length; // 5
+
+  function updateChain(){
+    const rect = outer.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const scrollable = outer.offsetHeight - window.innerHeight;
+    const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+
+    if(fill) fill.style.width = (progress * 100) + '%';
+
+    const blockInterval = 1 / (totalItems + 0.5);
+
+    cblocks.forEach((block, i) => {
+      const threshold = i * blockInterval * 0.85;
+      if(progress >= threshold) {
+        block.classList.add('revealed');
       }
     });
-  }, {threshold:0.2});
-  chainBlocks.forEach(b => observer.observe(b));
-  // arrows appear after first block
-  const arrowObs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('revealed'),200); arrowObs.unobserve(e.target); }});
-  },{threshold:0.5});
-  chainArrows.forEach(a=>arrowObs.observe(a));
+
+    carrows.forEach((arrow, i) => {
+      const threshold = (i + 0.6) * blockInterval * 0.85;
+      if(progress >= threshold) {
+        arrow.classList.add('revealed');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateChain, { passive: true });
+  window.addEventListener('resize', updateChain);
+  updateChain();
+})();
+
+// Steps sticky scroll
+(function(){
+  const outer = document.getElementById('stepsOuter');
+  const scards = Array.from(document.querySelectorAll('#stepsRow .step-card'));
+  const sarrows = Array.from(document.querySelectorAll('#stepsRow .step-arrow'));
+  if(!outer || !scards.length) return;
+
+  const total = scards.length; // 4
+
+  function updateSteps(){
+    const rect = outer.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const scrollable = outer.offsetHeight - window.innerHeight;
+    const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+
+    const interval = 1 / (total + 0.3);
+
+    scards.forEach((card, i) => {
+      if(progress >= i * interval * 0.9) card.classList.add('revealed');
+    });
+    sarrows.forEach((arrow, i) => {
+      if(progress >= (i + 0.7) * interval * 0.9) arrow.classList.add('revealed');
+    });
+  }
+
+  window.addEventListener('scroll', updateSteps, { passive: true });
+  window.addEventListener('resize', updateSteps);
+  updateSteps();
 })();
 </script>
 
