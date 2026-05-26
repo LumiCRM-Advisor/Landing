@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проверь свой найм за 2 минуты — Lumi.CRM</title>
+<meta name="description" content="Узнай тип своего рекрутинга и получи персональный план автоматизации. Бесплатно.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;
+  --text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;
+  --accent-glow:rgba(111,63,129,0.25);--green:#10b981;--amber:#f59e0b;--red:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.logo{font-family:'Montserrat',sans-serif}
+
+/* ── NAV ── */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(2,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-size:18px;font-weight:800;color:var(--text)}
+.logo span{color:var(--accent2)}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--text)}
+
+/* ── DISCOUNT BADGE ── */
+.discount-badge{
+  position:fixed;top:72px;right:20px;z-index:99;
+  background:linear-gradient(135deg,#1a0a22,#2a1040);
+  border:1px solid var(--accent);border-radius:14px;
+  padding:10px 16px;text-align:center;
+  box-shadow:0 0 24px var(--accent-glow);
+  transition:transform .3s,box-shadow .3s;
+  display:none;
+}
+.discount-badge.visible{display:block}
+.discount-badge.pulse{animation:badge-pulse .4s ease}
+@keyframes badge-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12);box-shadow:0 0 40px var(--accent-glow)}}
+.discount-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.discount-value{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;
+  color:var(--accent2);line-height:1}
+.discount-sub{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* ── PROGRESS ── */
+.progress-wrap{
+  position:fixed;top:57px;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);z-index:98
+}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  width:0%;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* ── SCREENS ── */
+.screen{display:none;min-height:100vh;padding-top:72px}
+.screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* ── INTRO ── */
+.intro-wrap{max-width:560px;width:100%;padding:40px 24px;text-align:center}
+.intro-badge{display:inline-block;font-size:12px;font-weight:600;color:var(--accent2);
+  background:rgba(111,63,129,0.12);border:1px solid rgba(111,63,129,0.3);
+  border-radius:20px;padding:5px 14px;margin-bottom:20px;letter-spacing:.04em}
+.intro-title{font-size:clamp(28px,5vw,44px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.intro-title .highlight{color:var(--accent2)}
+.intro-sub{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px}
+.stats-row{display:flex;gap:16px;justify-content:center;margin-bottom:36px;flex-wrap:wrap}
+.stat-chip{background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:10px 18px;font-size:13px}
+.stat-chip strong{color:var(--accent2);font-family:'Montserrat',sans-serif}
+.btn-start{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--accent),#5a3369);
+  color:#fff;font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;
+  padding:16px 36px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 0 36px var(--accent-glow);transition:all .2s;position:relative;overflow:hidden
+}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 0 52px rgba(111,63,129,.45)}
+.btn-start .arrow{transition:transform .2s}
+.btn-start:hover .arrow{transform:translateX(4px)}
+.intro-note{margin-top:16px;font-size:12px;color:var(--muted)}
+
+/* ── QUESTION ── */
+.quiz-wrap{
+  max-width:640px;width:100%;padding:32px 24px;
+  animation:slide-in .35s cubic-bezier(.4,0,.2,1)
+}
+@keyframes slide-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slide-out{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-18px)}}
+.q-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.q-num{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.06em}
+.q-icon{font-size:24px}
+.q-text{font-family:'Montserrat',sans-serif;font-size:clamp(18px,3vw,24px);
+  font-weight:800;line-height:1.3;margin-bottom:8px}
+.q-hint{font-size:13px;color:var(--muted);margin-bottom:28px}
+
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.options-grid{grid-template-columns:1fr}}
+
+.option-btn{
+  position:relative;overflow:hidden;
+  background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+  padding:16px;text-align:left;cursor:pointer;
+  transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;
+  display:flex;flex-direction:column;gap:6px;
+}
+.option-btn:hover:not(.disabled){
+  border-color:var(--accent);background:rgba(111,63,129,0.08);transform:translateY(-2px);
+  box-shadow:0 4px 20px rgba(111,63,129,.15)
+}
+.option-btn.selected{
+  border-color:var(--accent2);background:rgba(111,63,129,0.18);
+  box-shadow:0 0 30px rgba(111,63,129,.25);
+}
+.option-btn.faded{opacity:.35;transform:scale(.97)}
+.option-btn.disabled{cursor:default}
+.opt-icon{font-size:22px}
+.opt-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.3}
+.opt-stat{font-size:11px;color:var(--muted);margin-top:2px;display:none}
+.opt-stat.visible{display:block;animation:fade-in .4s ease}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
+/* ripple */
+.ripple{
+  position:absolute;border-radius:50%;
+  background:rgba(166,123,190,0.35);
+  transform:scale(0);animation:ripple .55s ease-out forwards;
+  pointer-events:none
+}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+
+/* ── SOCIAL PROOF TOAST ── */
+.sp-toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:12px 20px;font-size:13px;color:var(--muted);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);white-space:nowrap;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:200;
+}
+.sp-toast.show{transform:translateX(-50%) translateY(0)}
+.sp-toast strong{color:var(--accent2)}
+
+/* ── DISCOUNT REVEAL (mid-quiz) ── */
+.discount-unlock{
+  background:rgba(111,63,129,0.1);border:1px solid rgba(111,63,129,0.3);
+  border-radius:10px;padding:10px 14px;margin-top:16px;
+  display:none;align-items:center;gap:10px;font-size:13px;
+  animation:fade-in .4s ease
+}
+.discount-unlock.visible{display:flex}
+.discount-unlock .du-icon{font-size:18px}
+.discount-unlock strong{color:var(--accent2);font-family:'Montserrat',sans-serif}
+
+/* ── RESULT ── */
+.result-wrap{max-width:600px;width:100%;padding:32px 24px;text-align:center;
+  animation:slide-in .4s ease}
+.result-type-badge{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:20px;padding:5px 16px;margin-bottom:20px
+}
+.result-icon{font-size:52px;margin-bottom:12px;display:block}
+.result-title{font-size:clamp(22px,4vw,32px);font-weight:900;line-height:1.2;margin-bottom:12px}
+.result-desc{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+
+.result-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
+@media(max-width:480px){.result-stats{grid-template-columns:1fr 1fr}}
+.r-stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 10px}
+.r-stat-val{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--accent2)}
+.r-stat-label{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* big discount block */
+.discount-block{
+  background:linear-gradient(135deg,rgba(111,63,129,.18),rgba(90,51,105,.1));
+  border:2px solid var(--accent);border-radius:18px;padding:24px;margin-bottom:24px;
+  position:relative;overflow:hidden
+}
+.discount-block::before{
+  content:'';position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+  width:200px;height:200px;background:var(--accent-glow);border-radius:50%;
+  filter:blur(60px);pointer-events:none
+}
+.db-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.db-value{font-family:'Montserrat',sans-serif;font-size:72px;font-weight:900;
+  color:var(--accent2);line-height:1;position:relative;z-index:1}
+.db-suffix{font-size:36px;color:var(--accent2)}
+.db-sub{font-size:13px;color:var(--muted);margin-top:6px}
+.db-timer{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  background:rgba(255,255,255,0.05);border-radius:8px;padding:6px 14px;
+  font-size:13px;color:var(--amber)
+}
+.timer-icon{font-size:15px}
+
+/* form */
+.result-form{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.form-input{
+  background:var(--card);border:1.5px solid var(--border);border-radius:10px;
+  padding:13px 16px;font-size:14px;color:var(--text);outline:none;
+  font-family:'Open Sans',sans-serif;transition:border-color .2s
+}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--muted)}
+.btn-cta{
+  background:linear-gradient(135deg,var(--accent),#5a3369);
+  color:#fff;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;
+  padding:16px;border-radius:12px;border:none;cursor:pointer;width:100%;
+  box-shadow:0 0 36px var(--accent-glow);transition:all .2s;position:relative;overflow:hidden
+}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 0 52px rgba(111,63,129,.45)}
+.btn-cta:disabled{opacity:.6;cursor:default;transform:none}
+.result-note{font-size:12px;color:var(--muted)}
+
+/* success state */
+.success-wrap{text-align:center;padding:32px 24px;max-width:480px;width:100%;
+  animation:slide-in .4s ease}
+.success-icon{font-size:56px;margin-bottom:16px;display:block}
+.success-title{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:900;margin-bottom:12px}
+.success-sub{font-size:15px;color:var(--muted);line-height:1.7}
+
+/* ── PARTICLES ── */
+.particle{
+  position:fixed;pointer-events:none;border-radius:50%;z-index:300;
+  animation:particle-fly .8s ease-out forwards
+}
+@keyframes particle-fly{
+  0%{transform:translate(0,0) scale(1);opacity:1}
+  100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}
+}
+
+/* ── CONFETTI ── */
+.confetti-piece{
+  position:fixed;pointer-events:none;z-index:300;border-radius:2px;
+  animation:confetti-fall 1.2s ease-out forwards
+}
+@keyframes confetti-fall{
+  0%{transform:translate(0,0) rotate(0deg);opacity:1}
+  100%{transform:translate(var(--cx),var(--cy)) rotate(var(--cr));opacity:0}
+}
+
+/* ── BG ORBS ── */
+.bg-orbs{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.25;animation:orb-float 10s ease-in-out infinite}
+.orb-1{width:400px;height:400px;background:var(--accent);top:-100px;left:-100px}
+.orb-2{width:300px;height:300px;background:#164194;bottom:-80px;right:-80px;animation-delay:4s}
+@keyframes orb-float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+.screen>*{position:relative;z-index:1}
+</style>
+</head>
+<body>
+
+<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="logo">Lumi<span>.CRM</span></a>
+  <a href="/" class="nav-back">← На главную</a>
+</nav>
+
+<!-- PROGRESS -->
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- DISCOUNT BADGE -->
+<div class="discount-badge" id="discountBadge">
+  <div class="discount-label">Ваша скидка</div>
+  <div class="discount-value" id="badgeDiscount">0%</div>
+  <div class="discount-sub">накоплено</div>
+</div>
+
+<!-- SOCIAL PROOF TOAST -->
+<div class="sp-toast" id="spToast"></div>
+
+<!-- ═══════════════ SCREEN: INTRO ═══════════════ -->
+<div class="screen active" id="screenIntro">
+  <div class="intro-wrap">
+    <div class="intro-badge">⚡ Займёт 2 минуты</div>
+    <h1 class="intro-title">Проверь свой найм<br><span class="highlight">и получи план роста</span></h1>
+    <p class="intro-sub">6 вопросов — и ты узнаешь тип своего рекрутинга,<br>где теряешь кандидатов и как это исправить.</p>
+    <div class="stats-row">
+      <div class="stat-chip">👥 <strong>1 847</strong> прошли квиз</div>
+      <div class="stat-chip">⏱ <strong>2 мин</strong> на прохождение</div>
+      <div class="stat-chip">🎁 До <strong>30%</strong> скидки</div>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">
+      Начать квиз <span class="arrow">→</span>
+    </button>
+    <p class="intro-note">Без регистрации · Результат сразу · Персональный план в подарок</p>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREEN: QUESTION ═══════════════ -->
+<div class="screen" id="screenQuestion">
+  <div class="quiz-wrap" id="quizWrap">
+    <div class="q-meta">
+      <span class="q-icon" id="qIcon"></span>
+      <span class="q-num" id="qNum">ВОПРОС 1 / 6</span>
+    </div>
+    <div class="q-text" id="qText"></div>
+    <div class="q-hint" id="qHint"></div>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="discount-unlock" id="discountUnlock">
+      <span class="du-icon">🔓</span>
+      <span>Ответ разблокировал <strong id="unlockAmount"></strong> скидки</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREEN: RESULT ═══════════════ -->
+<div class="screen" id="screenResult">
+  <div class="result-wrap" id="resultWrap">
+    <div class="result-type-badge" id="resultBadge"></div>
+    <span class="result-icon" id="resultIcon"></span>
+    <h2 class="result-title" id="resultTitle"></h2>
+    <p class="result-desc" id="resultDesc"></p>
+
+    <div class="result-stats" id="resultStats"></div>
+
+    <div class="discount-block">
+      <div class="db-label">Вы накопили скидку</div>
+      <div class="db-value"><span id="finalDiscount">0</span><span class="db-suffix">%</span></div>
+      <div class="db-sub" id="discountNote"></div>
+      <div class="db-timer">
+        <span class="timer-icon">⏳</span>
+        Предложение истекает через <strong id="countdown">23:59:47</strong>
+      </div>
+    </div>
+
+    <form class="result-form" id="resultForm" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <input class="form-input" type="text" placeholder="Ваше имя" id="fName" required>
+        <input class="form-input" type="text" placeholder="Компания" id="fCompany">
+      </div>
+      <input class="form-input" type="email" placeholder="Email для плана автоматизации" id="fEmail" required>
+      <button class="btn-cta" type="submit" id="btnCta">
+        Получить план + забрать скидку →
+      </button>
+    </form>
+    <p class="result-note">Никакого спама. Только ваш персональный план.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREEN: SUCCESS ═══════════════ -->
+<div class="screen" id="screenSuccess">
+  <div class="success-wrap">
+    <span class="success-icon">🎉</span>
+    <h2 class="success-title">Готово! Ждите письмо</h2>
+    <p class="success-sub">Мы отправим персональный план автоматизации<br>на ваш email в течение 15 минут.<br><br>
+      <strong style="color:var(--accent2)">Ваша скидка зафиксирована.</strong> Наш менеджер свяжется с вами.</p>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// QUIZ DATA
+// ══════════════════════════════════════════════
+const QUESTIONS = [
+  {
+    icon: '📊', text: 'Сколько вакансий вы закрываете в месяц?',
+    hint: 'Примерное количество за последние 3 месяца',
+    options: [
+      { icon: '🌱', text: 'Меньше 5', score: 1, discount: 3, stat: '43% компаний начинают здесь' },
+      { icon: '📈', text: '5–20 вакансий', score: 2, discount: 4, stat: '68% HR-менеджеров в этой зоне' },
+      { icon: '🚀', text: '20–100 вакансий', score: 3, discount: 5, stat: 'Тут начинается настоящий хаос' },
+      { icon: '🏭', text: 'Более 100 в месяц', score: 4, discount: 6, stat: 'Только 12% компаний справляются без ATS' },
+    ]
+  },
+  {
+    icon: '🗂️', text: 'Как вы ведёте базу кандидатов?',
+    hint: 'Честно — где живут ваши кандидаты прямо сейчас',
+    options: [
+      { icon: '📋', text: 'Excel / Google Таблицы', score: 1, discount: 5, stat: '61% рекрутеров теряют до 30% кандидатов в таблицах' },
+      { icon: '📧', text: 'Почта и переписки', score: 1, discount: 5, stat: 'Средняя потеря контекста — 2,4 дня на кандидата' },
+      { icon: '💼', text: 'ATS или CRM-система', score: 4, discount: 4, stat: 'Топ-15% рекрутеров — добро пожаловать!' },
+      { icon: '🧠', text: 'В голове и заметках', score: 1, discount: 6, stat: '78% «в голове» теряют оффер к конкурентам' },
+    ]
+  },
+  {
+    icon: '⏱️', text: 'Сколько времени уходит на скрининг одного резюме?',
+    hint: 'От получения до решения «интересно / не интересно»',
+    options: [
+      { icon: '⚡', text: 'До 2 минут', score: 4, discount: 4, stat: 'AI-рекрутеры работают именно так' },
+      { icon: '☕', text: '2–5 минут', score: 3, discount: 4, stat: 'Неплохо — можно ускорить в 3 раза' },
+      { icon: '😓', text: '5–15 минут', score: 2, discount: 5, stat: 'При 50 резюме — это 12+ часов в неделю' },
+      { icon: '😱', text: 'Больше 15 минут', score: 1, discount: 6, stat: 'Это ~40 часов в месяц только на скрининг' },
+    ]
+  },
+  {
+    icon: '💔', text: 'Теряли хорошего кандидата из-за медленной реакции?',
+    hint: 'Когда кандидат ушёл к конкурентам, пока вы думали',
+    options: [
+      { icon: '😤', text: 'Да, постоянно', score: 1, discount: 6, stat: 'Компании теряют до 23% лучших кандидатов так' },
+      { icon: '🤷', text: 'Иногда случается', score: 2, discount: 5, stat: 'Каждая такая потеря = 3-5 зарплат рекрутера' },
+      { icon: '🙈', text: 'Редко, но бывает', score: 3, discount: 4, stat: 'Хорошая ситуация — есть куда расти' },
+      { icon: '✅', text: 'Нет, успеваем', score: 4, discount: 3, stat: 'Отличная реакция! Вы в топ-10%' },
+    ]
+  },
+  {
+    icon: '✍️', text: 'Как создаёте описание вакансии?',
+    hint: 'Каждый раз когда открывается новая позиция',
+    options: [
+      { icon: '📝', text: 'Пишу с нуля каждый раз', score: 1, discount: 5, stat: 'Это ~45 минут на каждую вакансию' },
+      { icon: '📌', text: 'Копирую с прошлой', score: 2, discount: 4, stat: '34% вакансий теряют актуальность за 2 недели' },
+      { icon: '🤖', text: 'Использую AI', score: 4, discount: 4, stat: 'Вы уже в авангарде — AI-рекрутинг работает!' },
+      { icon: '😶', text: 'Нет единого процесса', score: 1, discount: 6, stat: 'Без шаблона — каждая вакансия теряет 40% кандидатов' },
+    ]
+  },
+  {
+    icon: '🌐', text: 'Сколько источников поиска используете одновременно?',
+    hint: 'hh.ru, SuperJob, соцсети, реферальная программа и т.д.',
+    options: [
+      { icon: '🎯', text: 'Только один (hh.ru)', score: 1, discount: 5, stat: 'Mono-канал = упускаете 60% рынка кандидатов' },
+      { icon: '📡', text: '2–3 источника', score: 3, discount: 4, stat: 'Хорошее начало — ещё есть точки роста' },
+      { icon: '🔀', text: '4 и более', score: 4, discount: 4, stat: 'Мультиканал: вы работаете как профи!' },
+      { icon: '🤔', text: 'Не считали', score: 2, discount: 5, stat: '72% компаний не знают откуда приходят лучшие кандидаты' },
+    ]
+  },
+];
+
+const RESULTS = {
+  chaos: {
+    badge: '🔥 Рекрутинговый хаос',
+    badgeColor: '#ef4444',
+    icon: '🔥',
+    title: 'У вас «Рекрутинговый хаос»',
+    desc: 'Вы делаете всё возможное в ручном режиме, но система держится на героических усилиях. Потенциал роста — огромный: автоматизация даст вам в 3–5 раз больше при тех же ресурсах.',
+    stats: [
+      { val: '~40%', label: 'Кандидатов теряется' },
+      { val: '3×', label: 'Возможный рост скорости' },
+      { val: '8 ч/нед', label: 'Можно сэкономить' },
+    ],
+    discountNote: 'Мы даём максимальную скидку — потому что видим, как сильно вам нужна автоматизация прямо сейчас.',
+    minScore: 6, maxScore: 11,
+  },
+  manual: {
+    badge: '⚙️ Ручной режим',
+    badgeColor: '#f59e0b',
+    icon: '⚙️',
+    title: 'Вы работаете в «Ручном режиме»',
+    desc: 'Процессы есть, но они держатся на людях, не на системе. Один больничный — и воронка останавливается. Пора автоматизировать рутину и освободить команду для настоящей работы.',
+    stats: [
+      { val: '~25%', label: 'Кандидатов теряется' },
+      { val: '2×', label: 'Возможный рост скорости' },
+      { val: '5 ч/нед', label: 'Можно сэкономить' },
+    ],
+    discountNote: 'Хорошая база + правильный инструмент — и вы выйдете на новый уровень очень быстро.',
+    minScore: 12, maxScore: 16,
+  },
+  growing: {
+    badge: '📈 Растущая система',
+    badgeColor: '#6f3f81',
+    icon: '📈',
+    title: 'У вас «Растущая система»',
+    desc: 'Вы явно думаете о процессах — и это уже выгодно отличает вас. Несколько точечных улучшений дадут кратный результат: ускорение скрининга, единая база, аналитика воронки.',
+    stats: [
+      { val: '~15%', label: 'Кандидатов теряется' },
+      { val: '1.5×', label: 'Возможный рост скорости' },
+      { val: '3 ч/нед', label: 'Можно сэкономить' },
+    ],
+    discountNote: 'Вы уже хорошо работаете — скидка как бонус за правильный путь развития.',
+    minScore: 17, maxScore: 21,
+  },
+  pro: {
+    badge: '🚀 Почти идеально',
+    badgeColor: '#10b981',
+    icon: '🚀',
+    title: 'Вы «Почти идеальный» рекрутинг',
+    desc: 'Серьёзно — вы молодцы. Есть одна-две точки роста, которые дадут вам ещё +20–30% к эффективности. Lumi поможет их найти и закрыть.',
+    stats: [
+      { val: '<5%', label: 'Кандидатов теряется' },
+      { val: '+30%', label: 'Возможный рост эффективности' },
+      { val: '2 ч/нед', label: 'Можно сэкономить' },
+    ],
+    discountNote: 'Скидка для тех, кто уже понимает ценность хорошего инструмента.',
+    minScore: 22, maxScore: 24,
+  },
+};
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let currentQ = 0;
+let totalScore = 0;
+let totalDiscount = 0;
+let answered = false;
+let countdownInterval = null;
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+function startQuiz() {
+  showScreen('screenQuestion');
+  document.getElementById('discountBadge').classList.add('visible');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  answered = false;
+
+  // progress
+  const pct = (currentQ / QUESTIONS.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+
+  // meta
+  document.getElementById('qIcon').textContent = q.icon;
+  document.getElementById('qNum').textContent = `ВОПРОС ${currentQ + 1} / ${QUESTIONS.length}`;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('qHint').textContent = q.hint;
+
+  // hide unlock
+  document.getElementById('discountUnlock').classList.remove('visible');
+
+  // options
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `
+      <span class="opt-icon">${opt.icon}</span>
+      <span class="opt-text">${opt.text}</span>
+      <span class="opt-stat" id="stat-${i}">${opt.stat}</span>
+    `;
+    btn.addEventListener('click', (e) => selectOption(e, i, opt));
+    grid.appendChild(btn);
+  });
+
+  // animate in
+  const wrap = document.getElementById('quizWrap');
+  wrap.style.animation = 'none';
+  void wrap.offsetWidth;
+  wrap.style.animation = 'slide-in .35s cubic-bezier(.4,0,.2,1)';
+}
+
+function selectOption(e, index, opt) {
+  if (answered) return;
+  answered = true;
+
+  const btns = document.querySelectorAll('.option-btn');
+
+  // ripple
+  spawnRipple(e, btns[index]);
+  // particles
+  spawnParticles(e.clientX, e.clientY);
+
+  // mark selected / faded
+  btns.forEach((b, i) => {
+    b.classList.add('disabled');
+    if (i === index) {
+      b.classList.add('selected');
+    } else {
+      b.classList.add('faded');
+    }
+  });
+
+  // show stat
+  document.getElementById(`stat-${index}`).classList.add('visible');
+
+  // accumulate
+  totalScore += opt.score;
+  totalDiscount += opt.discount;
+  updateDiscountBadge(opt.discount);
+
+  // show social proof toast
+  showToast(opt.stat);
+
+  // advance after delay
+  setTimeout(() => {
+    currentQ++;
+    if (currentQ < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 1400);
+}
+
+// ══════════════════════════════════════════════
+// DISCOUNT
+// ══════════════════════════════════════════════
+function updateDiscountBadge(added) {
+  document.getElementById('badgeDiscount').textContent = totalDiscount + '%';
+
+  const badge = document.getElementById('discountBadge');
+  badge.classList.remove('pulse');
+  void badge.offsetWidth;
+  badge.classList.add('pulse');
+
+  const unlock = document.getElementById('discountUnlock');
+  document.getElementById('unlockAmount').textContent = '+' + added + '%';
+  unlock.classList.add('visible');
+}
+
+// ══════════════════════════════════════════════
+// RESULT
+// ══════════════════════════════════════════════
+function showResult() {
+  document.getElementById('progressBar').style.width = '100%';
+  showScreen('screenResult');
+
+  // determine result type
+  let type = 'chaos';
+  if (totalScore >= 22) type = 'pro';
+  else if (totalScore >= 17) type = 'growing';
+  else if (totalScore >= 12) type = 'manual';
+
+  const r = RESULTS[type];
+
+  document.getElementById('resultBadge').textContent = r.badge;
+  document.getElementById('resultBadge').style.background = r.badgeColor + '22';
+  document.getElementById('resultBadge').style.color = r.badgeColor;
+  document.getElementById('resultBadge').style.border = `1px solid ${r.badgeColor}55`;
+  document.getElementById('resultIcon').textContent = r.icon;
+  document.getElementById('resultTitle').textContent = r.title;
+  document.getElementById('resultDesc').textContent = r.desc;
+  document.getElementById('discountNote').textContent = r.discountNote;
+
+  // stats
+  const statsEl = document.getElementById('resultStats');
+  statsEl.innerHTML = r.stats.map(s => `
+    <div class="r-stat">
+      <div class="r-stat-val">${s.val}</div>
+      <div class="r-stat-label">${s.label}</div>
+    </div>
+  `).join('');
+
+  // animate discount counter
+  animateCounter('finalDiscount', 0, totalDiscount, 1200);
+
+  // confetti
+  setTimeout(spawnConfetti, 300);
+
+  // timer
+  startCountdown();
+}
+
+function animateCounter(id, from, to, duration) {
+  const el = document.getElementById(id);
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function startCountdown() {
+  let secs = 23 * 3600 + 59 * 60 + 47;
+  function tick() {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    document.getElementById('countdown').textContent =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (secs > 0) secs--;
+  }
+  tick();
+  countdownInterval = setInterval(tick, 1000);
+}
+
+// ══════════════════════════════════════════════
+// FORM
+// ══════════════════════════════════════════════
+async function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnCta');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const name = document.getElementById('fName').value;
+  const company = document.getElementById('fCompany').value;
+  const email = document.getElementById('fEmail').value;
+
+  // determine result type string
+  let type = 'chaos';
+  if (totalScore >= 22) type = 'pro';
+  else if (totalScore >= 17) type = 'growing';
+  else if (totalScore >= 12) type = 'manual';
+
+  try {
+    await fetch('https://api.lumicrm.ru/api/v1/leads/intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, company, email, source: 'quiz', quiz_type: type, quiz_score: totalScore, quiz_discount: totalDiscount }),
+    }).catch(() => {});
+  } catch {}
+
+  spawnConfetti();
+  showScreen('screenSuccess');
+  if (countdownInterval) clearInterval(countdownInterval);
+}
+
+// ══════════════════════════════════════════════
+// FX: RIPPLE
+// ══════════════════════════════════════════════
+function spawnRipple(e, btn) {
+  const rect = btn.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const rip = document.createElement('span');
+  rip.className = 'ripple';
+  rip.style.cssText = `width:${rect.width}px;height:${rect.width}px;left:${x - rect.width/2}px;top:${y - rect.width/2}px`;
+  btn.appendChild(rip);
+  setTimeout(() => rip.remove(), 600);
+}
+
+// ══════════════════════════════════════════════
+// FX: PARTICLES
+// ══════════════════════════════════════════════
+function spawnParticles(x, y) {
+  const colors = ['#a67bbe','#6f3f81','#c4a8d4','#5a3369','#e0c8f0'];
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 4 + Math.random() * 6;
+    const angle = (Math.PI * 2 * i) / 14 + Math.random() * 0.5;
+    const dist = 40 + Math.random() * 60;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${x}px;top:${y}px;
+      --tx:${Math.cos(angle)*dist}px;
+      --ty:${Math.sin(angle)*dist}px;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+  }
+}
+
+// ══════════════════════════════════════════════
+// FX: CONFETTI
+// ══════════════════════════════════════════════
+function spawnConfetti() {
+  const colors = ['#a67bbe','#6f3f81','#f59e0b','#10b981','#e0c8f0','#fff'];
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    const size = 6 + Math.random() * 8;
+    const x = Math.random() * window.innerWidth;
+    const cx = (Math.random() - 0.5) * 300;
+    const cy = 200 + Math.random() * 400;
+    c.style.cssText = `
+      width:${size}px;height:${size * (Math.random() > 0.5 ? 1 : 2.5)}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${x}px;top:-20px;
+      --cx:${cx}px;--cy:${cy}px;--cr:${Math.random()*720}deg;
+      animation-duration:${0.8+Math.random()*0.8}s;
+      animation-delay:${Math.random()*0.4}s;
+    `;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1800);
+  }
+}
+
+// ══════════════════════════════════════════════
+// FX: TOAST
+// ══════════════════════════════════════════════
+let toastTimer = null;
+function showToast(text) {
+  const el = document.getElementById('spToast');
+  if (toastTimer) clearTimeout(toastTimer);
+  el.innerHTML = `💡 <strong>${text.split(':')[0]}</strong>${text.includes(':') ? ': ' + text.split(':')[1] : ''}`;
+  el.classList.add('show');
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// ══════════════════════════════════════════════
+// SCREEN SWITCH
+// ══════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

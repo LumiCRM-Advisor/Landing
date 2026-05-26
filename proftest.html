@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Профтест: готов ли ты к смене профессии — Lumi.CRM</title>
+<meta name="description" content="Узнай свой тип готовности к смене профессии за 2 минуты. 97% точность оценки. Персональный план действий.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020a0a;--surface:#0d0d10;--card:#111116;--border:#1c1c24;
+  --text:#f4f4f7;--muted:#a0a0ab;--accent:#6f3f81;--accent2:#a67bbe;
+  --accent-glow:rgba(111,63,129,0.25);--green:#10b981;--amber:#f59e0b;
+  --blue:#164194;--red:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.logo{font-family:'Montserrat',sans-serif}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(2,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-size:18px;font-weight:800;color:var(--text)}
+.logo span{color:var(--accent2)}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--text)}
+
+/* ── SCORE BADGE (вместо скидки — очки точности) ── */
+.score-badge{
+  position:fixed;top:72px;right:20px;z-index:99;
+  background:linear-gradient(135deg,#0a1a0a,#102010);
+  border:1px solid var(--green);border-radius:14px;
+  padding:10px 16px;text-align:center;
+  box-shadow:0 0 24px rgba(16,185,129,0.2);
+  transition:transform .3s;display:none;
+}
+.score-badge.visible{display:block}
+.score-badge.pulse{animation:badge-pulse .4s ease}
+@keyframes badge-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.sb-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.sb-value{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--green);line-height:1}
+.sb-sub{font-size:10px;color:var(--muted);margin-top:2px}
+
+.progress-wrap{position:fixed;top:57px;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);z-index:98}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--green),#34d399);width:0%;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+.screen{display:none;min-height:100vh;padding-top:72px}
+.screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* ── INTRO ── */
+.intro-wrap{max-width:580px;width:100%;padding:40px 24px;text-align:center}
+.intro-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  color:var(--green);background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);
+  border-radius:20px;padding:5px 14px;margin-bottom:20px;letter-spacing:.04em}
+.intro-title{font-size:clamp(26px,5vw,42px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.intro-title .hl{background:linear-gradient(90deg,var(--accent2),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.intro-sub{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:28px}
+.accuracy-block{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:14px 20px;margin-bottom:28px
+}
+.accuracy-num{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:900;color:var(--green)}
+.accuracy-text{text-align:left;font-size:13px;color:var(--muted);line-height:1.4}
+.accuracy-text strong{color:var(--text);display:block;font-size:14px}
+.profiles-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.profile-chip{background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:8px 14px;font-size:13px;color:var(--muted)}
+.profile-chip .pc-icon{margin-right:5px}
+.btn-start{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,#0d7a52,#059669);
+  color:#fff;font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;
+  padding:16px 36px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 0 36px rgba(16,185,129,0.3);transition:all .2s;
+}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 0 52px rgba(16,185,129,.45)}
+.btn-start .arrow{transition:transform .2s}
+.btn-start:hover .arrow{transform:translateX(4px)}
+.intro-note{margin-top:14px;font-size:12px;color:var(--muted)}
+
+/* ── QUESTION ── */
+.quiz-wrap{max-width:660px;width:100%;padding:32px 24px;
+  animation:slide-in .35s cubic-bezier(.4,0,.2,1)}
+@keyframes slide-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.q-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.q-num{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.06em}
+.q-icon{font-size:26px}
+.q-text{font-family:'Montserrat',sans-serif;font-size:clamp(18px,3vw,24px);
+  font-weight:800;line-height:1.3;margin-bottom:6px}
+.q-hint{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.options-grid{grid-template-columns:1fr}}
+
+.option-btn{
+  position:relative;overflow:hidden;
+  background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+  padding:16px;text-align:left;cursor:pointer;
+  transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;
+  display:flex;flex-direction:column;gap:6px;
+}
+.option-btn:hover:not(.disabled){
+  border-color:var(--green);background:rgba(16,185,129,0.07);transform:translateY(-2px);
+  box-shadow:0 4px 20px rgba(16,185,129,.12)
+}
+.option-btn.selected{border-color:var(--green);background:rgba(16,185,129,0.14);
+  box-shadow:0 0 28px rgba(16,185,129,.2)}
+.option-btn.faded{opacity:.3;transform:scale(.97)}
+.option-btn.disabled{cursor:default}
+.opt-icon{font-size:22px}
+.opt-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.3}
+.opt-stat{font-size:11px;color:var(--muted);margin-top:2px;display:none}
+.opt-stat.visible{display:block;animation:fade-in .4s ease}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
+.ripple{position:absolute;border-radius:50%;
+  background:rgba(16,185,129,0.3);
+  transform:scale(0);animation:ripple .55s ease-out forwards;pointer-events:none}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+
+/* ── SCORE UNLOCK ── */
+.score-unlock{
+  background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);
+  border-radius:10px;padding:10px 14px;margin-top:16px;
+  display:none;align-items:center;gap:10px;font-size:13px;animation:fade-in .4s ease
+}
+.score-unlock.visible{display:flex}
+.score-unlock strong{color:var(--green)}
+
+/* ── TOAST ── */
+.sp-toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:12px 20px;font-size:13px;color:var(--muted);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);white-space:nowrap;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:200;max-width:90vw;
+  white-space:normal;text-align:center;
+}
+.sp-toast.show{transform:translateX(-50%) translateY(0)}
+.sp-toast strong{color:var(--accent2)}
+
+/* ── RESULT ── */
+.result-wrap{max-width:620px;width:100%;padding:32px 24px;text-align:center;animation:slide-in .4s ease}
+.result-type-badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;border-radius:20px;padding:5px 16px;margin-bottom:16px}
+.result-icon{font-size:56px;margin-bottom:10px;display:block}
+.result-title{font-size:clamp(20px,4vw,30px);font-weight:900;line-height:1.2;margin-bottom:12px}
+.result-desc{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px}
+
+.result-meter{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px;margin-bottom:20px;text-align:left}
+.meter-label{font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.meter-bar-wrap{background:rgba(255,255,255,0.06);border-radius:6px;height:10px;overflow:hidden;margin-bottom:8px}
+.meter-bar{height:100%;border-radius:6px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0}
+.meter-value{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--green)}
+.meter-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+.result-traits{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;text-align:left}
+@media(max-width:480px){.result-traits{grid-template-columns:1fr}}
+.trait-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+.trait-icon{font-size:18px;margin-bottom:6px}
+.trait-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.trait-desc{font-size:12px;color:var(--muted);line-height:1.4}
+
+.tg-block{
+  background:linear-gradient(135deg,rgba(0,136,204,0.12),rgba(0,100,180,0.08));
+  border:1px solid rgba(0,136,204,0.3);border-radius:16px;padding:20px;margin-bottom:20px
+}
+.tg-title{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px}
+.tg-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.tg-actions{display:flex;flex-direction:column;gap:10px}
+.btn-portal{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:transparent;color:var(--accent2);font-family:'Montserrat',sans-serif;
+  font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;
+  border:1px solid rgba(111,63,129,0.5);cursor:pointer;text-decoration:none;transition:all .2s;
+  width:100%
+}
+.btn-portal:hover{background:rgba(111,63,129,0.12);border-color:var(--accent2);color:#fff}
+.btn-tg{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:#0088cc;color:#fff;font-family:'Montserrat',sans-serif;
+  font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;
+  border:none;cursor:pointer;text-decoration:none;transition:all .2s;width:100%
+}
+.btn-tg:hover{background:#007ab8;transform:translateY(-1px)}
+
+.result-form{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+.form-input{
+  background:var(--card);border:1.5px solid var(--border);border-radius:10px;
+  padding:13px 16px;font-size:14px;color:var(--text);outline:none;
+  font-family:'Open Sans',sans-serif;transition:border-color .2s
+}
+.form-input:focus{border-color:var(--green)}
+.form-input::placeholder{color:var(--muted)}
+.btn-cta{
+  background:linear-gradient(135deg,#0d7a52,#059669);
+  color:#fff;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;
+  padding:15px;border-radius:12px;border:none;cursor:pointer;width:100%;
+  box-shadow:0 0 30px rgba(16,185,129,.25);transition:all .2s
+}
+.btn-cta:hover{transform:translateY(-2px)}
+.btn-cta:disabled{opacity:.6;cursor:default;transform:none}
+.result-note{font-size:12px;color:var(--muted)}
+.or-divider{font-size:12px;color:var(--muted);margin:14px 0;position:relative}
+.or-divider::before,.or-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border)}
+.or-divider::before{left:0}.or-divider::after{right:0}
+
+/* ── SUCCESS ── */
+.success-wrap{text-align:center;padding:32px 24px;max-width:480px;width:100%;animation:slide-in .4s ease}
+.success-icon{font-size:56px;margin-bottom:16px;display:block}
+.success-title{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:900;margin-bottom:12px}
+.success-sub{font-size:15px;color:var(--muted);line-height:1.7}
+
+/* ── PARTICLES / FX ── */
+.particle{position:fixed;pointer-events:none;border-radius:50%;z-index:300;
+  animation:particle-fly .8s ease-out forwards}
+@keyframes particle-fly{0%{transform:translate(0,0) scale(1);opacity:1}
+  100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+.confetti-piece{position:fixed;pointer-events:none;z-index:300;border-radius:2px;
+  animation:confetti-fall 1.2s ease-out forwards}
+@keyframes confetti-fall{0%{transform:translate(0,0) rotate(0deg);opacity:1}
+  100%{transform:translate(var(--cx),var(--cy)) rotate(var(--cr));opacity:0}}
+
+.bg-orbs{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.2;animation:orb-float 10s ease-in-out infinite}
+.orb-1{width:400px;height:400px;background:#0d7a52;top:-100px;right:-100px}
+.orb-2{width:300px;height:300px;background:var(--accent);bottom:-80px;left:-80px;animation-delay:5s}
+@keyframes orb-float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+.screen>*{position:relative;z-index:1}
+</style>
+</head>
+<body>
+
+<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+<nav class="nav">
+  <a href="/" class="logo">Lumi<span>.CRM</span></a>
+  <a href="/" class="nav-back">← На главную</a>
+</nav>
+
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="score-badge" id="scoreBadge">
+  <div class="sb-label">Точность оценки</div>
+  <div class="sb-value" id="badgeScore">0%</div>
+  <div class="sb-sub">накоплено</div>
+</div>
+
+<div class="sp-toast" id="spToast"></div>
+
+<!-- ══ INTRO ══ -->
+<div class="screen active" id="screenIntro">
+  <div class="intro-wrap">
+    <div class="intro-badge">🎯 97% точность оценки</div>
+    <h1 class="intro-title">Готов ли ты к смене<br><span class="hl">профессии?</span></h1>
+    <p class="intro-sub">Честный тест — не про «что ты хочешь», а про «что ты можешь».<br>7 вопросов. Без воды. Реальный анализ твоей ситуации.</p>
+    <div class="accuracy-block">
+      <div class="accuracy-num">97%</div>
+      <div class="accuracy-text">
+        <strong>Точность профиля</strong>
+        Методология основана на 3 000+ реальных случаях смены профессии
+      </div>
+    </div>
+    <div class="profiles-row">
+      <div class="profile-chip"><span class="pc-icon">🔥</span>Готов прямо сейчас</div>
+      <div class="profile-chip"><span class="pc-icon">⏳</span>Нужна подготовка</div>
+      <div class="profile-chip"><span class="pc-icon">🔍</span>Ещё не определился</div>
+      <div class="profile-chip"><span class="pc-icon">🛡️</span>Зона комфорта</div>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">
+      Пройти профтест <span class="arrow">→</span>
+    </button>
+    <p class="intro-note">Анонимно · Результат сразу · Персональный план действий</p>
+  </div>
+</div>
+
+<!-- ══ QUESTION ══ -->
+<div class="screen" id="screenQuestion">
+  <div class="quiz-wrap" id="quizWrap">
+    <div class="q-meta">
+      <span class="q-icon" id="qIcon"></span>
+      <span class="q-num" id="qNum">ВОПРОС 1 / 7</span>
+    </div>
+    <div class="q-text" id="qText"></div>
+    <div class="q-hint" id="qHint"></div>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="score-unlock" id="scoreUnlock">
+      <span>🎯</span>
+      <span>Ответ добавил <strong id="unlockAmount"></strong> к точности оценки</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULT ══ -->
+<div class="screen" id="screenResult">
+  <div class="result-wrap">
+    <div class="result-type-badge" id="resultBadge"></div>
+    <span class="result-icon" id="resultIcon"></span>
+    <h2 class="result-title" id="resultTitle"></h2>
+    <p class="result-desc" id="resultDesc"></p>
+
+    <div class="result-meter">
+      <div class="meter-label">Индекс готовности к смене</div>
+      <div class="meter-bar-wrap"><div class="meter-bar" id="meterBar"></div></div>
+      <div class="meter-value" id="meterValue">0%</div>
+      <div class="meter-sub" id="meterSub"></div>
+    </div>
+
+    <div class="result-traits" id="resultTraits"></div>
+
+    <div class="tg-block">
+      <div class="tg-title">📲 Получи полный разбор в Telegram-боте</div>
+      <div class="tg-desc" id="tgDesc">
+        @ProfsTream_bot задаст ещё несколько точечных вопросов и выдаст детальный план: какие навыки прокачать, куда идти, с чего начать. Бесплатно.
+      </div>
+      <div class="tg-actions">
+        <a class="btn-tg" href="https://t.me/ProfsTream_bot" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.03 9.565c-.148.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.893.656z"/></svg>
+          Открыть @ProfsTream_bot
+        </a>
+        <a class="btn-portal" href="https://app.lumicrm.ru/portal" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Смотреть вакансии и курсы →
+        </a>
+      </div>
+    </div>
+
+    <div class="or-divider">или оставь контакт — мы пришлём план на email</div>
+
+    <form class="result-form" id="resultForm" onsubmit="submitForm(event)">
+      <input class="form-input" type="text" placeholder="Ваше имя" id="fName" required>
+      <input class="form-input" type="email" placeholder="Email для персонального плана" id="fEmail" required>
+      <button class="btn-cta" type="submit" id="btnCta">
+        Получить план на email →
+      </button>
+    </form>
+    <p class="result-note">Без спама. Только ваш персональный план смены профессии.</p>
+  </div>
+</div>
+
+<!-- ══ SUCCESS ══ -->
+<div class="screen" id="screenSuccess">
+  <div class="success-wrap">
+    <span class="success-icon">✅</span>
+    <h2 class="success-title">Отлично! План отправлен</h2>
+    <p class="success-sub">Проверьте email — мы отправим персональный план действий.<br><br>
+      А пока — пройдите полный разбор в боте:<br>
+      <a href="https://t.me/ProfsTream_bot" target="_blank"
+         style="color:var(--accent2);font-weight:700">@ProfsTream_bot</a>
+      <br><br>Или смотрите <a href="https://app.lumicrm.ru/portal" target="_blank"
+         style="color:var(--green);font-weight:700">вакансии и курсы →</a>
+    </p>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    icon: '😤', text: 'Как ты себя чувствуешь на текущей работе уже долгое время?',
+    hint: 'Будь честен — это ключевой параметр оценки',
+    options: [
+      { icon: '🔥', text: 'Каждое утро — хочется уволиться', score: 4, accuracy: 16, stat: '83% таких людей меняют профессию в течение года' },
+      { icon: '😐', text: 'Нормально, но без огня и смысла', score: 3, accuracy: 14, stat: 'Это называется «тихое увольнение» — опасный сигнал' },
+      { icon: '🤔', text: 'Есть моменты недовольства, но терплю', score: 2, accuracy: 12, stat: '67% таких людей жалеют, что не ушли раньше' },
+      { icon: '😌', text: 'В целом всё устраивает', score: 1, accuracy: 10, stat: 'Важно понять: это комфорт или зона безопасности?' },
+    ]
+  },
+  {
+    icon: '⏰', text: 'Сколько лет ты уже работаешь в своей текущей сфере?',
+    hint: 'Опыт — твой актив при смене профессии',
+    options: [
+      { icon: '🌱', text: 'Меньше 2 лет', score: 4, accuracy: 15, stat: 'Отлично — чем раньше, тем легче переход' },
+      { icon: '📅', text: '2–5 лет', score: 3, accuracy: 14, stat: 'Есть навыки, которые можно перенести' },
+      { icon: '📆', text: '5–10 лет', score: 2, accuracy: 13, stat: 'Сложнее, но десятки тысяч людей сделали это' },
+      { icon: '🏆', text: 'Более 10 лет', score: 1, accuracy: 12, stat: 'Твой опыт = ценный актив в новой сфере' },
+    ]
+  },
+  {
+    icon: '💡', text: 'Есть ли у тебя направление, в которое хочешь перейти?',
+    hint: 'Конкретность мечты — важный маркер готовности',
+    options: [
+      { icon: '🎯', text: 'Да, точно знаю куда', score: 4, accuracy: 16, stat: 'Конкретная цель повышает шанс успеха на 74%' },
+      { icon: '🗺️', text: 'Есть 2–3 варианта, думаю', score: 3, accuracy: 14, stat: 'Хорошая позиция — нужно сузить' },
+      { icon: '🌫️', text: 'Примерно понимаю область', score: 2, accuracy: 12, stat: 'Область = старт, дальше нужна конкретика' },
+      { icon: '❓', text: 'Пока не знаю, хочу разобраться', score: 1, accuracy: 11, stat: 'Честность — отличный старт для анализа' },
+    ]
+  },
+  {
+    icon: '💰', text: 'Как обстоят дела с финансовой подушкой на период перехода?',
+    hint: 'Финансовая готовность — критический фактор',
+    options: [
+      { icon: '🏦', text: 'Есть запас на 6+ месяцев', score: 4, accuracy: 15, stat: 'Идеальная ситуация для безопасного перехода' },
+      { icon: '💵', text: 'Есть запас на 2–3 месяца', score: 3, accuracy: 13, stat: '58% успешных переходов — с такой подушкой' },
+      { icon: '😬', text: 'Есть немного, буду искать параллельно', score: 2, accuracy: 12, stat: 'Параллельный поиск замедляет, но работает' },
+      { icon: '🚫', text: 'Финансовой подушки нет совсем', score: 1, accuracy: 11, stat: 'Это главный барьер — нужен план Б' },
+    ]
+  },
+  {
+    icon: '📚', text: 'Учишься ли ты чему-то новому прямо сейчас?',
+    hint: 'Обучение = сигнал реальной готовности, не просто мечты',
+    options: [
+      { icon: '🚀', text: 'Да, активно изучаю новую сферу', score: 4, accuracy: 16, stat: 'Это решающий признак — ты уже в процессе!' },
+      { icon: '📖', text: 'Читаю/смотрю по теме иногда', score: 3, accuracy: 13, stat: 'Нужно системно — хаотичное обучение не работает' },
+      { icon: '🤷', text: 'Думаю начать, но не начал', score: 2, accuracy: 12, stat: 'Разрыв между «думаю» и «делаю» — главный враг' },
+      { icon: '💤', text: 'Не учусь ничему новому', score: 1, accuracy: 10, stat: 'Без обучения смена профессии — только мечта' },
+    ]
+  },
+  {
+    icon: '👥', text: 'Есть ли у тебя кто-то из окружения, кто уже сменил профессию?',
+    hint: 'Социальное окружение влияет на решения сильнее, чем кажется',
+    options: [
+      { icon: '🤝', text: 'Да, и общаюсь с ними', score: 4, accuracy: 14, stat: 'Окружение — твой главный ресурс для перехода' },
+      { icon: '👋', text: 'Есть такие, но не общаюсь', score: 3, accuracy: 12, stat: 'Простой шаг: напишите им прямо сейчас' },
+      { icon: '🔍', text: 'Не знаю таких лично', score: 2, accuracy: 11, stat: 'Нужно выходить в сообщества новой сферы' },
+      { icon: '🌍', text: 'Все вокруг работают «как я»', score: 1, accuracy: 10, stat: 'Окружение сильно тормозит изменения' },
+    ]
+  },
+  {
+    icon: '🎭', text: 'Как долго ты уже думаешь о смене профессии?',
+    hint: 'Продолжительность раздумий — важный диагностический признак',
+    options: [
+      { icon: '⚡', text: 'Недавно пришла мысль, хочу действовать', score: 4, accuracy: 15, stat: 'Свежая мотивация — действуй, пока энергия есть!' },
+      { icon: '📅', text: 'Несколько месяцев думаю', score: 3, accuracy: 13, stat: 'Пора переходить от мыслей к первому шагу' },
+      { icon: '😓', text: 'Год или больше', score: 2, accuracy: 12, stat: 'Долгие раздумья = нужен внешний импульс' },
+      { icon: '♾️', text: 'Сколько себя помню — всё не то', score: 1, accuracy: 14, stat: 'Это глубокий паттерн, требует осознанного разбора' },
+    ]
+  },
+];
+
+const RESULTS = {
+  ready: {
+    badge: '🔥 Готов к переходу',
+    badgeColor: '#10b981',
+    icon: '🚀',
+    title: 'Ты готов к смене профессии',
+    desc: 'У тебя есть ключевые признаки готовности: мотивация, направление, обучение. Осталось только не тянуть — большинство людей с твоим профилем совершают переход в течение 3–6 месяцев.',
+    readiness: 85,
+    meterColor: '#10b981',
+    meterSub: 'Высокая готовность — действуй сейчас',
+    traits: [
+      { icon: '✅', title: 'Чёткая мотивация', desc: 'Ты точно знаешь, что хочешь изменить' },
+      { icon: '🎯', title: 'Есть направление', desc: 'Понимаешь куда идти — это половина пути' },
+      { icon: '📚', title: 'Уже учишься', desc: 'Активное обучение — сигнал реального перехода' },
+      { icon: '⏰', title: 'Не затягиваешь', desc: 'Свежая мотивация — самое ценное' },
+    ],
+    tgDesc: '@ProfsTream_bot даст конкретный план на следующие 30 дней: с чего начать, куда идти, что изучить в первую очередь.',
+    minScore: 22,
+  },
+  preparing: {
+    badge: '⏳ В процессе подготовки',
+    badgeColor: '#f59e0b',
+    icon: '⚙️',
+    title: 'Ты на полпути к смене',
+    desc: 'Мотивация есть, но чего-то не хватает: либо конкретного направления, либо финансовой подушки, либо первого шага в обучении. Хорошая новость: это решаемо за 1–2 месяца.',
+    readiness: 62,
+    meterColor: '#f59e0b',
+    meterSub: 'Средняя готовность — нужна конкретизация',
+    traits: [
+      { icon: '💪', title: 'Мотивация есть', desc: 'Внутренний запрос уже сформирован' },
+      { icon: '🗺️', title: 'Нужна конкретика', desc: 'Сузь направление до 1 варианта' },
+      { icon: '💰', title: 'Финансы — зона роста', desc: 'Создай подушку на 3 месяца' },
+      { icon: '📖', title: 'Начни учиться системно', desc: 'Хаотичное чтение → один курс/ментор' },
+    ],
+    tgDesc: '@ProfsTream_bot поможет конкретизировать направление и составить план подготовки под твою ситуацию.',
+    minScore: 15,
+  },
+  thinking: {
+    badge: '🔍 Ещё думаю',
+    badgeColor: '#a67bbe',
+    icon: '🤔',
+    title: 'Ты ещё в стадии раздумий',
+    desc: 'Это честно и нормально. Но важно понять: ты думаешь, потому что не готов — или потому что боишься? Разница принципиальная. Тест помог обозначить точки роста.',
+    readiness: 38,
+    meterColor: '#a67bbe',
+    meterSub: 'Подготовительная стадия',
+    traits: [
+      { icon: '🧭', title: 'Нужно направление', desc: 'Без цели движения нет' },
+      { icon: '💡', title: 'Начни с малого', desc: 'Попробуй новое как хобби — 1 час в день' },
+      { icon: '🤝', title: 'Найди ролевую модель', desc: 'Поговори с тем, кто уже сменил профессию' },
+      { icon: '📋', title: 'Составь список', desc: '5 сфер, которые тебя привлекают — запиши прямо сейчас' },
+    ],
+    tgDesc: '@ProfsTream_bot поможет разобраться что тебя реально привлекает — через серию точечных вопросов.',
+    minScore: 8,
+  },
+  comfort: {
+    badge: '🛡️ Зона комфорта',
+    badgeColor: '#6f3f81',
+    icon: '🏰',
+    title: 'Ты держишься за зону комфорта',
+    desc: 'Это не плохо — но важно честно спросить себя: это осознанный выбор или страх? Если ты прошёл этот тест — значит, внутренний запрос есть. Он просто ещё не созрел.',
+    readiness: 20,
+    meterColor: '#6f3f81',
+    meterSub: 'Пока не готов — и это нормально',
+    traits: [
+      { icon: '🔒', title: 'Стабильность важна', desc: 'Это не слабость — это приоритет' },
+      { icon: '❓', title: 'Но запрос есть', desc: 'Иначе зачем проходить тест?' },
+      { icon: '🌱', title: 'Начни с исследования', desc: 'Изучи сферу — без обязательств и дедлайнов' },
+      { icon: '🎯', title: 'Один маленький шаг', desc: 'Поговори с 1 человеком из интересной сферы' },
+    ],
+    tgDesc: '@ProfsTream_bot поможет разобраться — это осознанный выбор или страх. Без давления, только честный анализ.',
+    minScore: 0,
+  },
+};
+
+// STATE
+let currentQ = 0, totalScore = 0, totalAccuracy = 0, answered = false;
+
+function startQuiz() {
+  showScreen('screenQuestion');
+  document.getElementById('scoreBadge').classList.add('visible');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  answered = false;
+  document.getElementById('progressBar').style.width = (currentQ / QUESTIONS.length * 100) + '%';
+  document.getElementById('qIcon').textContent = q.icon;
+  document.getElementById('qNum').textContent = `ВОПРОС ${currentQ + 1} / ${QUESTIONS.length}`;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('qHint').textContent = q.hint;
+  document.getElementById('scoreUnlock').classList.remove('visible');
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="opt-icon">${opt.icon}</span><span class="opt-text">${opt.text}</span><span class="opt-stat" id="stat-${i}">${opt.stat}</span>`;
+    btn.addEventListener('click', (e) => selectOption(e, i, opt));
+    grid.appendChild(btn);
+  });
+
+  const wrap = document.getElementById('quizWrap');
+  wrap.style.animation = 'none'; void wrap.offsetWidth;
+  wrap.style.animation = 'slide-in .35s cubic-bezier(.4,0,.2,1)';
+}
+
+function selectOption(e, index, opt) {
+  if (answered) return;
+  answered = true;
+
+  document.querySelectorAll('.option-btn').forEach((b, i) => {
+    b.classList.add('disabled');
+    b.classList.add(i === index ? 'selected' : 'faded');
+  });
+  document.getElementById(`stat-${index}`).classList.add('visible');
+
+  spawnRipple(e, document.querySelectorAll('.option-btn')[index]);
+  spawnParticles(e.clientX, e.clientY, '#10b981');
+
+  totalScore += opt.score;
+  totalAccuracy += opt.accuracy;
+
+  document.getElementById('badgeScore').textContent = totalAccuracy + '%';
+  const badge = document.getElementById('scoreBadge');
+  badge.classList.remove('pulse'); void badge.offsetWidth; badge.classList.add('pulse');
+
+  document.getElementById('unlockAmount').textContent = '+' + opt.accuracy + '%';
+  document.getElementById('scoreUnlock').classList.add('visible');
+
+  showToast(opt.stat);
+
+  setTimeout(() => {
+    currentQ++;
+    if (currentQ < QUESTIONS.length) renderQuestion();
+    else showResult();
+  }, 1400);
+}
+
+function showResult() {
+  document.getElementById('progressBar').style.width = '100%';
+  showScreen('screenResult');
+
+  const type = totalScore >= 22 ? 'ready' : totalScore >= 15 ? 'preparing' : totalScore >= 8 ? 'thinking' : 'comfort';
+  const r = RESULTS[type];
+
+  document.getElementById('resultBadge').textContent = r.badge;
+  document.getElementById('resultBadge').style.cssText = `background:${r.badgeColor}22;color:${r.badgeColor};border:1px solid ${r.badgeColor}55`;
+  document.getElementById('resultIcon').textContent = r.icon;
+  document.getElementById('resultTitle').textContent = r.title;
+  document.getElementById('resultDesc').textContent = r.desc;
+  document.getElementById('tgDesc').textContent = r.tgDesc;
+
+  // meter
+  const bar = document.getElementById('meterBar');
+  bar.style.background = r.meterColor;
+  setTimeout(() => bar.style.width = r.readiness + '%', 100);
+  animateCounter('meterValue', 0, r.readiness, 1200, '%');
+  document.getElementById('meterSub').textContent = r.meterSub;
+
+  // traits
+  document.getElementById('resultTraits').innerHTML = r.traits.map(t =>
+    `<div class="trait-card"><div class="trait-icon">${t.icon}</div><div class="trait-title">${t.title}</div><div class="trait-desc">${t.desc}</div></div>`
+  ).join('');
+
+  setTimeout(spawnConfetti, 400);
+}
+
+async function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnCta');
+  btn.disabled = true; btn.textContent = 'Отправляем...';
+
+  const type = totalScore >= 22 ? 'ready' : totalScore >= 15 ? 'preparing' : totalScore >= 8 ? 'thinking' : 'comfort';
+
+  try {
+    await fetch('https://api.lumicrm.ru/api/v1/leads/intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('fName').value,
+        email: document.getElementById('fEmail').value,
+        source: 'proftest', quiz_type: type, quiz_score: totalScore, quiz_accuracy: totalAccuracy
+      }),
+    }).catch(() => {});
+  } catch {}
+
+  spawnConfetti();
+  showScreen('screenSuccess');
+}
+
+function animateCounter(id, from, to, dur, suffix = '') {
+  const el = document.getElementById(id);
+  const start = performance.now();
+  (function step(now) {
+    const p = Math.min((now - start) / dur, 1);
+    el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  })(performance.now());
+}
+
+function spawnRipple(e, btn) {
+  const rect = btn.getBoundingClientRect();
+  const r = document.createElement('span');
+  r.className = 'ripple';
+  r.style.cssText = `width:${rect.width}px;height:${rect.width}px;left:${e.clientX-rect.left-rect.width/2}px;top:${e.clientY-rect.top-rect.width/2}px`;
+  btn.appendChild(r);
+  setTimeout(() => r.remove(), 600);
+}
+
+function spawnParticles(x, y, base = '#a67bbe') {
+  ['#10b981','#34d399','#6f3f81','#a67bbe','#ffffff'].forEach((c, i) => {
+    for (let j = 0; j < 3; j++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const angle = (Math.PI * 2 * (i * 3 + j)) / 15;
+      const dist = 40 + Math.random() * 60;
+      p.style.cssText = `width:${4+Math.random()*5}px;height:${4+Math.random()*5}px;background:${c};left:${x}px;top:${y}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px`;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 900);
+    }
+  });
+}
+
+function spawnConfetti() {
+  const colors = ['#10b981','#34d399','#a67bbe','#6f3f81','#f59e0b','#fff'];
+  for (let i = 0; i < 50; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    const s = 5 + Math.random() * 8;
+    c.style.cssText = `width:${s}px;height:${s*(Math.random()>.5?1:2.5)}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*window.innerWidth}px;top:-20px;--cx:${(Math.random()-.5)*300}px;--cy:${200+Math.random()*400}px;--cr:${Math.random()*720}deg;animation-duration:${.8+Math.random()*.8}s;animation-delay:${Math.random()*.4}s`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1800);
+  }
+}
+
+let toastTimer;
+function showToast(text) {
+  const el = document.getElementById('spToast');
+  if (toastTimer) clearTimeout(toastTimer);
+  el.innerHTML = `💡 ${text}`;
+  el.classList.add('show');
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
