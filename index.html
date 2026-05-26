@@ -346,6 +346,11 @@ footer span{font-size:13px;color:var(--muted)}
 .chain-block{min-width:140px;max-width:158px}
 .chain-block .ctitle{font-size:0.85rem}
 }
+.steps-chain-section{height:450vh}
+.steps-chain-section .chain-sticky{flex-direction:column;gap:16px;padding:24px 20px}
+.steps-chain-header{text-align:center;max-width:640px}
+.steps-chain-header .section-title{margin-bottom:6px}
+.steps-chain-header .section-desc{font-size:0.875rem}
 
 /* Partner models */
 .partner-section{padding:96px 0;border-top:1px solid var(--border)}
@@ -1008,46 +1013,72 @@ html,body,*{cursor:none!important}
 </div>
 </section>
 
-<section class="steps-sticky-outer" id="stepsOuter">
-  <div class="steps-sticky-inner">
-    <div style="text-align:center;margin-bottom:40px">
-      <div class="section-tag">Как это работает</div>
-      <h2 class="section-title">Четыре шага до первой выплаты</h2>
-      <div class="section-desc" style="margin:0 auto">Старт за один вечер. Никакой бюрократии и долгих согласований.</div>
-    </div>
-    <div class="steps-row" id="stepsRow">
-      <div class="step-card" data-step="0">
-        <div class="step-num">01</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
-        <h3>Регистрация</h3>
-        <p>Регистрируетесь как партнёр в Lumi CRM. Указываете компанию и формат сотрудничества.</p>
-      </div>
-      <div class="step-arrow" data-sarrow="0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="step-card" data-step="1">
-        <div class="step-num">02</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-        <h3>Реферальный код</h3>
-        <p>Получаете персональный реферальный код и доступ в партнёрский кабинет с аналитикой.</p>
-      </div>
-      <div class="step-arrow" data-sarrow="1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="step-card" data-step="2">
-        <div class="step-num">03</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3>Приводите клиентов</h3>
-        <p>Клиенты указывают ваш код при регистрации — система сама фиксирует привязку к вам.</p>
-      </div>
-      <div class="step-arrow" data-sarrow="2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      <div class="step-card" data-step="3">
-        <div class="step-num">04</div>
-        <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>Получаете 20%</h3>
-        <p>Получаете 20% с их ежемесячных платежей автоматически. Выплаты прозрачные, по графику.</p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:48px">
-      <a href="/partners.html" class="btn btn-primary">Стать партнёром →</a>
-    </div>
-  </div>
+<section class="chain-section steps-chain-section" id="stepsSection">
+<div class="chain-sticky">
+<div class="chain-scroll-label">Четыре шага</div>
+
+<div class="steps-chain-header">
+  <div class="section-tag">Как это работает</div>
+  <h2 class="section-title">Четыре шага до первой выплаты</h2>
+  <div class="section-desc">Старт за один вечер. Никакой бюрократии и долгих согласований.</div>
+</div>
+
+<div class="chain-container" id="stepsContainer">
+
+<div class="chain-block cb-1" data-index="0">
+<div class="ccard"><div class="ccard-inner">
+<div class="cnum">ШАГ 01</div>
+<div class="ctitle">Регистрация</div>
+<div class="cdesc">Регистрируетесь как партнёр в Lumi CRM. Указываете компанию и формат сотрудничества.</div>
+</div></div>
+</div>
+
+<div class="chain-arrow" data-arrow="0">
+<svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+</div>
+
+<div class="chain-block cb-2" data-index="1">
+<div class="ccard"><div class="ccard-inner">
+<div class="cnum">ШАГ 02</div>
+<div class="ctitle">Реферальный код</div>
+<div class="cdesc">Получаете персональный реферальный код и доступ в партнёрский кабинет с аналитикой.</div>
+</div></div>
+</div>
+
+<div class="chain-arrow" data-arrow="1">
+<svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+</div>
+
+<div class="chain-block cb-3" data-index="2">
+<div class="ccard"><div class="ccard-inner">
+<div class="cnum">ШАГ 03</div>
+<div class="ctitle">Приводите клиентов</div>
+<div class="cdesc">Клиенты указывают ваш код при регистрации — система сама фиксирует привязку к вам.</div>
+</div></div>
+</div>
+
+<div class="chain-arrow" data-arrow="2">
+<svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+</div>
+
+<div class="chain-block cb-4" data-index="3">
+<div class="ccard"><div class="ccard-inner">
+<div class="cnum">ШАГ 04</div>
+<div class="ctitle">Получаете 20%</div>
+<div class="cdesc">Получаете 20% с ежемесячных платежей автоматически. Выплаты прозрачные, по графику.</div>
+</div></div>
+</div>
+
+</div>
+
+<div style="text-align:center">
+  <a href="/partners.html" class="btn btn-primary">Стать партнёром →</a>
+</div>
+
+<div class="chain-progress-bar">
+<div class="chain-progress-fill"></div>
+</div>
+</div>
 </section>
 
 <section id="integrations">
@@ -1764,8 +1795,8 @@ function submitFeedback(e) {
     });
   });
 
-  // --- Magnetic on step cards ---
-  document.querySelectorAll('.step-card,.bento-card').forEach(card => {
+  // --- Magnetic on bento cards ---
+  document.querySelectorAll('.bento-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const cx2 = rect.left+rect.width/2, cy2 = rect.top+rect.height/2;
@@ -1851,114 +1882,59 @@ function submitFeedback(e) {
 })();
 </script>
 
+
 <script>
-// Chain + Steps: GSAP ScrollTrigger pin animations
-(function(){
-  const stepsInner = document.querySelector('.steps-sticky-inner');
-  const scards = Array.from(document.querySelectorAll('#stepsRow .step-card'));
-  const sarrows = Array.from(document.querySelectorAll('#stepsRow .step-arrow'));
+// Chain sections — sticky scroll-reveal, works for any .chain-section on the page
+(function() {
+  document.querySelectorAll('.chain-section').forEach(function(chainSection) {
+    var chainLabel = chainSection.querySelector('.chain-scroll-label');
+    var progressBar = chainSection.querySelector('.chain-progress-bar');
+    var progressFill = chainSection.querySelector('.chain-progress-fill');
+    var blocks = chainSection.querySelectorAll('.chain-block');
+    var arrows = chainSection.querySelectorAll('.chain-arrow');
+    if (!blocks.length) return;
+    var totalBlocks = blocks.length;
 
-  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  gsap.registerPlugin(ScrollTrigger);
+    function updateChain() {
+      var rect = chainSection.getBoundingClientRect();
+      var sectionHeight = chainSection.offsetHeight;
+      var viewportHeight = window.innerHeight;
+      var scrolled = -rect.top;
+      var scrollable = sectionHeight - viewportHeight;
+      var progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
-  const isMobile = window.innerWidth <= 768;
+      if (progress > 0.02) {
+        chainLabel && chainLabel.classList.add('visible');
+        progressBar && progressBar.classList.add('visible');
+      } else {
+        chainLabel && chainLabel.classList.remove('visible');
+        progressBar && progressBar.classList.remove('visible');
+      }
+      if (progressFill) progressFill.style.width = (progress * 100) + '%';
 
-  // --- Chain JS removed: now driven by standalone vanilla scroll-reveal below ---
-
-  // --- Steps ---
-  if(stepsInner && scards.length) {
-    gsap.set(scards, { opacity:0, y:20, scale:0.96 });
-    gsap.set(sarrows, { opacity:0 });
-
-    if(isMobile) {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:1.4});
-          else gsap.to(e.target, {opacity:0, y:20, scale:0.96, duration:0.8});
-        });
-      }, { threshold: 0.3 });
-      scards.forEach(el => obs.observe(el));
-      gsap.set(sarrows, {opacity:1});
-    } else {
-      const stepsTl = gsap.timeline({
-        scrollTrigger:{
-          trigger: '.steps-sticky-outer',
-          start: 'top top',
-          end: '+=300%',
-          scrub: 1.6,
-          pin: stepsInner,
-          anticipatePin: 1
+      var blockInterval = 1 / (totalBlocks + 0.5);
+      blocks.forEach(function(block, index) {
+        var bp = (progress - index * blockInterval * 0.85) / (blockInterval * 0.6);
+        var cp = Math.max(0, Math.min(1, bp));
+        if (cp > 0) {
+          block.classList.add('visible');
+          block.style.transform = 'translateY(' + ((1 - cp) * 20) + 'px)';
+        } else {
+          block.classList.remove('visible');
+          block.style.transform = 'translateY(60px)';
         }
       });
-
-      scards.forEach((card, i) => {
-        stepsTl.to(card,
-          { opacity:1, y:0, scale:1, duration:1.2, ease:'power2.out' },
-          i * 1.6
-        );
-      });
-      sarrows.forEach((arrow, i) => {
-        stepsTl.to(arrow,
-          { opacity:1, duration:0.6, ease:'power2.out' },
-          i * 1.6 + 1.0
-        );
+      arrows.forEach(function(arrow, index) {
+        var ap = (progress - (index + 0.5) * blockInterval * 0.85) / (blockInterval * 0.5);
+        var cp = Math.max(0, Math.min(1, ap));
+        arrow.classList.toggle('visible', cp > 0);
       });
     }
-  }
-})();
-</script>
 
-<script>
-// Chain — sticky horizontal scroll-reveal (vanilla, adapted from chain_scroll.html)
-(function() {
-  const chainSection = document.getElementById('chainSection');
-  const chainLabel = document.querySelector('.chain-scroll-label');
-  const progressBar = document.querySelector('.chain-progress-bar');
-  const progressFill = document.getElementById('chainProgressFill');
-  const blocks = document.querySelectorAll('.chain-block');
-  const arrows = document.querySelectorAll('.chain-arrow');
-  if (!chainSection || !blocks.length) return;
-  const totalBlocks = blocks.length;
-
-  function updateChain() {
-    const rect = chainSection.getBoundingClientRect();
-    const sectionHeight = chainSection.offsetHeight;
-    const viewportHeight = window.innerHeight;
-    const scrolled = -rect.top;
-    const scrollable = sectionHeight - viewportHeight;
-    let progress = Math.max(0, Math.min(1, scrolled / scrollable));
-
-    if (progress > 0.02) {
-      chainLabel && chainLabel.classList.add('visible');
-      progressBar && progressBar.classList.add('visible');
-    } else {
-      chainLabel && chainLabel.classList.remove('visible');
-      progressBar && progressBar.classList.remove('visible');
-    }
-    if (progressFill) progressFill.style.width = (progress * 100) + '%';
-
-    const blockInterval = 1 / (totalBlocks + 0.5);
-    blocks.forEach((block, index) => {
-      const bp = (progress - index * blockInterval * 0.85) / (blockInterval * 0.6);
-      const cp = Math.max(0, Math.min(1, bp));
-      if (cp > 0) {
-        block.classList.add('visible');
-        block.style.transform = `translateY(${(1 - cp) * 20}px)`;
-      } else {
-        block.classList.remove('visible');
-        block.style.transform = 'translateY(60px)';
-      }
-    });
-    arrows.forEach((arrow, index) => {
-      const ap = (progress - (index + 0.5) * blockInterval * 0.85) / (blockInterval * 0.5);
-      const cp = Math.max(0, Math.min(1, ap));
-      arrow.classList.toggle('visible', cp > 0);
-    });
-  }
-
-  window.addEventListener('scroll', updateChain, { passive: true });
-  window.addEventListener('resize', updateChain);
-  updateChain();
+    window.addEventListener('scroll', updateChain, { passive: true });
+    window.addEventListener('resize', updateChain);
+    updateChain();
+  });
 })();
 </script>
 
