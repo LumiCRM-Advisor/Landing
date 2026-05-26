@@ -256,7 +256,7 @@ footer span{font-size:13px;color:var(--muted)}
 .step-icon-orig svg{width:100%;height:100%}
 .step-card-orig h3{font-size:1rem;font-weight:700;margin-bottom:8px}
 .step-card-orig p{font-size:13.5px;color:var(--muted);line-height:1.6}
-.step-arrow-orig{display:flex;align-items:center;justify-content:center;color:rgba(111,63,129,0.55);font-size:28px;padding-top:60px}
+.step-arrow-orig{display:flex;align-items:center;justify-content:center;align-self:center;color:rgba(111,63,129,0.55);font-size:28px}
 @media(max-width:768px){.steps-row-orig{grid-template-columns:1fr}.step-arrow-orig{display:none}}
 
 /* Steps sticky scroll */
@@ -269,7 +269,7 @@ footer span{font-size:13px;color:var(--muted)}
 .step-icon svg{width:22px;height:22px}
 .step-card h3{font-size:15px;font-weight:700;margin-bottom:10px;color:var(--text)}
 .step-card p{font-size:12.5px;color:var(--muted);line-height:1.6}
-.step-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:48px;padding-bottom:60px;color:#b794f6;font-size:22px;font-weight:700;opacity:0}
+.step-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:48px;align-self:center;color:#b794f6;font-size:22px;font-weight:700;opacity:0}
 
 /* Testimonials */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -445,7 +445,7 @@ html,body,*{cursor:none!important}
 @keyframes ripple-out{to{transform:translate(-50%,-50%) scale(8);opacity:0}}
 .scroll-progress{position:fixed;right:0;top:0;width:3px;height:100vh;z-index:9995;background:rgba(255,255,255,0.05)}
 .progress-fill{width:100%;height:0%;background:linear-gradient(180deg,var(--accent2),var(--blue,#164194));transition:height .1s linear}
-.fade-up{opacity:0;transform:translateY(32px)}
+.fade-up{opacity:0;transform:translateY(18px)}
 .magnetic-shift{transition:transform .1s var(--ease,ease-out)!important}
 
 /* ===== MOBILE ADAPTATION ===== */
@@ -1703,21 +1703,21 @@ function submitFeedback(e) {
   // --- GSAP fade-up (step-card excluded: handled by pinned timeline) ---
   document.querySelectorAll('.testi-card,.mod-card,.metric-card,.price-card').forEach(el => {
     el.classList.add('fade-up');
-    gsap.to(el, { opacity:1, y:0, duration:0.7, ease:'power3.out',
+    gsap.to(el, { opacity:1, y:0, duration:1.4, ease:'power2.out',
       scrollTrigger:{ trigger:el, start:'top 88%' }
     });
   });
   // Bento cards: slower reveal
   document.querySelectorAll('.bento-card').forEach(el => {
     el.classList.add('fade-up');
-    gsap.to(el, { opacity:1, y:0, duration:1.2, ease:'power3.out',
+    gsap.to(el, { opacity:1, y:0, duration:2.4, ease:'power2.out',
       scrollTrigger:{ trigger:el, start:'top 88%' }
     });
   });
 
   // Section titles
   document.querySelectorAll('.section-title, .section-tag, .hero h1, .hero p').forEach((el,i) => {
-    gsap.from(el, { opacity:0, y:24, duration:0.8, delay:i*0.08, ease:'power3.out',
+    gsap.from(el, { opacity:0, y:14, duration:1.6, delay:i*0.15, ease:'power2.out',
       scrollTrigger:{ trigger:el, start:'top 90%' }
     });
   });
@@ -1826,14 +1826,14 @@ function submitFeedback(e) {
 
   // --- Chain ---
   if(chainInner && cblocks.length) {
-    gsap.set(cblocks, { opacity:0, y:50, scale:0.9 });
+    gsap.set(cblocks, { opacity:0, y:25, scale:0.95 });
     gsap.set(carrows, { opacity:0, scale:0.5 });
 
     if(isMobile) {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
-          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:0.7});
-          else gsap.to(e.target, {opacity:0, y:50, scale:0.9, duration:0.4});
+          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:1.4});
+          else gsap.to(e.target, {opacity:0, y:25, scale:0.95, duration:0.8});
         });
       }, { threshold: 0.3 });
       cblocks.forEach(el => obs.observe(el));
@@ -1845,7 +1845,7 @@ function submitFeedback(e) {
           trigger: '.chain-sticky-outer',
           start: 'top top',
           end: '+=400%',
-          scrub: 0.8,
+          scrub: 1.6,
           pin: chainInner,
           anticipatePin: 1
         }
@@ -1853,14 +1853,14 @@ function submitFeedback(e) {
 
       cblocks.forEach((block, i) => {
         chainTl.to(block,
-          { opacity:1, y:0, scale:1, duration:0.6, ease:'power3.out' },
-          i * 0.8
+          { opacity:1, y:0, scale:1, duration:1.2, ease:'power2.out' },
+          i * 1.6
         );
       });
       carrows.forEach((arrow, i) => {
         chainTl.to(arrow,
-          { opacity:1, scale:1, duration:0.3, ease:'power2.out' },
-          i * 0.8 + 0.5
+          { opacity:1, scale:1, duration:0.6, ease:'power2.out' },
+          i * 1.6 + 1.0
         );
       });
 
@@ -1878,14 +1878,14 @@ function submitFeedback(e) {
 
   // --- Steps ---
   if(stepsInner && scards.length) {
-    gsap.set(scards, { opacity:0, y:40, scale:0.92 });
+    gsap.set(scards, { opacity:0, y:20, scale:0.96 });
     gsap.set(sarrows, { opacity:0 });
 
     if(isMobile) {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
-          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:0.7});
-          else gsap.to(e.target, {opacity:0, y:40, scale:0.92, duration:0.4});
+          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:1.4});
+          else gsap.to(e.target, {opacity:0, y:20, scale:0.96, duration:0.8});
         });
       }, { threshold: 0.3 });
       scards.forEach(el => obs.observe(el));
@@ -1896,7 +1896,7 @@ function submitFeedback(e) {
           trigger: '.steps-sticky-outer',
           start: 'top top',
           end: '+=300%',
-          scrub: 0.8,
+          scrub: 1.6,
           pin: stepsInner,
           anticipatePin: 1
         }
@@ -1904,14 +1904,14 @@ function submitFeedback(e) {
 
       scards.forEach((card, i) => {
         stepsTl.to(card,
-          { opacity:1, y:0, scale:1, duration:0.6, ease:'power3.out' },
-          i * 0.8
+          { opacity:1, y:0, scale:1, duration:1.2, ease:'power2.out' },
+          i * 1.6
         );
       });
       sarrows.forEach((arrow, i) => {
         stepsTl.to(arrow,
-          { opacity:1, duration:0.3, ease:'power2.out' },
-          i * 0.8 + 0.5
+          { opacity:1, duration:0.6, ease:'power2.out' },
+          i * 1.6 + 1.0
         );
       });
     }
