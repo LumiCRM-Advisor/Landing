@@ -310,28 +310,55 @@ footer span{font-size:13px;color:var(--muted)}
 .chain-step{padding:9px 16px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap}
 .chain-sep{color:var(--muted);font-size:16px;flex-shrink:0}
 
-/* Chain scroll animated */
-.chain-sticky-outer{position:relative}
-.chain-sticky-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:60px 20px}
-.chain-scroll-label{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:40px}
-.chain-blocks{display:flex;align-items:center;gap:0;flex-wrap:nowrap;justify-content:center;padding:1rem}
-.cblock{display:flex;flex-direction:column;align-items:center;min-width:155px;max-width:175px;flex-shrink:0}
-.cblock .ccard{width:100%;padding:18px 16px;border-radius:12px;text-align:center;position:relative;overflow:hidden}
-.cblock .ccard::before{content:'';position:absolute;inset:0;border-radius:12px;padding:1.5px;background:linear-gradient(135deg,var(--gc1),var(--gc2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.7}
-.cblock .ccard::after{content:'';position:absolute;inset:0;border-radius:12px;background:radial-gradient(ellipse at center,var(--gc1),transparent 70%);opacity:.08;pointer-events:none}
-.cblock .cnum{font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--gc1);margin-bottom:.35rem;opacity:.7;position:relative;z-index:1}
-.cblock .ctitle{font-size:.9rem;font-weight:600;color:#e2d9f3;line-height:1.3;position:relative;z-index:1}
-.cblock .cdesc{font-size:.7rem;line-height:1.5;color:#aaa;margin-top:.5rem;position:relative;z-index:1}
-.carrow{display:flex;align-items:center;justify-content:center;width:36px;flex-shrink:0}
-.carrow svg{width:16px;height:16px;fill:#444}
-.chain-progress{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:160px;height:2px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
-.chain-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#888,#ccc);border-radius:2px;transition:width .1s linear}
-.cblock-1{--gc1:#b794f6;--gc2:#9f7aea;} .cblock-1 .ccard{background:rgba(159,122,234,.06)}
-.cblock-2{--gc1:#68d391;--gc2:#48bb78;} .cblock-2 .ccard{background:rgba(72,187,120,.06)}
-.cblock-3{--gc1:#f6e05e;--gc2:#d69e2e;} .cblock-3 .ccard{background:rgba(214,158,46,.06)}
-.cblock-4{--gc1:#fc8181;--gc2:#e53e3e;} .cblock-4 .ccard{background:rgba(229,62,62,.06)}
-.cblock-5{--gc1:#63b3ed;--gc2:#4299e1;} .cblock-5 .ccard{background:rgba(66,153,225,.06)}
-@media(max-width:900px){.carrow{display:none!important}}
+/* Chain — MI-style split layout (left CSS visual + right scroll list) */
+.chain-mi{display:flex;gap:48px;align-items:flex-start;margin-top:8px}
+/* Left column — sticky CSS-art visual */
+.cmi-visual{flex:1 1 55%;position:sticky;top:96px;align-self:flex-start;height:480px;display:flex;align-items:center;justify-content:center}
+.cmi-stage{position:relative;width:100%;max-width:560px;aspect-ratio:4/3;perspective:1000px}
+.cmi-frame{position:absolute;inset:0;border-radius:24px;overflow:hidden;opacity:0;transform:translateY(24px) scale(0.98);transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1);background:linear-gradient(145deg,#15121b 0%,#0c0c11 100%);border:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:40px}
+.cmi-frame.active{opacity:1;transform:translateY(0) scale(1)}
+/* abstract CSS-art layer: orbs + radial glow tinted by stage color */
+.cmi-frame::after{content:'';position:absolute;inset:0;border-radius:24px;background:radial-gradient(120% 120% at 80% 0%,color-mix(in srgb,var(--cmi-color,var(--accent)) 30%,transparent) 0%,transparent 55%);opacity:0.6;pointer-events:none}
+.cmi-orb{position:absolute;border-radius:50%;filter:blur(46px);opacity:0.5;pointer-events:none;transition:background 1s ease}
+.cmi-orb-1{width:240px;height:240px;left:-60px;bottom:-60px;background:radial-gradient(circle,color-mix(in srgb,var(--cmi-color,var(--accent)) 60%,transparent) 0%,transparent 70%)}
+.cmi-orb-2{width:170px;height:170px;right:-40px;top:-30px;background:radial-gradient(circle,color-mix(in srgb,var(--cmi-color,var(--accent2)) 50%,transparent) 0%,transparent 70%)}
+.cmi-grid{position:absolute;inset:0;border-radius:24px;opacity:0.35;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:38px 38px;-webkit-mask:radial-gradient(120% 120% at 30% 60%,#000 0%,transparent 75%);mask:radial-gradient(120% 120% at 30% 60%,#000 0%,transparent 75%)}
+.cmi-frame-border{position:absolute;inset:-1px;border-radius:25px;padding:1px;background:linear-gradient(145deg,color-mix(in srgb,var(--cmi-color,var(--accent)) 55%,transparent),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.cmi-frame-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.cmi-frame-icon{width:84px;height:84px;border-radius:20px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--cmi-color,var(--accent)) 16%,transparent);border:1px solid color-mix(in srgb,var(--cmi-color,var(--accent)) 35%,transparent);color:var(--cmi-color,var(--accent2));box-shadow:0 0 40px color-mix(in srgb,var(--cmi-color,var(--accent)) 30%,transparent)}
+.cmi-frame-icon svg{width:42px;height:42px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cmi-frame-num{font-family:'Montserrat',sans-serif;font-size:120px;font-weight:900;line-height:0.8;letter-spacing:-0.04em;color:color-mix(in srgb,var(--cmi-color,var(--accent2)) 22%,transparent)}
+.cmi-frame-bottom{position:relative;z-index:1}
+.cmi-frame-title{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;color:var(--text)}
+.cmi-frame-step{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:7px 16px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)}
+.cmi-frame-step .cmi-dot{width:8px;height:8px;border-radius:50%;background:var(--cmi-color,var(--accent2));box-shadow:0 0 10px var(--cmi-color,var(--accent2));animation:miPulse 2s ease infinite}
+/* Right column — scroll-activated step cards */
+.cmi-list{flex:0 0 45%;max-width:45%;display:flex;flex-direction:column}
+.cmi-card{position:relative;padding:32px 4px;border-top:1px solid var(--border);cursor:none;opacity:0.4;transition:opacity .8s cubic-bezier(0.16,1,0.3,1)}
+.cmi-card:first-child{border-top:none}
+.cmi-card.active{opacity:1}
+.cmi-card.active::before{content:'';position:absolute;right:-24px;top:32px;bottom:32px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--cmi-color,var(--accent2)),transparent)}
+.cmi-inner{position:relative;z-index:1}
+.cmi-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cmi-num{font-size:13px;font-weight:700;letter-spacing:0.08em;color:var(--muted);transition:color .4s}
+.cmi-card.active .cmi-num{color:var(--cmi-color,var(--accent2))}
+.cmi-icon{width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;color:var(--muted);transition:all .4s}
+.cmi-card.active .cmi-icon{color:var(--cmi-color,var(--accent2));border-color:var(--cmi-color,var(--accent2));background:color-mix(in srgb,var(--cmi-color,var(--accent2)) 12%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--cmi-color,var(--accent2)) 28%,transparent)}
+.cmi-icon svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cmi-title{font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-0.02em;margin-bottom:12px;transition:color .4s}
+.cmi-desc{font-size:14px;line-height:1.65;color:var(--muted);margin-bottom:16px}
+.cmi-feats{list-style:none;display:flex;flex-direction:column;gap:9px;max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);transition:max-height .7s cubic-bezier(0.16,1,0.3,1),opacity .5s,transform .5s}
+.cmi-card.active .cmi-feats,.cmi-card:hover .cmi-feats{max-height:240px;opacity:1;transform:translateY(0)}
+.cmi-feats li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
+.cmi-check{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:color-mix(in srgb,var(--cmi-color,var(--accent2)) 16%,transparent);color:var(--cmi-color,var(--accent2))}
+@media(max-width:1024px){
+.chain-mi{display:block}
+.cmi-list{max-width:100%;flex:none}
+.cmi-visual{display:none}
+.cmi-card{opacity:1;cursor:pointer;padding:28px 0}
+.cmi-card.active::before{display:none}
+.cmi-feats{max-height:240px;opacity:1;transform:none}
+}
 
 /* Partner models */
 .partner-section{padding:96px 0;border-top:1px solid var(--border)}
@@ -488,15 +515,6 @@ html,body,*{cursor:none!important}
   .mi-list{display:flex;flex-direction:column;gap:0}
 }
 
-/* Chain scroll section — убрать стрелки, 2-col grid */
-@media(max-width:768px){
-  .carrow{display:none!important}
-  .cblock{min-width:unset;max-width:unset}
-}
-@media(max-width:480px){
-  .chain-blocks{grid-template-columns:1fr}
-}
-
 /* Partner sections (три модели / четыре шага) */
 @media(max-width:600px){
   .cards-3{grid-template-columns:1fr}
@@ -547,13 +565,8 @@ html,body,*{cursor:none!important}
   .final-cta h2{font-size:clamp(1.6rem,7vw,2.4rem)}
 }
 
-/* Chain + Steps sticky scroll mobile */
+/* Steps sticky scroll mobile */
 @media(max-width:768px){
-  .chain-sticky-outer{position:relative}
-  .chain-sticky-inner{min-height:auto;padding:40px 16px}
-  .chain-blocks{flex-wrap:wrap;gap:10px;justify-content:center}
-  .cblock{min-width:140px;max-width:160px}
-  .carrow{display:none!important}
   .steps-sticky-outer{position:relative}
   .steps-sticky-inner{min-height:auto;padding:40px 16px}
   .steps-row{flex-wrap:wrap;gap:16px;justify-content:center}
@@ -907,32 +920,183 @@ html,body,*{cursor:none!important}
 </div>
 </section>
 
-<section class="chain-sticky-outer" id="chainOuter">
-  <div class="chain-sticky-inner">
-    <h2 class="chain-scroll-label">Сквозная цепочка</h2>
-    <div class="chain-blocks" id="chainBlocks">
-      <div class="cblock cblock-1" data-delay="0">
-        <div class="ccard"><div class="cnum">ЭТАП 01</div><div class="ctitle">Заявка на подбор</div><div class="cdesc">Формирование требований к кандидату, сроков и условий работы</div></div>
-      </div>
-      <div class="carrow" data-arrow="0"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-      <div class="cblock cblock-2" data-delay="0">
-        <div class="ccard"><div class="cnum">ЭТАП 02</div><div class="ctitle">Рекрутинг</div><div class="cdesc">AI-скрининг резюме, Telegram-бот, Match-Score 0–100</div></div>
-      </div>
-      <div class="carrow" data-arrow="1"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-      <div class="cblock cblock-3" data-delay="0">
-        <div class="ccard"><div class="cnum">ЭТАП 03</div><div class="ctitle">Кадровое оформление</div><div class="cdesc">Договор, документы, внесение в кадровую систему</div></div>
-      </div>
-      <div class="carrow" data-arrow="2"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-      <div class="cblock cblock-4" data-delay="0">
-        <div class="ccard"><div class="cnum">ЭТАП 04</div><div class="ctitle">Допуск HSE</div><div class="cdesc">Охрана труда, инструктажи, выдача допуска к работе</div></div>
-      </div>
-      <div class="carrow" data-arrow="3"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
-      <div class="cblock cblock-5" data-delay="0">
-        <div class="ccard"><div class="cnum">ЭТАП 05</div><div class="ctitle">Табель + Вахта</div><div class="cdesc">Учёт времени, формирование табеля, вахтовый метод</div></div>
-      </div>
-    </div>
-    <div class="chain-progress"><div class="chain-progress-fill" id="chainFill"></div></div>
-  </div>
+<section id="chainOuter">
+<div class="container">
+<div style="text-align:center;margin-bottom:56px">
+<div class="section-tag">Процесс</div>
+<h2 class="section-title">Сквозная цепочка</h2>
+<div class="section-desc" style="margin:0 auto">От заявки на подбор до табеля на вахте — пять этапов в одной системе, без потерь между отделами.</div>
+</div>
+
+<div class="chain-mi" id="chain-mi">
+
+<div class="cmi-visual">
+<div class="cmi-stage" id="cmi-stage">
+
+<div class="cmi-frame active" data-index="0" style="--cmi-color:#9f7aea">
+<div class="cmi-frame-border"></div>
+<div class="cmi-orb cmi-orb-1"></div>
+<div class="cmi-orb cmi-orb-2"></div>
+<div class="cmi-grid"></div>
+<div class="cmi-frame-top">
+<div class="cmi-frame-icon"><svg viewBox="0 0 24 24"><path d="M9 2h6a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2z"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><path d="M9 12h6"/><path d="M9 16h6"/></svg></div>
+<span class="cmi-frame-num">01</span>
+</div>
+<div class="cmi-frame-bottom">
+<div class="cmi-frame-title">Заявка на подбор</div>
+<span class="cmi-frame-step"><span class="cmi-dot"></span>Этап 01</span>
+</div>
+</div>
+
+<div class="cmi-frame" data-index="1" style="--cmi-color:#48bb78">
+<div class="cmi-frame-border"></div>
+<div class="cmi-orb cmi-orb-1"></div>
+<div class="cmi-orb cmi-orb-2"></div>
+<div class="cmi-grid"></div>
+<div class="cmi-frame-top">
+<div class="cmi-frame-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><circle cx="19" cy="11" r="2.5"/><path d="m22 16-2-1.5"/></svg></div>
+<span class="cmi-frame-num">02</span>
+</div>
+<div class="cmi-frame-bottom">
+<div class="cmi-frame-title">Рекрутинг</div>
+<span class="cmi-frame-step"><span class="cmi-dot"></span>Этап 02</span>
+</div>
+</div>
+
+<div class="cmi-frame" data-index="2" style="--cmi-color:#d69e2e">
+<div class="cmi-frame-border"></div>
+<div class="cmi-orb cmi-orb-1"></div>
+<div class="cmi-orb cmi-orb-2"></div>
+<div class="cmi-grid"></div>
+<div class="cmi-frame-top">
+<div class="cmi-frame-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>
+<span class="cmi-frame-num">03</span>
+</div>
+<div class="cmi-frame-bottom">
+<div class="cmi-frame-title">Кадровое оформление</div>
+<span class="cmi-frame-step"><span class="cmi-dot"></span>Этап 03</span>
+</div>
+</div>
+
+<div class="cmi-frame" data-index="3" style="--cmi-color:#e53e3e">
+<div class="cmi-frame-border"></div>
+<div class="cmi-orb cmi-orb-1"></div>
+<div class="cmi-orb cmi-orb-2"></div>
+<div class="cmi-grid"></div>
+<div class="cmi-frame-top">
+<div class="cmi-frame-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+<span class="cmi-frame-num">04</span>
+</div>
+<div class="cmi-frame-bottom">
+<div class="cmi-frame-title">Допуск HSE</div>
+<span class="cmi-frame-step"><span class="cmi-dot"></span>Этап 04</span>
+</div>
+</div>
+
+<div class="cmi-frame" data-index="4" style="--cmi-color:#4299e1">
+<div class="cmi-frame-border"></div>
+<div class="cmi-orb cmi-orb-1"></div>
+<div class="cmi-orb cmi-orb-2"></div>
+<div class="cmi-grid"></div>
+<div class="cmi-frame-top">
+<div class="cmi-frame-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg></div>
+<span class="cmi-frame-num">05</span>
+</div>
+<div class="cmi-frame-bottom">
+<div class="cmi-frame-title">Табель + Вахта</div>
+<span class="cmi-frame-step"><span class="cmi-dot"></span>Этап 05</span>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="cmi-list" id="cmi-list">
+
+<article class="cmi-card active" data-index="0" data-cursor="этап" style="--cmi-color:#9f7aea">
+<div class="cmi-inner">
+<div class="cmi-head">
+<span class="cmi-num">ЭТАП 01</span>
+<div class="cmi-icon"><svg viewBox="0 0 24 24"><path d="M9 2h6a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2z"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/><path d="M9 12h6"/><path d="M9 16h6"/></svg></div>
+</div>
+<h3 class="cmi-title">Заявка на подбор</h3>
+<p class="cmi-desc">Формирование заявки на подбор персонала с указанием требований к кандидату, сроков и условий работы.</p>
+<ul class="cmi-feats">
+<li><span class="cmi-check">✓</span><span>Требования, объект и условия в одной форме</span></li>
+<li><span class="cmi-check">✓</span><span>Сроки и количество позиций</span></li>
+<li><span class="cmi-check">✓</span><span>Маршрутизация на ответственного рекрутера</span></li>
+</ul>
+</div>
+</article>
+
+<article class="cmi-card" data-index="1" data-cursor="этап" style="--cmi-color:#48bb78">
+<div class="cmi-inner">
+<div class="cmi-head">
+<span class="cmi-num">ЭТАП 02</span>
+<div class="cmi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><circle cx="19" cy="11" r="2.5"/><path d="m22 16-2-1.5"/></svg></div>
+</div>
+<h3 class="cmi-title">Рекрутинг</h3>
+<p class="cmi-desc">AI-скрининг резюме, Telegram-бот для коммуникации и Match-Score 0–100 для каждого кандидата.</p>
+<ul class="cmi-feats">
+<li><span class="cmi-check">✓</span><span>AI-скрининг резюме с объяснением</span></li>
+<li><span class="cmi-check">✓</span><span>Telegram-бот для первичного контакта</span></li>
+<li><span class="cmi-check">✓</span><span>Match-Score 0–100 по каждому кандидату</span></li>
+</ul>
+</div>
+</article>
+
+<article class="cmi-card" data-index="2" data-cursor="этап" style="--cmi-color:#d69e2e">
+<div class="cmi-inner">
+<div class="cmi-head">
+<span class="cmi-num">ЭТАП 03</span>
+<div class="cmi-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>
+</div>
+<h3 class="cmi-title">Кадровое оформление</h3>
+<p class="cmi-desc">Оформление трудового договора, сбор документов и внесение сотрудника в кадровую систему компании.</p>
+<ul class="cmi-feats">
+<li><span class="cmi-check">✓</span><span>Трудовой договор и кадровые приказы</span></li>
+<li><span class="cmi-check">✓</span><span>Сбор и контроль документов</span></li>
+<li><span class="cmi-check">✓</span><span>Внесение в кадровую систему</span></li>
+</ul>
+</div>
+</article>
+
+<article class="cmi-card" data-index="3" data-cursor="этап" style="--cmi-color:#e53e3e">
+<div class="cmi-inner">
+<div class="cmi-head">
+<span class="cmi-num">ЭТАП 04</span>
+<div class="cmi-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+</div>
+<h3 class="cmi-title">Допуск HSE</h3>
+<p class="cmi-desc">Проверка знаний по охране труда, выдача допуска к работе и инструктажи по технике безопасности.</p>
+<ul class="cmi-feats">
+<li><span class="cmi-check">✓</span><span>Проверка знаний по охране труда</span></li>
+<li><span class="cmi-check">✓</span><span>Инструктажи по технике безопасности</span></li>
+<li><span class="cmi-check">✓</span><span>Выдача допуска к работе</span></li>
+</ul>
+</div>
+</article>
+
+<article class="cmi-card" data-index="4" data-cursor="этап" style="--cmi-color:#4299e1">
+<div class="cmi-inner">
+<div class="cmi-head">
+<span class="cmi-num">ЭТАП 05</span>
+<div class="cmi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg></div>
+</div>
+<h3 class="cmi-title">Табель + Вахта</h3>
+<p class="cmi-desc">Учёт рабочего времени, формирование табеля и организация вахтового метода работы.</p>
+<ul class="cmi-feats">
+<li><span class="cmi-check">✓</span><span>Учёт рабочего времени</span></li>
+<li><span class="cmi-check">✓</span><span>Формирование табеля</span></li>
+<li><span class="cmi-check">✓</span><span>Организация вахтового метода</span></li>
+</ul>
+</div>
+</article>
+
+</div>
+
+</div>
+</div>
 </section>
 
 <section class="partner-section">
@@ -1812,10 +1976,9 @@ function submitFeedback(e) {
 <script>
 // Chain + Steps: GSAP ScrollTrigger pin animations
 (function(){
-  const chainInner = document.querySelector('.chain-sticky-inner');
   const stepsInner = document.querySelector('.steps-sticky-inner');
-  const cblocks = Array.from(document.querySelectorAll('#chainBlocks .cblock'));
-  const carrows = Array.from(document.querySelectorAll('#chainBlocks .carrow'));
+  const cmiCards = Array.from(document.querySelectorAll('#cmi-list .cmi-card'));
+  const cmiFrames = Array.from(document.querySelectorAll('#cmi-stage .cmi-frame'));
   const scards = Array.from(document.querySelectorAll('#stepsRow .step-card'));
   const sarrows = Array.from(document.querySelectorAll('#stepsRow .step-arrow'));
 
@@ -1824,55 +1987,53 @@ function submitFeedback(e) {
 
   const isMobile = window.innerWidth <= 768;
 
-  // --- Chain ---
-  if(chainInner && cblocks.length) {
-    gsap.set(cblocks, { opacity:0, y:25, scale:0.95 });
-    gsap.set(carrows, { opacity:0, scale:0.5 });
+  // --- Chain (MI-style split layout) ---
+  if(cmiCards.length && cmiFrames.length) {
+    let chainActive = 0;
 
-    if(isMobile) {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if(e.isIntersecting) gsap.to(e.target, {opacity:1, y:0, scale:1, duration:1.4});
-          else gsap.to(e.target, {opacity:0, y:25, scale:0.95, duration:0.8});
-        });
-      }, { threshold: 0.3 });
-      cblocks.forEach(el => obs.observe(el));
-      const fill = document.getElementById('chainFill');
-      if(fill) fill.style.width = '100%';
-    } else {
-      const chainTl = gsap.timeline({
-        scrollTrigger:{
-          trigger: '.chain-sticky-outer',
-          start: 'top top',
-          end: '+=400%',
-          scrub: 1.6,
-          pin: chainInner,
-          anticipatePin: 1
-        }
-      });
-
-      cblocks.forEach((block, i) => {
-        chainTl.to(block,
-          { opacity:1, y:0, scale:1, duration:1.2, ease:'power2.out' },
-          i * 1.6
-        );
-      });
-      carrows.forEach((arrow, i) => {
-        chainTl.to(arrow,
-          { opacity:1, scale:1, duration:0.6, ease:'power2.out' },
-          i * 1.6 + 1.0
-        );
-      });
-
-      const fill = document.getElementById('chainFill');
-      if(fill) {
-        ScrollTrigger.create({
-          trigger: '.chain-sticky-outer',
-          start: 'top top',
-          end: '+=400%',
-          onUpdate: self => { fill.style.width = (self.progress * 100) + '%'; }
-        });
+    function setStage(index){
+      if(index === chainActive) return;
+      chainActive = index;
+      cmiCards.forEach((c,i)=>c.classList.toggle('active', i===index));
+      cmiFrames.forEach((f,i)=>f.classList.toggle('active', i===index));
+      const frame = cmiFrames[index];
+      if(frame){
+        gsap.fromTo(frame.querySelector('.cmi-frame-title'),
+          { y:18, opacity:0.4 },
+          { y:0, opacity:1, duration:0.6, ease:'power3.out', overwrite:true });
+        gsap.fromTo(frame.querySelector('.cmi-frame-icon'),
+          { scale:0.85, opacity:0.4 },
+          { scale:1, opacity:1, duration:0.6, ease:'power3.out', overwrite:true });
       }
+    }
+
+    // Scroll activation (desktop)
+    cmiCards.forEach((card,index)=>{
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 55%',
+        end: 'bottom 45%',
+        onEnter: ()=>setStage(index),
+        onEnterBack: ()=>setStage(index)
+      });
+    });
+
+    // Click activation
+    cmiCards.forEach((card,index)=>{
+      card.addEventListener('click', ()=>setStage(index));
+    });
+
+    // Mobile: IntersectionObserver for active highlight
+    if(window.matchMedia('(max-width:1024px)').matches){
+      const cio = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const idx = parseInt(entry.target.dataset.index||'0');
+            cmiCards.forEach((c,i)=>c.classList.toggle('active', i===idx));
+          }
+        });
+      }, { rootMargin:'-30% 0px -45% 0px', threshold:0 });
+      cmiCards.forEach(c=>cio.observe(c));
     }
   }
 
